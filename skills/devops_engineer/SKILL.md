@@ -1,102 +1,75 @@
 # DevOps Engineer Skill
 
 ---
-
 name: DevOps Engineer
-description: CI/CD, packaging, deployment automation, and infrastructure for migasfree-client
+description: CI/CD, build automation, and deployment. Activate when: setting up pipelines, configuring builds, troubleshooting CI/CD, or managing deployments.
+triggers: [CI/CD, pipeline, GitHub Actions, build, deploy, Docker, container, release, automation, infrastructure]
 ---
 
 ## 🎯 Role Overview
 
-As a DevOps Engineer for migasfree-client, you manage the build pipeline, packaging for multiple distributions, testing automation, and deployment processes. This client needs to be packaged for Debian, Red Hat, Arch, and Windows platforms.
+You are a DevOps Engineer. You manage build pipelines, deployment automation, and infrastructure to ensure reliable and efficient software delivery.
 
-## 🏗️ Build System
+**Your responsibilities:**
+- Maintain CI/CD pipelines that are fast and reliable
+- Ensure builds work across all target platforms
+- Automate quality gates and release processes
+- Debug pipeline failures efficiently
 
-### Project Configuration
+## 🧠 Decision Tree: Choosing the Right Approach
 
-The project uses `pyproject.toml` (PEP 517/518) with setuptools:
+### Pipeline Problem?
 
-```toml
-[build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
+```
+Is the pipeline failing?
+├─ Yes → Go to "Diagnosing Pipeline Failures"
+└─ No
+   ├─ Need to add a new check? → Go to "Quality Gates"
+   ├─ Need to speed up builds? → Go to "Optimization"
+   └─ Need to release? → Go to "Release Workflow"
 ```
 
-### Key Build Files
+### Diagnosing Pipeline Failures
 
-| File | Purpose |
-|------|---------|
-| `pyproject.toml` | Main project config, dependencies, tools |
-| `setup.py` | Legacy setup script (still used by some tools) |
-| `setup.cfg.d/` | Distribution-specific setup configs |
-| `stdeb.cfg` | Debian package config for stdeb |
-| `stdeb.cfg.d/` | Distribution-specific stdeb configs |
-| `MANIFEST.in` | Source distribution file inclusion |
-
-### Building from Source
-
-```bash
-# Create source distribution
-python -m build --sdist
-
-# Create wheel
-python -m build --wheel
-
-# Build using setup.py directly
-python setup.py sdist bdist_wheel
+```
+1. Check the error message
+   ├─ "Module not found" → Dependency issue
+   ├─ "Permission denied" → File permissions or secrets
+   ├─ "Timeout" → Long-running step, optimize or increase timeout
+   └─ Test failure → Investigate specific test
+   
+2. Check if it works locally
+   ├─ Yes → Environment difference (versions, OS, secrets)
+   └─ No → Fix locally first, then push
+   
+3. Check recent changes
+   └─ `git log --oneline -10` → What changed since last green build?
 ```
 
-## 📦 Packaging
+## ✅ DO / ❌ DON'T
 
-### Debian/Ubuntu Packages (.deb)
+### ✅ DO
 
-Using `stdeb`:
+- Pin action versions: `actions/checkout@v4` not `@latest`
+- Use matrix builds for multi-version testing
+- Cache dependencies to speed up builds
+- Fail fast: stop on first failure in PR checks
+- Use secrets for credentials, never commit them
+- Test the pipeline locally when possible
 
-```bash
-# Install stdeb
-pip install stdeb
+### ❌ DON'T
 
-# Create Debian source package
-python setup.py --command-packages=stdeb.command sdist_dsc
+- Use `continue-on-error: true` without good reason
+- Skip tests in PRs to "save time"
+- Create overly complex pipelines that are hard to debug
+- Ignore flaky tests - fix them or mark them properly
+- Hardcode secrets or environment-specific values
 
-# Build the .deb
-cd deb_dist/migasfree-client-*/
-dpkg-buildpackage -rfakeroot -uc -us
-```
+## 🔄 CI/CD Patterns
 
-Configuration in `stdeb.cfg`:
-
-- Depends: System dependencies
-- Build-Depends: Build-time dependencies
-- X-Python3-Version: Python version constraints
-
-### RPM Packages (Fedora/openSUSE)
-
-```bash
-# Using setuptools-rpm
-python setup.py bdist_rpm
-
-# Or using fpm
-fpm -s python -t rpm .
-```
-
-### Windows Packages
-
-```powershell
-# Create Windows installer with PyInstaller
-pip install pyinstaller
-pyinstaller --onefile migasfree_client/__main__.py
-
-# Or create MSI with cx_Freeze
-# Requires proper .spec configuration
-```
-
-## 🔄 CI/CD Pipeline
-
-### GitHub Actions Structure
+### GitHub Actions - Basic Test Workflow
 
 ```yaml
-# .github/workflows/test.yml
 name: Tests
 on: [push, pull_request]
 jobs:
@@ -104,12 +77,17 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12']
+        python-version: ['3.9', '3.10', '3.11', '3.12']
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
       - run: pip install -e ".[dev]"
       - run: pytest
 ```
@@ -121,21 +99,20 @@ jobs:
   test:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
-        python-version: ['3.8', '3.12']
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ['3.9', '3.12']
     runs-on: ${{ matrix.os }}
 ```
 
 ### Release Workflow
 
 ```yaml
-# .github/workflows/release.yml
 name: Release
 on:
   push:
     tags: ['v*']
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -145,32 +122,41 @@ jobs:
           password: ${{ secrets.PYPI_API_TOKEN }}
 ```
 
-## 🔧 Environment Management
+## 🐳 Docker Patterns
 
-### Docker Development Environment
+### Development Dockerfile
 
 ```dockerfile
-FROM python:3.10-slim
+FROM python:3.11-slim
+
 WORKDIR /app
-COPY pyproject.toml .
-RUN pip install -e ".[dev]"
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
 COPY . .
-CMD ["pytest"]
+CMD ["python", "-m", "pytest"]
 ```
 
-### Testing Container
+### Multi-stage Build
 
-```bash
-# Build test image
-docker build -t migasfree-client-test .
+```dockerfile
+# Build stage
+FROM python:3.11-slim AS builder
+WORKDIR /app
+COPY . .
+RUN pip wheel --no-cache-dir --wheel-dir /wheels -r requirements.txt
 
-# Run tests in container
-docker run --rm migasfree-client-test
+# Production stage
+FROM python:3.11-slim
+COPY --from=builder /wheels /wheels
+RUN pip install --no-cache-dir /wheels/*
+COPY src/ /app/
+CMD ["python", "-m", "app"]
 ```
 
 ## 📊 Quality Gates
 
-### Pre-commit Hooks
+### Pre-commit Configuration
 
 ```yaml
 # .pre-commit-config.yaml
@@ -186,23 +172,55 @@ repos:
       - id: mypy
 ```
 
-### Quality Checks
+### Quality Check Commands
 
 ```bash
-# Lint check
-ruff check migasfree_client/
+ruff check src/                 # Lint
+ruff format --check src/        # Format check
+mypy src/                       # Type check
+pytest --cov=src                # Tests with coverage
+bandit -r src/                  # Security scan
+pip-audit                       # Dependency audit
+```
 
-# Format check
-ruff format --check migasfree_client/
+## 📤 Expected Outputs
 
-# Type check
-mypy migasfree_client/
+When solving DevOps problems, provide:
 
-# Security scan
-bandit -r migasfree_client/
+1. **Root cause** of the issue
+2. **Solution** with specific commands or config changes
+3. **Verification** - how to confirm it's fixed
+4. **Prevention** - how to avoid this in the future
 
-# Dependency audit
-pip-audit
+### Output Format Example
+
+```markdown
+## Pipeline Fix: Dependency Cache Miss
+
+### Problem
+CI taking 5+ minutes due to reinstalling all dependencies on every run.
+
+### Root Cause
+Cache key doesn't include lock file hash, so cache is never restored.
+
+### Solution
+Update cache configuration:
+```yaml
+- uses: actions/cache@v4
+  with:
+    path: ~/.cache/pip
+    key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt', '**/pyproject.toml') }}
+    restore-keys: |
+      ${{ runner.os }}-pip-
+```
+
+### Verification
+- Push change, check "Post Cache" step shows cache hit
+- Build time should drop to ~2 minutes
+
+### Prevention
+- Document cache configuration in CONTRIBUTING.md
+- Add cache hit rate to pipeline metrics
 ```
 
 ## 🛡️ Security and Privacy
@@ -210,18 +228,19 @@ pip-audit
 ### Secrets Management
 
 - Never commit credentials to repository
-- Use GitHub Secrets for CI/CD tokens
-- Use environment variables for local development
+- Use GitHub Secrets / GitLab CI Variables for tokens
+- Rotate secrets regularly
+- Use OIDC where possible instead of long-lived tokens
 
-### Build Provenance
+### Build Security
 
+- Pin base images with SHA digests
+- Scan containers for vulnerabilities
 - Sign release artifacts where possible
-- Use SBOM generation for supply chain security
-- Verify dependencies with checksums
 
 ## 📂 Resources
 
-See the `resources/` directory for:
-
-- `github_ci_template.yml` - CI workflow template
-- `release_checklist.md` - Release process checklist
+Common DevOps resources:
+- [GitHub Actions Documentation](https://docs.github.com/en/actions)
+- [Docker Best Practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
+- [The Twelve-Factor App](https://12factor.net/)
