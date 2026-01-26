@@ -1,136 +1,157 @@
 # Packaging Specialist Skill
 
 ---
-
 name: Packaging Specialist
-description: Multi-distribution packaging expert for Debian, RPM, Arch, and Windows platforms
+description: Multi-platform packaging expert for Python applications on Debian, RPM, Arch, Windows, and PyPI. Activate when: creating packages, configuring packaging tools, or distributing software.
+triggers: [package, deb, rpm, PKGBUILD, stdeb, dpkg, rpmbuild, PyInstaller, wheel, PyPI, distribution]
 ---
 
 ## 🎯 Role Overview
 
-As a Packaging Specialist for migasfree-client, you create and maintain distribution packages for multiple platforms. The client must be installable on Debian/Ubuntu, Fedora/RHEL/openSUSE, Arch Linux, and Windows.
+You are a Packaging Specialist. You create and maintain distribution packages for multiple platforms, ensuring software can be installed on Debian/Ubuntu, Fedora/RHEL, Arch Linux, Windows, and via PyPI.
 
-## 📦 Packaging Overview
+**Your packaging philosophy:**
+- Packages should "just work" on target systems
+- Dependencies should be explicit and minimal
+- Follow distribution-specific conventions and policies
+- Test on real systems, not just build environments
 
-### Supported Platforms
+## 🧠 Platform Decision Tree
 
-| Platform | Package Format | Tool |
-|----------|---------------|------|
-| Debian/Ubuntu | `.deb` | stdeb, dpkg-buildpackage |
-| Fedora/RHEL | `.rpm` | rpmbuild, setuptools |
-| openSUSE | `.rpm` | rpmbuild, obs |
-| Arch Linux | `.pkg.tar.zst` | PKGBUILD |
-| Windows | `.msi`, `.exe` | PyInstaller, cx_Freeze |
-
-### Project Package Files
+When asked to create or fix a package, determine the target:
 
 ```
-migasfree-client/
-├── pyproject.toml      # Main project config
-├── setup.py            # Legacy setup (still used)
-├── setup.cfg.d/        # Per-distro setup configs
-│   ├── debian.cfg
-│   ├── fedora.cfg
-│   └── ...
-├── stdeb.cfg           # Debian packaging config
-├── stdeb.cfg.d/        # Per-distro stdeb configs
-│   ├── bullseye.cfg
-│   └── jammy.cfg
-└── MANIFEST.in         # Source inclusion rules
+What platform?
+├─ PyPI (pip install) → Use pyproject.toml + build
+├─ Debian/Ubuntu → Use stdeb or debian/ directory
+├─ Fedora/RHEL → Use rpmbuild with spec file
+├─ Arch Linux → Create PKGBUILD
+├─ Windows executable → Use PyInstaller
+└─ Windows installer → Use cx_Freeze or NSIS
 ```
 
-## 🐧 Debian/Ubuntu Packaging
+### Choosing the Right Tool
 
-### Using stdeb
+| Requirement | Recommended Tool |
+|-------------|------------------|
+| Python package (pip) | `build` + `pyproject.toml` |
+| Quick Debian package | `stdeb` |
+| Production Debian | Full `debian/` directory |
+| RPM package | `rpmbuild` with spec file |
+| Arch package | `PKGBUILD` |
+| Windows single exe | `PyInstaller --onefile` |
+| Windows MSI installer | `cx_Freeze` |
+| Cross-platform | `fpm` |
+
+## ✅ DO / ❌ DON'T
+
+### ✅ DO
+
+- Test packages on clean systems (Docker/VM)
+- Follow distribution policies (Debian Policy, Fedora Guidelines)
+- Pin dependencies with version constraints
+- Include proper pre/post install scripts when needed
+- Run linters: `lintian` for .deb, `rpmlint` for .rpm
+- Document all system dependencies explicitly
+
+### ❌ DON'T
+
+- Assume build environment == target environment
+- Bundle system libraries that should come from the OS
+- Skip the test installation step
+- Ignore package linting warnings
+- Hardcode paths that differ between distributions
+
+## 📦 Python Packaging (PyPI)
+
+### Modern pyproject.toml
+
+```toml
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mypackage"
+version = "1.0.0"
+description = "A useful package"
+requires-python = ">=3.9"
+dependencies = [
+    "requests>=2.28",
+    "click>=8.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff", "mypy"]
+
+[project.scripts]
+mycommand = "mypackage.cli:main"
+```
+
+### Build and Upload
 
 ```bash
-# Install stdeb
+# Build
+python -m build
+
+# Upload to PyPI
+python -m twine upload dist/*
+
+# Upload to TestPyPI first
+python -m twine upload --repository testpypi dist/*
+```
+
+## 🐧 Debian Packaging
+
+### Quick Build with stdeb
+
+```bash
 pip install stdeb
-
-# Create Debian source package
 python setup.py --command-packages=stdeb.command sdist_dsc
-
-# Build .deb package
-cd deb_dist/migasfree-client-*/
+cd deb_dist/package-*/
 dpkg-buildpackage -rfakeroot -uc -us
-
-# Result: ../migasfree-client_X.X.X-1_all.deb
 ```
 
 ### stdeb.cfg Configuration
 
 ```ini
 [DEFAULT]
-# System package dependencies (Depends: in control file)
-Depends3: python3-netifaces, python3-requests, python3-cryptography, python3-rich
-
-# Build-time dependencies
-Build-Depends: debhelper (>= 9), dh-python, python3-all, python3-setuptools
-
-# Conflicts with older package names
-Conflicts: migasfree-client-python2
-
-# Scripts to run post-installation
-postinst-file: debian/postinst
+Depends3: python3-requests, python3-click
+Build-Depends: debhelper (>= 9), dh-python, python3-all
 ```
 
-### Distribution-Specific Configs
+### Testing Debian Package
 
-For different Ubuntu/Debian versions, use `stdeb.cfg.d/`:
+```bash
+# Install
+sudo dpkg -i package_*.deb
+sudo apt-get install -f
 
-```ini
-# stdeb.cfg.d/jammy.cfg (Ubuntu 22.04)
-[DEFAULT]
-Depends3: python3-netifaces (>= 0.11), python3-requests (>= 2.27)
+# Verify
+dpkg -L package-name
+lintian package_*.deb
 ```
-
-### Control File Fields
-
-| Field | Purpose |
-|-------|---------|
-| `Package` | Package name |
-| `Version` | Package version |
-| `Architecture` | `all` for pure Python |
-| `Depends` | Runtime dependencies |
-| `Suggests` | Optional dependencies |
-| `Conflicts` | Incompatible packages |
-| `Description` | Package description |
 
 ## 🎩 RPM Packaging
 
-### Using setuptools
-
-```bash
-# Build RPM directly
-python setup.py bdist_rpm
-
-# Result: dist/migasfree_client-X.X.X-1.noarch.rpm
-```
-
-### Manual spec file
+### Spec File Template
 
 ```spec
-Name:           migasfree-client
-Version:        5.0
+Name:           mypackage
+Version:        1.0.0
 Release:        1%{?dist}
-Summary:        Synchronizes a computer from a migasfree server
+Summary:        A useful package
 
-License:        GPL-3.0-or-later
-URL:            https://github.com/migasfree/migasfree-client
+License:        MIT
+URL:            https://github.com/user/mypackage
 Source0:        %{name}-%{version}.tar.gz
 
 BuildArch:      noarch
-BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
-
-Requires:       python3-netifaces >= 0.8
-Requires:       python3-requests >= 2.4.3
-Requires:       python3-cryptography >= 2.5
-Requires:       python3-rich >= 9.5
+BuildRequires:  python3-devel, python3-setuptools
+Requires:       python3-requests, python3-click
 
 %description
-migasfree-client synchronizes computers with a migasfree server
-for centralized systems management.
+A useful package that does things.
 
 %prep
 %autosetup
@@ -143,132 +164,115 @@ for centralized systems management.
 
 %files
 %license LICENSE
-%doc README.md
-%{python3_sitelib}/migasfree_client/
-%{python3_sitelib}/migasfree_client-*.egg-info/
-%{_bindir}/migasfree
+%{python3_sitelib}/%{name}/
+%{_bindir}/mycommand
+```
+
+### Build and Test
+
+```bash
+rpmbuild -ba mypackage.spec
+rpmlint ~/rpmbuild/RPMS/noarch/mypackage-*.rpm
 ```
 
 ## 🏗️ Arch Linux Packaging
 
-### PKGBUILD
+### PKGBUILD Template
 
 ```bash
-# Maintainer: Your Name <email@example.com>
-pkgname=migasfree-client
-pkgver=5.0
+pkgname=mypackage
+pkgver=1.0.0
 pkgrel=1
-pkgdesc="Synchronizes a computer from a migasfree server"
+pkgdesc="A useful package"
 arch=('any')
-url="https://github.com/migasfree/migasfree-client"
-license=('GPL3')
-depends=('python' 'python-netifaces' 'python-requests' 'python-cryptography' 'python-rich')
-makedepends=('python-build' 'python-installer' 'python-wheel')
-source=("${pkgname}-${pkgver}.tar.gz::https://github.com/migasfree/migasfree-client/archive/v${pkgver}.tar.gz")
-sha256sums=('SKIP')
+url="https://github.com/user/mypackage"
+license=('MIT')
+depends=('python' 'python-requests' 'python-click')
+makedepends=('python-build' 'python-installer')
+source=("$pkgname-$pkgver.tar.gz")
 
 build() {
-    cd "${pkgname}-${pkgver}"
+    cd "$pkgname-$pkgver"
     python -m build --wheel --no-isolation
 }
 
 package() {
-    cd "${pkgname}-${pkgver}"
+    cd "$pkgname-$pkgver"
     python -m installer --destdir="$pkgdir" dist/*.whl
-    install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }
 ```
 
 ## 🪟 Windows Packaging
 
-### PyInstaller
+### PyInstaller Single Executable
 
 ```bash
-# Install PyInstaller
 pip install pyinstaller
+pyinstaller --onefile --name myapp src/main.py
+```
 
-# Create single executable
+### PyInstaller with Resources
+
+```bash
 pyinstaller --onefile \
-    --name migasfree \
-    --icon icons/migasfree.ico \
-    migasfree_client/__main__.py
+    --name myapp \
+    --icon assets/icon.ico \
+    --add-data "assets:assets" \
+    src/main.py
 ```
 
-### cx_Freeze for MSI
+## 📤 Expected Outputs
 
-```python
-# setup_cx.py
-from cx_Freeze import setup, Executable
+When creating or fixing packages, provide:
 
-setup(
-    name='migasfree-client',
-    version='5.0',
-    executables=[
-        Executable('migasfree_client/__main__.py', target_name='migasfree.exe')
-    ],
-    options={
-        'build_exe': {
-            'packages': ['migasfree_client'],
-            'include_files': ['conf/', 'icons/']
-        },
-        'bdist_msi': {
-            'upgrade_code': '{GUID-HERE}'
-        }
-    }
-)
+1. **Configuration files** needed
+2. **Build commands** to run
+3. **Testing steps** to verify
+4. **Known issues** with specific platforms
+
+### Output Format Example
+
+```markdown
+## Debian Package for Ubuntu 24.04
+
+### Configuration
+`stdeb.cfg`:
+```ini
+[DEFAULT]
+Depends3: python3-requests (>= 2.28), python3-click
 ```
 
-## 🔍 Testing Packages
-
-### Debian/Ubuntu
-
+### Build Commands
 ```bash
-# Install test (on clean system or container)
-sudo dpkg -i migasfree-client_*.deb
-sudo apt-get install -f  # Fix dependencies
-
-# Verify installation
-migasfree version
-dpkg -L migasfree-client
-
-# Linting
-lintian migasfree-client_*.deb
+python setup.py --command-packages=stdeb.command sdist_dsc
+cd deb_dist/mypackage-*/
+dpkg-buildpackage -rfakeroot -uc -us
 ```
 
-### RPM
-
+### Testing
 ```bash
-# Install test
-sudo rpm -i migasfree-client-*.rpm
-
-# Or with dependencies
-sudo dnf install ./migasfree-client-*.rpm
-
-# Verify
-migasfree version
-rpm -ql migasfree-client
-
-# Linting
-rpmlint migasfree-client-*.rpm
+# In a Ubuntu 24.04 container
+docker run -it ubuntu:24.04
+apt update && dpkg -i mypackage_*.deb && apt install -f -y
+mycommand --version
 ```
 
-## 🛡️ Security and Privacy
+### Known Issues
+- Python 3.12 removes distutils, use setuptools
+```
+
+## 🛡️ Security
 
 ### Package Signing
 
-- **Debian**: Sign with GPG key for repository
-- **RPM**: Use GPG signing for packages
-- **Windows**: Code signing certificate for executables
-
-### Dependency Verification
-
-- Pin dependency versions for reproducibility
-- Verify package checksums in build process
-- Audit dependencies for security issues
+- **PyPI**: Use Trusted Publishers with OIDC
+- **Debian**: Sign with GPG for apt repository
+- **RPM**: Use GPG signing
+- **Windows**: Code signing certificate
 
 ## 📂 Resources
 
-See the `resources/` directory for:
-
-- `debian_control_template` - Template for Debian control file
-- `rpm_spec_template.spec` - Template for RPM spec file
+- [Python Packaging Guide](https://packaging.python.org/)
+- [Debian Policy Manual](https://www.debian.org/doc/debian-policy/)
+- [Fedora Packaging Guidelines](https://docs.fedoraproject.org/en-US/packaging-guidelines/)
+- [Arch PKGBUILD](https://wiki.archlinux.org/title/PKGBUILD)
