@@ -1,207 +1,249 @@
 # Systems Analyst Skill
 
 ---
-
 name: Systems Analyst
-description: System architecture analysis, integration patterns, and troubleshooting for migasfree deployments
+description: System architecture analysis, integration patterns, and troubleshooting. Activate when: diagnosing issues, analyzing system interactions, or designing architectures.
+triggers: [troubleshoot, diagnose, architecture, integration, connectivity, configuration, debugging, network, logs]
 ---
 
 ## 🎯 Role Overview
 
-As a Systems Analyst for migasfree-client, you analyze client-server interactions, diagnose integration issues, design deployment architectures, and ensure the client works correctly across diverse IT environments.
+You are a Systems Analyst. You analyze system interactions, diagnose integration issues, design architectures, and ensure systems work correctly across diverse environments.
 
-## 🏗️ System Architecture
+**Your analytical approach:**
+- Start with symptoms, trace to root cause
+- Consider the full stack: application, network, infrastructure
+- Document findings for future reference
+- Recommend preventive measures
 
-### Component Overview
+## 🧠 Diagnostic Methodology
+
+### Problem Analysis Framework
+
+Follow this systematic approach when troubleshooting:
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                        Managed Computer                         │
-│  ┌─────────────┐  ┌──────────────┐  ┌────────────────────────┐ │
-│  │ migasfree   │  │ Package      │  │ Device Drivers          │ │
-│  │ client      │──│ Manager      │  │ (CUPS, etc.)            │ │
-│  │             │  │ (apt/yum/..) │  │                         │ │
-│  └──────┬──────┘  └──────────────┘  └────────────────────────┘ │
-│         │ HTTPS/mTLS                                            │
-└─────────┼───────────────────────────────────────────────────────┘
-          │
-          ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                      Network Layer                               │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────┐  │
-│  │ Proxy Server │  │ Package Cache│  │ Firewall             │  │
-│  │ (optional)   │  │ (apt-cacher) │  │                      │  │
-│  └──────────────┘  └──────────────┘  └──────────────────────┘  │
-└─────────────────────────────────────────────────────────────────┘
-          │
-          ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                     migasfree Server                             │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────┐  │
-│  │ Web API      │  │ Package      │  │ Database              │  │
-│  │              │  │ Repository   │  │ (PostgreSQL)          │  │
-│  └──────────────┘  └──────────────┘  └──────────────────────┘  │
-└─────────────────────────────────────────────────────────────────┘
+1. GATHER: Collect symptoms and context
+   └─ What exactly is happening? When did it start?
+   
+2. HYPOTHESIZE: Form possible causes
+   └─ Based on symptoms, what could cause this?
+   
+3. TEST: Validate or eliminate hypotheses
+   └─ What tests can prove/disprove each hypothesis?
+   
+4. RESOLVE: Apply the fix
+   └─ What's the minimal change to fix this?
+   
+5. PREVENT: Avoid recurrence
+   └─ How do we prevent this in the future?
 ```
+
+### Quick Diagnosis Tree
+
+```
+Service not responding?
+├─ Is the service running?
+│  ├─ No → Check why it stopped (logs, resources)
+│  └─ Yes
+│     ├─ Can you reach it locally? (localhost)
+│     │  ├─ No → Application issue
+│     │  └─ Yes → Network/firewall issue
+│     └─ Check logs for errors
+│
+└─ Check common culprits:
+   ├─ Disk space: `df -h`
+   ├─ Memory: `free -h`
+   ├─ CPU: `top` or `htop`
+   └─ Ports: `netstat -tlnp` or `ss -tlnp`
+```
+
+## ✅ DO / ❌ DON'T
+
+### ✅ DO
+
+- Always check logs first
+- Verify network path: DNS → firewall → service
+- Document the working configuration before changes
+- Test changes in a non-production environment first
+- Use standard diagnostic commands (`curl`, `dig`, `netstat`)
+- Consider time-based factors (cron jobs, cert expiry, clock skew)
+
+### ❌ DON'T
+
+- Assume the client is always at fault
+- Make multiple changes at once (change one thing, test, repeat)
+- Ignore warning messages - they often precede errors
+- Skip the basics (is it plugged in? is the service running?)
+- Recommend disabling security features as first resort
+
+## 🔍 Diagnostic Commands
+
+### Network Diagnostics
+
+```bash
+# DNS resolution
+nslookup example.com
+dig example.com
+
+# Connectivity test
+ping -c 4 example.com
+telnet example.com 443
+nc -zv example.com 443
+
+# HTTP request with details
+curl -v https://example.com/api/health
+
+# SSL/TLS certificate check
+openssl s_client -connect example.com:443 -servername example.com
+```
+
+### System Diagnostics
+
+```bash
+# Resource usage
+df -h                    # Disk space
+free -h                  # Memory
+top -bn1 | head -20      # CPU/processes
+
+# Services and ports
+systemctl status service-name
+ss -tlnp                 # Listening ports
+netstat -tlnp            # Alternative
+
+# Recent logs
+journalctl -u service-name --since "1 hour ago"
+tail -100 /var/log/application.log
+```
+
+### Application Diagnostics
+
+```bash
+# Process status
+ps aux | grep application
+
+# Open files and connections
+lsof -p <pid>
+
+# Strace for debugging
+strace -p <pid> -f
+```
+
+## 📊 Log Analysis Patterns
+
+### Key Patterns to Search
+
+| Pattern | Meaning |
+|---------|---------|
+| `ERROR`, `FATAL` | Critical failures |
+| `WARNING`, `WARN` | Potential issues |
+| `timeout`, `timed out` | Network/performance issues |
+| `refused`, `denied` | Permission/firewall issues |
+| `not found`, `missing` | Configuration/dependency issues |
+| `out of memory`, `OOM` | Resource exhaustion |
+
+### Log Analysis Commands
+
+```bash
+# Find errors in last hour
+journalctl --since "1 hour ago" | grep -i error
+
+# Count error types
+grep -i error app.log | sort | uniq -c | sort -rn
+
+# Follow logs in real-time
+tail -f /var/log/app.log | grep --line-buffered -i error
+```
+
+## 🏗️ Architecture Analysis
+
+### System Mapping Questions
+
+When analyzing a system, understand:
+
+1. **Components**: What services/applications are involved?
+2. **Communication**: How do they talk? (HTTP, gRPC, message queue)
+3. **Data flow**: Where does data originate? Where is it stored?
+4. **Dependencies**: What external services are required?
+5. **Failure modes**: What happens when each component fails?
+
+### Documentation Template
+
+```markdown
+## System: [Name]
+
+### Components
+- Service A: [purpose, port, technology]
+- Service B: [purpose, port, technology]
 
 ### Communication Flow
+Service A → (HTTP/443) → Service B → (PostgreSQL/5432) → Database
 
-1. **Registration**: Client requests mTLS token → Server issues certificate
-2. **Synchronization**:
-   - Client sends attributes (hardware UUID, user, etc.)
-   - Server responds with repositories, packages, faults to check
-   - Client configures package manager, installs/removes packages
-   - Client reports results back to server
+### Dependencies
+- External API: api.example.com
+- Database: PostgreSQL 14
 
-### Key Integration Points
-
-| Component | Protocol | Purpose |
-|-----------|----------|---------|
-| migasfree server | HTTPS + mTLS | API communication |
-| Package repository | HTTP/HTTPS | Package downloads |
-| CUPS | Local D-Bus/CUPS API | Printer management |
-| Hardware (lshw) | Local subprocess | Hardware inventory |
-| dmidecode | Local subprocess | UUID extraction |
-
-## 🔧 Configuration Analysis
-
-### Configuration Hierarchy
-
-```
-1. Environment variables (MIGASFREE_*)
-   ↓ (overrides)
-2. Command-line arguments
-   ↓ (overrides)
-3. Configuration file (/etc/migasfree.conf)
-   ↓ (overrides)
-4. Built-in defaults (settings.py)
+### Known Failure Modes
+- If database is down: Service B returns 503
+- If external API is slow: Service A times out after 30s
 ```
 
-### Critical Settings
+## 📤 Expected Outputs
 
-| Setting | Impact | Troubleshooting |
-|---------|--------|-----------------|
-| `Server` | Which server to connect to | DNS resolution, firewall |
-| `Protocol` | http/https | Certificate issues if https |
-| `Project` | Which packages to receive | Wrong packages if mismatch |
-| `Auto_Update_Packages` | Whether to upgrade | Missing updates if False |
-| `Debug` | Verbose logging | Enable for troubleshooting |
+When diagnosing issues, provide:
 
-### Platform Differences
+1. **Summary** of the problem
+2. **Root cause** identified through analysis
+3. **Evidence** - logs, commands, outputs that confirm
+4. **Solution** with step-by-step instructions
+5. **Prevention** - how to avoid this in future
 
-| Aspect | Linux | Windows |
-|--------|-------|---------|
-| Config path | `/etc/migasfree.conf` | `%PROGRAMDATA%\migasfree-client\migasfree.conf` |
-| Key storage | `/var/migasfree-client/` | `%PROGRAMDATA%\migasfree-client\` |
-| Package manager | apt, yum, etc. | wpt (Windows Package Tool) |
-| Service mode | systemd timer | Windows Task Scheduler |
+### Output Format Example
 
-## 🔍 Diagnostic Procedures
+```markdown
+## Diagnosis: API Connection Timeout
 
-### Connectivity Testing
+### Summary
+Application unable to connect to external API, failing with timeout errors.
 
+### Root Cause
+DNS resolution failing intermittently due to misconfigured resolv.conf.
+
+### Evidence
 ```bash
-# Check DNS resolution
-nslookup migasfree-server.example.com
+$ dig api.example.com
+;; connection timed out; no servers could be reached
 
-# Check HTTPS connectivity
-curl -v https://migasfree-server.example.com/api/v1/public/
-
-# Check with mTLS
-curl --cert cert.pem --key key.pem --cacert ca.pem \
-     https://migasfree-server.example.com/api/v1/
+$ cat /etc/resolv.conf
+nameserver 10.0.0.1  # Incorrect DNS server
 ```
 
-### Client Diagnostics
+### Solution
+1. Update DNS configuration:
+   ```bash
+   echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+   ```
+2. Verify resolution: `dig api.example.com`
+3. Test application: restart and verify connectivity
 
-```bash
-# Enable debug mode
-migasfree sync -d
-
-# Check version and configuration
-migasfree version
-
-# Test server connectivity
-migasfree info
-
-# View current computer attributes
-migasfree traits
+### Prevention
+- Use DHCP for DNS configuration
+- Add DNS monitoring alert
+- Document network requirements
 ```
 
-### Log Analysis
+## 🛡️ Security Considerations
 
-**Linux**: `/var/log/migasfree.log` or systemd journal  
-**Windows**: Event Viewer or log file location
+When troubleshooting, be mindful of:
 
-Key log patterns:
-
-- `ERROR` - Critical failures
-- `WARNING` - Potential issues
-- Connection timeouts - Network issues
-- Certificate errors - mTLS problems
-
-## 📊 Performance Analysis
-
-### Sync Time Factors
-
-| Factor | Impact | Mitigation |
-|--------|--------|------------|
-| Network latency | Slow API calls | Local cache proxy |
-| Package size | Slow downloads | Package proxy (apt-cacher) |
-| Hardware inventory | Slow lshw | Adjust capture frequency |
-| Repository update | apt update time | Mirror configuration |
-
-### Optimization Recommendations
-
-1. **Package Proxy Cache**: Deploy apt-cacher-ng for large deployments
-2. **mTLS Session Caching**: Reduce TLS handshake overhead
-3. **Selective Sync**: Use flags to sync only needed data
-
-## 🚨 Common Issues
-
-### Connection Problems
-
-| Symptom | Possible Cause | Resolution |
-|---------|---------------|------------|
-| "Connection refused" | Server down, wrong port | Check server status, port |
-| "SSL certificate verify failed" | CA not trusted | Import CA certificate |
-| "401 Unauthorized" | Invalid credentials | Re-register computer |
-| Timeout | Firewall, proxy | Check network path |
-
-### Package Management Issues
-
-| Symptom | Possible Cause | Resolution |
-|---------|---------------|------------|
-| "Package not found" | Repository misconfigured | Check repo URLs |
-| Dependency errors | Conflicting packages | Clean apt cache, force |
-| Lock file errors | Another process running | Wait or kill |
-
-### Certificate Issues
-
-| Symptom | Possible Cause | Resolution |
-|---------|---------------|------------|
-| "Certificate expired" | mTLS cert expired | Re-register |
-| "Certificate not yet valid" | Clock skew | Sync NTP |
-| "Unable to verify" | Missing CA cert | Download CA from server |
-
-## 🛡️ Security and Privacy
-
-### Security Assessment Areas
-
-- Network security (firewall rules, proxy configs)
-- Certificate lifecycle management
-- Access control for config files
-- Audit logging requirements
-
-### Compliance Considerations
-
-- Data retention policies for inventory data
-- Access logging for regulatory compliance
-- Encryption requirements for data in transit
+- Don't share sensitive credentials in logs or screenshots
+- Use secure channels for sharing diagnostic info
+- Check if issue could be security-related (attack, breach)
+- Follow incident response procedures if security is suspected
 
 ## 📂 Resources
 
-See the `resources/` directory for:
-
-- `diagnostic_script.sh` - Automated diagnostic script
-- `deployment_diagram.md` - Deployment architecture templates
+Common diagnostic resources:
+- [Linux Performance Analysis](http://www.brendangregg.com/linuxperf.html)
+- [Networking Troubleshooting](https://wiki.archlinux.org/title/Network_debugging)
+- [Log Analysis Best Practices](https://sematext.com/guides/log-analysis/)
