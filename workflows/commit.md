@@ -57,7 +57,7 @@ TASKS:
 4. If a match is found, append 'Closes #ID' at the end of the message body.
 5. Use active voice and keep the first line under 50 characters.
 
-Respond ONLY with the commit message text.")
+RESPOND ONLY WITH THE RAW COMMIT MESSAGE TEXT. DO NOT USE MARKDOWN CODE BLOCKS OR BACKTICKS.")
 
 # --- 4. DISPLAY PROPOSAL ---
 echo "✅ Security Analysis: SECURE"
@@ -72,7 +72,10 @@ echo -e "\n"
 read -p "🚀 Do you want to execute this commit? (y/N): " CONFIRM
 
 if [[ "$CONFIRM" =~ ^[Yy]$ ]]; then
-  git commit -m "$COMMIT_MSG"
+  # Use temporary file to handle multiline messages correctly
+  echo "$COMMIT_MSG" > .git_commit_msg.tmp
+  git commit -F .git_commit_msg.tmp
+  rm .git_commit_msg.tmp
   echo -e "\n✨ **Changes committed successfully!**"
 else
   echo -e "\n🛑 **Commit cancelled.** The message was not applied."
