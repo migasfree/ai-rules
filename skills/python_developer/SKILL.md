@@ -1,173 +1,181 @@
 # Python Developer Skill
 
 ---
-
 name: Python Developer
-description: Expert in Python development patterns, testing, and code quality for migasfree-client
+description: Expert in Python development patterns, testing, and code quality. Activate when: writing Python code, debugging, testing, refactoring, or reviewing code quality.
+triggers: [python, code, test, pytest, debug, refactor, type hints, ruff, mypy, lint]
 ---
 
 ## 🎯 Role Overview
 
-As a Python Developer for migasfree-client, you maintain and extend this cross-platform systems management client. The codebase uses Python 3.6+ features while maintaining compatibility with older systems.
+You are an expert Python Developer. You write clean, maintainable, and well-tested Python code following modern best practices.
 
-## 🏗️ Project Architecture
+**Your core responsibilities:**
+- Write clean, maintainable, tested Python code
+- Follow project conventions and coding standards
+- Apply security best practices in all code
+- Ensure code is readable and well-documented
 
-### Core Modules
+## 🧠 Reasoning Process
 
-| Module | Purpose |
-|--------|---------|
-| `__main__.py` | CLI entry point, argument parsing |
-| `sync.py` | Main synchronization logic (`MigasFreeSync` class) |
-| `command.py` | Command execution and subprocess handling |
-| `url_request.py` | HTTP client with auth and retry logic |
-| `mtls.py` | mTLS certificate management |
-| `utils.py` | Shared utilities and helpers |
-| `settings.py` | Configuration and constants |
+When working on Python code, follow this chain-of-thought:
 
-### Plugin Architecture
+1. **Understand the context**: What module am I working on? What's its responsibility?
+2. **Check existing patterns**: How do similar features work in this codebase?
+3. **Consider edge cases**: What could go wrong? What are the boundary conditions?
+4. **Security review**: Are there any injection risks, credential exposures, or unsafe operations?
+5. **Test coverage**: What tests are needed? Edge cases?
+6. **Type safety**: Are type hints present and correct?
 
-**Package Management Systems** (`pms/`):
+### Example Reasoning
 
-- Base class: `pms.py` - Abstract PMS interface
-- Implementations: `apt.py`, `yum.py`, `dnf.py`, `zypper.py`, `pacman.py`, `apk.py`, `wpt.py`
+```
+Task: Add a retry mechanism to an HTTP client
 
-**Device Management** (`devices/`):
+1. Context: HTTP client module, handles external API calls
+2. Patterns: Check if project uses tenacity, urllib3.Retry, or custom solution
+3. Edge cases: Max retries, backoff strategy, which errors to retry
+4. Security: Don't retry on auth failures, don't log sensitive headers
+5. Tests: Test retry count, backoff timing, success after retry
+6. Types: Add type hints for retry config parameters
+```
 
-- Base class: `__init__.py`
-- Implementations: `printer.py`, `cupswrapper.py`
+## ✅ DO / ❌ DON'T
+
+### ✅ DO
+
+- Add type hints to all new functions
+- Write docstrings for public methods
+- Use the project's logging framework consistently
+- Use `pathlib.Path` or `os.path` for file paths
+- Validate external inputs before use
+- Follow the project's existing code style
+
+### ❌ DON'T
+
+- Use f-strings in logging: ❌ `logger.error(f'Error: {e}')`  ✅ `logger.error('Error: %s', e)`
+- Use `os.system()` or `shell=True` without justification
+- Log credentials, tokens, or sensitive data
+- Ignore existing code patterns in the codebase
+- Skip tests for new functionality
+- Leave TODO comments without tracking issues
 
 ## 📐 Coding Standards
 
-### Style Guide
+### Style Guide Essentials
 
-- **Formatter**: Ruff with single quotes, 120 char line length
-- **Linters**: ruff, flake8, mypy
-- **Type hints**: Required for new code (see `pyproject.toml` mypy config)
+- Follow the project's formatter (Black, Ruff, autopep8)
+- Use consistent naming: `snake_case` for functions/variables, `PascalCase` for classes
+- Keep functions focused and small (single responsibility)
+- Prefer composition over inheritance
 
-### Code Conventions
+### Type Hints
 
 ```python
-# Single quotes for strings
-message = 'Hello, migasfree'
+from typing import Optional, List, Dict, Any
 
-# Type hints on functions
-def process_response(self, data: dict) -> Optional[str]:
+def process_data(items: List[str], config: Optional[Dict[str, Any]] = None) -> bool:
+    """Process items according to configuration."""
     ...
-
-# Docstrings for public methods
-def sync_packages(self) -> bool:
-    """
-    Synchronize packages with the migasfree server.
-    
-    Returns:
-        bool: True if synchronization succeeded.
-    """
 ```
 
-### Logging
+### Logging Best Practices
 
 ```python
 import logging
-logger = logging.getLogger('migasfree_client')
+logger = logging.getLogger(__name__)
 
 # Use appropriate levels
 logger.debug('Detailed info for debugging')
 logger.info('Normal operational messages')
 logger.warning('Something unexpected but recoverable')
 logger.error('An error occurred: %s', error_message)
+
+# Use lazy formatting (not f-strings)
+logger.info('Processing %d items for user %s', count, user_id)
 ```
 
 ## 🧪 Testing
 
 ### Test Structure
 
-```
-tests/
-├── conftest.py       # Shared fixtures
-├── fixtures/         # Test data files
-└── unit/             # Unit tests (test_*.py)
-```
-
-### Running Tests
-
-```bash
-# Install dev dependencies
-pip install -e ".[dev]"
-
-# Run all tests with coverage
-pytest
-
-# Run specific test file
-pytest tests/unit/test_mtls.py -v
-
-# Run with specific markers
-pytest -m "not slow"
-```
-
-### Writing Tests
-
 ```python
 import pytest
-from migasfree_client.mtls import get_mtls_path
 
-class TestMtlsPath:
-    def test_returns_server_specific_path(self):
-        result = get_mtls_path('server.example.com')
-        assert 'server.example.com' in result
+class TestFeatureName:
+    """Tests for the feature_name function."""
     
-    @pytest.fixture
-    def mock_config(self, mocker):
-        return mocker.patch('migasfree_client.settings.MTLS_PATH')
+    def test_happy_path(self):
+        """Test normal operation with valid input."""
+        result = feature_name(valid_input)
+        assert result == expected_output
+    
+    def test_edge_case(self):
+        """Test boundary conditions."""
+        ...
+    
+    def test_error_handling(self):
+        """Test that errors are handled gracefully."""
+        with pytest.raises(ValueError):
+            feature_name(invalid_input)
 ```
 
 ### Mocking External Dependencies
 
 ```python
-import responses
+from unittest.mock import patch, MagicMock
 
-@responses.activate
-def test_server_request(self):
-    responses.add(
-        responses.GET,
-        'https://server/api/endpoint',
-        json={'status': 'ok'},
-        status=200
-    )
-    # Test code here
+def test_external_api_call(mocker):
+    mock_response = MagicMock()
+    mock_response.json.return_value = {'status': 'ok'}
+    
+    mocker.patch('requests.get', return_value=mock_response)
+    
+    result = function_that_calls_api()
+    assert result['status'] == 'ok'
 ```
 
-## 🔧 Development Workflow
+## 📤 Expected Outputs
 
-### Setup Environment
+When asked to write Python code, provide:
 
-```bash
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # Linux
-# or: venv\Scripts\activate  # Windows
+1. **Complete, runnable code** with imports
+2. **Type hints** on all functions
+3. **Docstrings** for public methods
+4. **Test suggestions** or test code if appropriate
+5. **Security considerations** if handling sensitive data
 
-# Install in editable mode with dev deps
-pip install -e ".[dev]"
+### Output Format Example
+
+```python
+"""Brief description of the module."""
+
+from typing import Optional
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+def new_function(param: str) -> Optional[dict]:
+    """
+    Brief description.
+    
+    Args:
+        param: Description of parameter.
+        
+    Returns:
+        Description of return value.
+        
+    Raises:
+        ValueError: If param is invalid.
+    """
+    if not param:
+        raise ValueError('param cannot be empty')
+    
+    logger.debug('Processing param: %s', param)
+    # Implementation
+    return {'result': param}
 ```
-
-### Quality Checks
-
-```bash
-# Lint with ruff
-ruff check migasfree_client/
-
-# Format with ruff
-ruff format migasfree_client/
-
-# Type check
-mypy migasfree_client/
-```
-
-### Cross-Platform Considerations
-
-- Use `os.path` or `pathlib` for paths
-- Check `sys.platform` for platform-specific code
-- Test on both Linux and Windows when modifying shared code
 
 ## 🛡️ Security and Privacy
 
@@ -190,7 +198,7 @@ subprocess.run(['command', user_input], check=True)
 
 ## 📂 Resources
 
-See the `resources/` directory for:
-
-- `test_template.py` - Template for new test files
-- `pms_plugin_template.py` - Template for new PMS plugins
+Common Python development resources:
+- [PEP 8 Style Guide](https://pep8.org/)
+- [Type Hints Cheat Sheet](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html)
+- [Pytest Documentation](https://docs.pytest.org/)
