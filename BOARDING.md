@@ -26,11 +26,11 @@ We follow a **Hybrid Installation Strategy**: Core roles are global (always on),
 # 1. Templates & Workflows
 mkdir -p ~/.gemini/antigravity/templates/ ~/.gemini/antigravity/global_workflows/
 cp -r ./templates/* ~/.gemini/antigravity/templates/
-cp ./workflows/*.md ~/.gemini/antigravity/global_workflows/
+cp ./global_workflows/*.md ~/.gemini/antigravity/global_workflows/
 
 # 2. Core Roles (Architect, Ops, Designer)
-mkdir -p ~/.gemini/antigravity/core/
-cp -r ./core/* ~/.gemini/antigravity/core/
+mkdir -p ~/.gemini/antigravity/global_skills/
+cp -r ./global_skills/* ~/.gemini/antigravity/global_skills/
 
 # B. LOCAL: Project-Specific Skills
 # ---------------------------------

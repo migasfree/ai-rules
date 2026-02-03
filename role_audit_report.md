@@ -87,7 +87,7 @@ description: Acts as a technology skill...
 
 ## ⚡ 3. Workforce & Automation Audit
 
-**Analyzed**: `workflows/` directory.
+**Analyzed**: `global_workflows/` directory.
 
 ### ✅ Strengths
 
