@@ -124,9 +124,9 @@ graph TD
     C -->|Provides| E[Workflows]
     C -->|Contains| F[Templates]
     
-    D --> G[Core: Python Dev]
-    D --> H[Core: Security Eng]
-    D --> I[Skill: Electron Expert]
+    D --> G[Global: Architect]
+    D --> H[Global: Ops Lead]
+    D --> I[Skill: Python Expert]
     
     E --> J[Automated Audits]
     E --> K[Standardized Commits]

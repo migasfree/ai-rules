@@ -17,7 +17,7 @@ This workflow lists all Global Roles/Skills and Local Workspace Skills, giving a
 
 ```bash
 # --- Configuration ---
-GLOBAL_SKILLS_DIR="/home/alberto/.gemini/antigravity/global_skills"
+GLOBAL_SKILLS_DIR="$HOME/.gemini/antigravity/global_skills"
 WORKSPACE_SKILLS_DIR=".agent/skills"
 
 echo "📋 Migasfree AI Skill Report"
@@ -49,7 +49,7 @@ list_skills() {
         done
         [ $found -eq 0 ] && echo "   (No roles found)"
     else
-        # List .md files (Technology Plugins)
+        # List .md files (Technology Skills)
         found=0
         # Check if dir is empty
         if [ -z "$(ls -A "$dir" 2>/dev/null)" ]; then

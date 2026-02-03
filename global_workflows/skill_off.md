@@ -18,7 +18,7 @@ This workflow disables specified technology skills by adding a `.off` extension 
 
 ```bash
 # --- Configuration ---
-SKILLS_DIR="skills"
+SKILLS_DIR=".agent/skills"
 
 if [ -z "$*" ]; then
     echo "❌ No skills specified."

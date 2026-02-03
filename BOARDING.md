@@ -54,9 +54,9 @@ You should see a list of Migasfree Core roles (e.g., `technical_lead_architect`)
 
 Depending on your contribution, you should activate different "Skills" for your session.
 
-| **Architecting** | `Technical Lead & Architect` (Core) | Patterns, security-by-design, ADRs |
-| **Operations** | `Solutions & Operations Lead` (Core) | CI/CD, packaging, reliability |
-| **Designing** | `Product & Experience Designer` (Core) | UX/UI, accessibility, user flow |
+| **Architecting** | `Technical Lead & Architect` (Global Role) | Patterns, security-by-design, ADRs |
+| **Operations** | `Solutions & Operations Lead` (Global Role) | CI/CD, packaging, reliability |
+| **Designing** | `Product & Experience Designer` (Global Role) | UX/UI, accessibility, user flow |
 | **Developing** | `Python Expert` (Skill) | Idiomatic Python, mTLS, performance |
 | **Dev Desktop** | `Electron Expert` (Skill) | Secure IPC, native integration |
 
