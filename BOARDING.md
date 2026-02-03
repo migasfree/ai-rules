@@ -16,22 +16,28 @@ In a distributed community like ours, consistency is key. By using this reposito
 
 Ensure you have the Antigravity AI agent installed and configured.
 
-### 2. Install the Standards
+## 2. Install the Standards
 
-We recommend a **Global Installation** so your AI assistant is "Migasfree-aware" across all your projects.
+We follow a **Hybrid Installation Strategy**: Core roles are global (always on), while technology skills are installed per-project to keep the context clean.
 
 ```bash
-# copy the standardized prompt templates
-mkdir -p ~/.gemini/antigravity/templates/
+# A. GLOBAL: System-wide Workflows & Core Roles
+# ---------------------------------------------
+# 1. Templates & Workflows
+mkdir -p ~/.gemini/antigravity/templates/ ~/.gemini/antigravity/global_workflows/
 cp -r ./templates/* ~/.gemini/antigravity/templates/
-
-# copy the automation workflows
-mkdir -p ~/.gemini/antigravity/global_workflows/
 cp ./workflows/*.md ~/.gemini/antigravity/global_workflows/
 
-# copy the role definitions (skills)
-mkdir -p ~/.gemini/antigravity/global_skills/
-cp -r ./skills/* ~/.gemini/antigravity/global_skills/
+# 2. Core Roles (Architect, Ops, Designer)
+mkdir -p ~/.gemini/antigravity/core/
+cp -r ./core/* ~/.gemini/antigravity/core/
+
+# B. LOCAL: Project-Specific Skills
+# ---------------------------------
+# Navigate to your specific project folder and run:
+mkdir -p .agent/skills
+# Then copy ONLY the skills you need from this repo:
+# cp /path/to/ai-rules/skills/languages/python-expert.md .agent/skills/
 ```
 
 ### 3. Verification
@@ -42,19 +48,17 @@ Run the following command in any project to verify your installation:
 /skill_list
 ```
 
-You should see a list of Migasfree roles (e.g., `migasfree_python_developer`, `migasfree_packaging_specialist`).
+You should see a list of Migasfree Core roles (e.g., `technical_lead_architect`) and active Skills (e.g., `python-expert`).
 
 ## 🎭 Your Role in the Community
 
 Depending on your contribution, you should activate different "Skills" for your session.
 
-| If you are... | Activate this Skill | Focus |
-| :--- | :--- | :--- |
-| **Writing Code** | `Python Developer` | Code style, testing, mTLS patterns |
-| **Packaging** | `Packaging Specialist` | `stdeb`, RPM specs, Windows builds |
-| **Designing** | `Systems Analyst` | Architecture, data flow, integration |
-| **Auditing** | `Security Engineer` | Vulnerability checks, credential safety |
-| **Documenting** | `Technical Writer` | Diátaxis framework, user guides |
+| **Architecting** | `Technical Lead & Architect` (Core) | Patterns, security-by-design, ADRs |
+| **Operations** | `Solutions & Operations Lead` (Core) | CI/CD, packaging, reliability |
+| **Designing** | `Product & Experience Designer` (Core) | UX/UI, accessibility, user flow |
+| **Developing** | `Python Expert` (Skill) | Idiomatic Python, mTLS, performance |
+| **Dev Desktop** | `Electron Expert` (Skill) | Secure IPC, native integration |
 
 ### How to Switch Roles
 

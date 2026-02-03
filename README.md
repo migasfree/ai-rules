@@ -15,7 +15,7 @@ This repository serves as the central source of truth for AI interactions within
 
 To empower developers, system administrators, and technical writers with a standardized AI context. By using these rules, we ensure that:
 
-* **Code** aligns with Migasfree's architectural patterns (mTLS, Python 3.6+ compat, etc.).
+* **Code** aligns with Migasfree's architectural patterns (mTLS, Python 3.12+ compat, etc.).
 * **Documentation** follows the Diátaxis framework.
 * **Security** best practices are automatically verified.
 
@@ -25,34 +25,42 @@ To empower developers, system administrators, and technical writers with a stand
 
 To adopt the Migasfree standards, install the resources into your local Antigravity configuration.
 
-### 🌎 Global Installation (Recommended)
+### 🌎 Global Installation (Core Foundation)
 
-This makes the Migasfree roles and workflows available in *any* terminal session.
+Install the standard workflows, templates, and core roles that apply to **every** Migasfree project. This ensures the "Rules of the House" are always active.
 
 ```bash
-# 1. Install Workflows (Automation)
-mkdir -p ~/.gemini/antigravity/global_workflows/
+# 1. Install Workflows & Templates
+mkdir -p ~/.gemini/antigravity/global_workflows/ ~/.gemini/antigravity/templates/
 cp ./workflows/*.md ~/.gemini/antigravity/global_workflows/
-
-# 2. Install Templates (Prompt Logic)
-mkdir -p ~/.gemini/antigravity/templates/
 cp -r ./templates/* ~/.gemini/antigravity/templates/
 
-# 3. Install Skills (Role Definitions)
-mkdir -p ~/.gemini/antigravity/global_skills/
-cp -r ./skills/* ~/.gemini/antigravity/global_skills/
+# 2. Install Core Roles (Architect, Ops, Designer)
+mkdir -p ~/.gemini/antigravity/core/
+cp -r ./core/* ~/.gemini/antigravity/core/
 ```
 
-### 📂 Workspace-Specific Installation
+### 📂 Workspace-Specific Skills (Tech Stack)
 
-If you only want these active for a specific project:
+Every project is different. **Do not install all skills globally.** Instead, select and install only the skills relevant to your specific project's technology stack.
 
-```bash
-mkdir -p .agent/workflows .agent/templates .agent/skills
-cp ./workflows/*.md .agent/workflows/
-cp -r ./templates/* .agent/templates/
-cp -r ./skills/* .agent/skills/
-```
+1. Create the local agent directory in your project root:
+
+    ```bash
+    mkdir -p .agent/skills
+    ```
+
+2. Copy **only** the skills you need from the `ai-rules` repository:
+
+    ```bash
+    # Example: For a Python/Django project
+    cp /path/to/ai-rules/skills/languages/python-expert.md .agent/skills/
+    cp /path/to/ai-rules/skills/frameworks/django-expert.md .agent/skills/
+    ```
+
+> Note: The skills are organized in subfolders (`languages`, `frameworks`, `disciplines`). Browse them to find exactly what you need.
+
+> 💡 **Tip**: Use `/skill_list` to verify which skills are active in your current session.
 
 ---
 
@@ -60,19 +68,26 @@ cp -r ./skills/* .agent/skills/
 
 These commands automate routine tasks using our community standards.
 
-### 🧠 `/generate_skills`
+### 🧠 `/skill_generate`
 
-*Analyzes your project structure and assigns the appropriate Migasfree roles.*
+*Analyzes your project structure and generates specialized technology skills.*
 
-* **Use when**: Starting a new repository or onboarding a new project.
+* **Use when**: Starting a new repository or onboarding a new project to provide specific technical context.
 * **Model**: Claude Opus 4.5
 
-### 🛡️ `/audit_report`
+### � `/audit_report`
 
-*Performs a comprehensive quality audit based on active roles.*
+*Performs a comprehensive quality audit covering both Core Architecture and Skill technology compliance.*
 
 * **Use when**: Before submitting a Pull Request.
-* **Output**: A detailed `role_audit_report.md` covering security, code quality, and architecture.
+* **Output**: A detailed `role_audit_report.md` covering security, code quality, and multi-layer architecture.
+
+### 🕵️ `/audit_report_forensic`
+
+*Executes a Deep-Dive Technical Audit, actively searching for specific patterns and enforcing Senior Expert rules.*
+
+* **Use when**: Analyzing legacy code, performance bottlenecks, or security incidents.
+* **Output**: A "Staff Engineer" level report with forensic evidence (file paths, line numbers) and specific remediation plans.
 
 ### ✍️ `/commit`
 
@@ -83,9 +98,9 @@ These commands automate routine tasks using our community standards.
 
 ### 📋 Role Management
 
-* `/skill_list`: View active roles.
-* `/skill_on [role]`: Activate a role (e.g., `technical_writer`).
-* `/skill_off [role]`: Deactivate a role.
+* `/skill_list`: View active Core roles and Skills.
+* `/skill_on [skill]`: Activate a technology skill (e.g., `python-expert`).
+* `/skill_off [skill]`: Deactivate a skill.
 
 ---
 
@@ -109,9 +124,9 @@ graph TD
     C -->|Provides| E[Workflows]
     C -->|Contains| F[Templates]
     
-    D --> G[Python Dev]
-    D --> H[Security Eng]
-    D --> I[System Analyst]
+    D --> G[Core: Python Dev]
+    D --> H[Core: Security Eng]
+    D --> I[Skill: Electron Expert]
     
     E --> J[Automated Audits]
     E --> K[Standardized Commits]
