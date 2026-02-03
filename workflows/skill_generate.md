@@ -1,32 +1,46 @@
 ---
-description: Analyze the codebase technology stack and generate specialized role-based skills dynamic and specific to the workspace content.
+description: Analyze the codebase technology stack and generate specialized technology skills dynamic and specific to the workspace content.
 ---
 
-# Generate Dynamic Role-Based Skills
+# Generate Dynamic Technology Skills
 
-This workflow is designed to be executed by you (the agent) directly. Your goal is to analyze the current workspace and generate specialized skill definitions (`SKILL.md`) for the roles you identify as necessary.
+This workflow is designed to be executed by the agent to analyze the current workspace and generate specialized Knowledge Skills (`.md` files) for the technologies, frameworks, and languages detected. These skills complement the **Core Mega-Roles**.
 
 ## Instructions
 
 1. **Analyze the Workspace**:
-    * Use `list_dir` to explore the root directory and key subdirectories (e.g., `src`, `docs`, `.agent`).
-    * Read configuration files to understand the stack (e.g., `package.json`, `requirements.txt`, `docker-compose.yml`, `README.md`).
+    * Use `list_dir` to explore the root directory and key subdirectories (e.g., `src`, `lib`, `app`, `core`, `.agent`).
+    * Read configuration files to understand the stack (e.g., `package.json`, `requirements.txt`, `go.mod`, `pom.xml`, `docker-compose.yml`, `README.md`).
+    * Identify specific versions and key libraries used.
 
-2. **Identify Roles**:
-    * Based on the technologies and project structure, determine 2-4 key technical roles (e.g., "Svelte Frontend Expert", "Python Backend Developer", "DevOps Engineer").
-    * *Self-Correction*: Do not create generic roles. Be specific to the framework/library versions found.
+2. **Identify Skills Needed**:
+    * Determine 2-4 key technical skills (e.g., "FastAPI Expert", "SvelteKit & Tailwind Expert", "PostgreSQL Architect").
+    * **Constraint**: Do not recreate Core roles (Architect, Operations, Designer). Focus ONLY on the technology-specific knowledge.
 
 3. **Generate Skills**:
-    * For each identified role, create a directory in `.agent/skills/<role_name_snake_case>/`.
-    * Create a `SKILL.md` file in that directory.
-    * **Content of SKILL.md**:
-        * **Role Definition**: "You are an expert in [Technology]..."
-        * **Topic Expertise**: Detailed knowledge about the specific version or library.
-        * **Coding Standards**: Idioms and patterns preferred for this project.
-    * **Important**: Check if a skill already exists before overwriting. If it exists, update it only if you can significantly improve it.
+    * Create each skill as a single Markdown file in `.agent/skills/<tech_name_snake_case>.md`.
+    * **Structure of the Skill File**:
+        * **YAML Frontmatter**:
 
-4. **Create Resources (Optional)**:
-    * If useful, create a `resources/` folder within the skill directory and add templates or checklists (e.g., `checklist_pr_review.md`).
+            ```yaml
+            ---
+            name: [Tech Name] Expert (Skill)
+            description: Specialized module for [Technology]. Focus on [Key Areas].
+            triggers: [list, of, trigger, keywords]
+            ---
+            ```
+
+        * **Role Overview**: Define the Persona (e.g., "You are the Senior Architect").
+        * **🧠 Cognitive Process (Mandatory)**: A step-by-step reasoning chain the agent MUST perform *before* generating code (e.g., "Check for N+1", "Verify Idempotency").
+        * **🤝 Collaboration**: Explicit instructions to cross-reference other experts (e.g., "Consult the PostgreSQL Expert for schema changes").
+        * **Technical Deep-Dive**: Best practices, specific version idiomatic code.
+        * **🛑 Critical Hard Stops**: Negative constraints (e.g., "NEVER use shell=True", "NEVER commit secrets").
+        * **🗣️ Output Style Guide**: Enforce a structured response format (Why -> Code -> Improve).
+        * **Project-Specific standards**: Idioms found in the existing codebase.
+
+4. **Important**:
+    * If a skill already exists in `.agent/skills/`, update it only if you can add significant value or if the versions/stack have changed.
+    * Do not overwrite global skills; always prioritize local `.agent/skills/` for workspace-specific customizations.
 
 5. **Report**:
-    * Summarize the roles created and the rationale behind them to the user.
+    * Summarize the skills generated and explain how they interact with the Core Mega-Roles to the user.

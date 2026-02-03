@@ -1,64 +1,52 @@
 ---
-description: Disable one or more skills by renaming SKILL.md to SKILL.md.off
+description: Disable one or more skills by renaming .md to .md.off
 ---
 
 # Disable Skills
 
-This workflow disables specified skill roles by renaming their `SKILL.md` file to `SKILL.md.off`.
+This workflow disables specified technology skills by adding a `.off` extension to their files. Note: Core Mega-Roles cannot be disabled.
 
 ## Usage Examples
 
-- `/skill_off technical_writer`
-- `/skill_off security_engineer, devops`
-- `/skill_off "Technical Writer" "Security Engineer"`
+- `/skill_off python-expert`
+- `/skill_off frameworks/electron-expert`
 
 ## 1. Disable Skills
 
-- **Action**: Parse input and disable each specified skill.
+- **Action**: Search for enabled skills and disable them.
 - **Command**:
 
 ```bash
 # --- Configuration ---
-SKILLS_DIR="$HOME/.gemini/antigravity/global_skills"
+SKILLS_DIR="skills"
 
-# Create skills directory if it doesn't exist
-mkdir -p "$SKILLS_DIR"
-
-# Parse input: replace commas with spaces, normalize
-INPUT_ROLES="$*"
-INPUT_ROLES=$(echo "$INPUT_ROLES" | tr ',' ' ' | tr -s ' ')
-
-if [ -z "$INPUT_ROLES" ]; then
-    echo "❌ No roles specified."
-    echo "   Usage: /skill_off role1 role2 ..."
-    echo ""
-    echo "📋 Available skills:"
-    for skill_dir in "$SKILLS_DIR"/*/; do
-        [ -d "$skill_dir" ] && echo "   - $(basename "$skill_dir")"
-    done
+if [ -z "$*" ]; then
+    echo "❌ No skills specified."
+    echo "   Usage: /skill_off skill_name"
     exit 1
 fi
 
-echo "🔧 Disabling skills..."
+echo "🚫 Disabling skills..."
 echo ""
 
-# Process each role
-for role in $INPUT_ROLES; do
-    # Normalize: lowercase, spaces to underscores
-    role_dir=$(echo "$role" | tr '[:upper:]' '[:lower:]' | tr ' ' '_')
+for input in "$@"; do
+    # Normalize
+    target=$(echo "$input" | sed 's/\.md$//' | sed 's/\.off$//')
     
-    skill_file="$SKILLS_DIR/$role_dir/SKILL.md"
-    disabled_file="$SKILLS_DIR/$role_dir/SKILL.md.off"
+    # Try to find the file
+    found_file=$(find "$SKILLS_DIR" -name "${target}.md" | head -n 1)
     
-    if [ -f "$skill_file" ]; then
-        mv "$skill_file" "$disabled_file"
-        echo "🚫 $role_dir: DISABLED"
-    elif [ -f "$disabled_file" ]; then
-        echo "⏭️  $role_dir: Already disabled"
-    elif [ -d "$SKILLS_DIR/$role_dir" ]; then
-        echo "⚠️  $role_dir: No SKILL.md found"
+    if [ -n "$found_file" ]; then
+        mv "$found_file" "${found_file}.off"
+        echo "🚫 Disabled: $target"
     else
-        echo "❌ $role_dir: Skill not found"
+        # Check if it's already off
+        already_off=$(find "$SKILLS_DIR" -name "${target}.md.off" | head -n 1)
+        if [ -n "$already_off" ]; then
+            echo "⏭️  Already disabled: $target"
+        else
+            echo "❌ Skill not found or is a Core role: $target"
+        fi
     fi
 done
 

@@ -1,133 +1,55 @@
 ---
-description: Create a Role-Based Audit Report summarizing findings and recommendations for each skill role.
+description: Create a Premium Role-Based Audit Report with high-end visuals and "packaging".
 ---
 
-# Generate Role-Based Audit Report
+# Agentic Audit Workflow: Premium Role-Based Report
 
-This workflow performs an automated audit of the codebase using the personas and guidelines defined in your global skills, formatting the output into a premium, professional report.
+This workflow is designed to be executed directly by you (the AI agent). It generates a "Premium" audit report that balances deep technical insight with executive-level presentation ("Packaging").
 
-## 1. Automated Audit Execution
+## Instructions
 
-- **Action**: For each active global skill, analyze the codebase and generate findings following the premium template.
-- **Command**:
+### 1. Context Acquisition & Initialization
 
-```bash
-# --- Configuration ---
-SKILLS_DIR="$HOME/.gemini/antigravity/global_skills"
-REPORT_FILE="role_audit_report.md"
-PROJECT_NAME=$(basename "$(pwd)")
-CURRENT_DATE=$(date +"%Y-%m-%d")
-TEMPLATE_DIR="templates/audit_report"
-AGENT_TEMPLATE_DIR=".agent/templates/audit_report"
-GLOBAL_TEMPLATE_DIR="$HOME/.gemini/antigravity/templates/audit_report"
+* **Analyze Structure**: Use `list_dir` to explore the project. Build a mental model of the architecture.
+* **Discovery**:
+  * Identify **Core Mega-Roles** (e.g., Business Analyst, DevOps, Security).
+  * Identify **Technology Skills** (e.g., Python Expert, Bash Expert) in `.agent/skills`.
+* **Initialize Report**: Create `role_audit_report.md`. Add a **Premium Header** (Logo placeholder, Date, Auditor Name, clear divider).
 
-if [ -d "$SKILLS_DIR" ]; then
-    # Skills dir exists
-    :
-else
-    echo "❌ Global skills directory not found at $SKILLS_DIR"
-    exit 1
-fi
+### 2. Strategic Assessment (The "Hook")
 
-if [ -d "$TEMPLATE_DIR" ]; then
-    echo "ℹ️  Using local templates from ./$TEMPLATE_DIR"
-elif [ -d "$AGENT_TEMPLATE_DIR" ]; then
-    echo "ℹ️  Using agent templates from ./$AGENT_TEMPLATE_DIR"
-    TEMPLATE_DIR="$AGENT_TEMPLATE_DIR"
-elif [ -d "$GLOBAL_TEMPLATE_DIR" ]; then
-    echo "ℹ️  Using global templates from $GLOBAL_TEMPLATE_DIR"
-    TEMPLATE_DIR="$GLOBAL_TEMPLATE_DIR"
-else
-    echo "❌ Template directory not found (checked ./$TEMPLATE_DIR, ./$AGENT_TEMPLATE_DIR, and $GLOBAL_TEMPLATE_DIR)"
-    exit 1
-fi
+* **Executive Dashboard**: Instead of just text, create a high-level summary using:
+  * **Status Badges**: (e.g., 🟢 Stable, 🟡 Modernize, 🔴 Critical).
+  * **Scorecard Table**: Rate key areas (Architecture, Security, Code Quality) out of 10.
+  * **Mermaid Graph**: A high-level architecture diagram of what you found.
 
-echo "🔍 Starting Premium Automated Audit for $PROJECT_NAME..."
+### 3. Multi-Layer Audit (The "Content")
 
-# Export variables for envsubst
-export PROJECT_NAME
-export CURRENT_DATE
-export CONTEXT_STRUCTURE
+* **Process Core & Skills**: For each discovered Role/Skill:
+  * **Adopt the Persona**: Write *as* that expert. Use their terminology.
+  * **Structured Analysis**:
+    * **✅ Strengths**: Bullet points of what is good.
+    * **⚠️ Concerns**: specific findings with Severity (High/Medium/Low).
+    * **📄 Code Examples**: Real snippets from the codebase. **Crucial**: Show "Before" vs "After" or "Current" vs "Recommended" snippets where possible, using syntax highlighting.
+  * **REQUIRED VISUALIZATION**: For **every** role/section, you **MUST** include a specific Mermaid diagram. Examples:
+    * *Business Analyst*: Flowchart of value delivery or process gaps.
+    * *Security*: Attack vector diagram or permission hierarchy.
+    * *DevOps*: CI/CD Pipeline visualization.
+    * *Code Expert*: Refactoring flow or dependency graph.
 
-# 1. INITIALIZE REPORT HEADER
-cat <<EOF > "$REPORT_FILE"
-# $PROJECT_NAME Role-Based Audit Report
+### 4. Synthesis & Recommendations (The "Value")
 
-> **Date**: $CURRENT_DATE  
-> **Repository**: $PROJECT_NAME  
-> **Auditor**: Antigravity AI
+* **Consolidated Recommendations Matrix**:
+  * Group findings into a robust table: `| Priority | Domain | Finding | Actionable Recommendation |`.
+* **Metrics & Appendix**:
+  * Include a "Files Analyzed" list.
+  * Include a Glossary if technical terms were used.
 
----
+### 5. Final Polish ("Packaging")
 
-EOF
-
-# 2. CAPTURE CONTEXT
-CONTEXT_STRUCTURE=$(find . -maxdepth 3 -not -path '*/.*' | head -n 60)
-FILE_LIST=$(find . -maxdepth 2 -not -path '*/.*' -type f | head -n 20)
-export CONTEXT_STRUCTURE
-
-# 3. GENERATE EXECUTIVE SUMMARY
-echo "📝 Generating Executive Summary..."
-PROMPT=$(envsubst < "$TEMPLATE_DIR/executive_summary.md")
-EXEC_SUMMARY=$(ag run --mode Planning --model "Claude Opus 4.5" "$PROMPT")
-
-echo "$EXEC_SUMMARY" >> "$REPORT_FILE"
-echo -e "\n---\n" >> "$REPORT_FILE"
-
-# 4. LOOP THROUGH ROLES
-ROLE_INDEX=1
-export ROLE_INDEX
-for skill_path in "$SKILLS_DIR"/*; do
-    if [ -d "$skill_path" ]; then
-        if [ ! -f "$skill_path/SKILL.md" ]; then
-            continue
-        fi
-
-        role_name=$(basename "$skill_path")
-        role_label=$(echo "$role_name" | sed 's/_/ /g' | sed -e 's/\b\(.\)/\u\1/g')
-        guidelines=$(cat "$skill_path/SKILL.md")
-        
-        export role_label
-        export guidelines
-        export ROLE_INDEX
-
-        echo "⚙️  Auditing Role: $role_label..."
-
-        PROMPT=$(envsubst < "$TEMPLATE_DIR/role_audit.md")
-        ROLE_FINDINGS=$(ag run --mode Planning --model "Claude Opus 4.5" "$PROMPT")
-
-        {
-            echo "$ROLE_FINDINGS"
-            echo ""
-            echo "---"
-            echo ""
-        } >> "$REPORT_FILE"
-        
-        ((ROLE_INDEX++))
-    fi
-done
-
-# 5. CONSOLIDATED RECOMMENDATIONS
-echo "📊 Consolidating Recommendations..."
-REPORT_CONTENT=$(cat "$REPORT_FILE")
-export REPORT_CONTENT
-PROMPT=$(envsubst < "$TEMPLATE_DIR/consolidated.md")
-CONSOLIDATED=$(ag run --mode Planning --model "Claude Opus 4.5" "$PROMPT")
-
-echo "$CONSOLIDATED" >> "$REPORT_FILE"
-
-# 6. METRICS & APPENDIX
-echo "📈 Finalizing Metrics and Appendix..."
-PROMPT=$(envsubst < "$TEMPLATE_DIR/metrics.md")
-METRICS_APPENDIX=$(ag run --mode Planning --model "Claude Opus 4.5" "$PROMPT")
-
-echo -e "\n---\n" >> "$REPORT_FILE"
-echo "$METRICS_APPENDIX" >> "$REPORT_FILE"
-
-echo "✅ Premium Audit Report generated: $REPORT_FILE"
-```
-
-## 2. Notify User
-
-- **Action**: Inform completion.
-- **Message**: "Automated Premium Audit Report generated using the high-fidelity professional template."
+* **Review**: Read the generated markdown.
+* **Format Check**:
+  * Are headers clear?
+  * Are there enough emojis to guide the eye (without being clownish)?
+  * Are the tables well-spaced?
+* **Delivery**: Save the file and inform the user the Premium Audit is ready.

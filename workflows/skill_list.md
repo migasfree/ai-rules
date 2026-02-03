@@ -1,64 +1,101 @@
 ---
-description: List all skills showing their enabled/disabled status
+description: List all skills showing their enabled/disabled status, merging Global and Workspace scopes.
 ---
 
-# List Skills Status
+# List Skills Status (Unified View)
 
-This workflow lists all available skill roles and shows whether they are enabled or disabled.
+This workflow lists all Global Roles/Skills and Local Workspace Skills, giving a complete overview of the agent's capabilities.
 
 ## Usage
 
 - `/skill_list`
 
-## 1. List Skills
+## 1. List Global & Local Skills
 
-- **Action**: Scan skills directory and display status of each skill.
+- **Action**: Scan both global and local directories.
 - **Command**:
 
 ```bash
 # --- Configuration ---
-SKILLS_DIR="$HOME/.gemini/antigravity/global_skills"
+GLOBAL_SKILLS_DIR="/home/alberto/.gemini/antigravity/global_skills"
+WORKSPACE_SKILLS_DIR=".agent/skills"
 
-# Create skills directory if it doesn't exist
-mkdir -p "$SKILLS_DIR"
-
-echo "📋 Global Skills Status"
-echo "📂 Location: $SKILLS_DIR"
-echo "================================"
+echo "📋 Migasfree AI Skill Report"
+echo "=================================================="
 echo ""
 
-ENABLED_COUNT=0
-DISABLED_COUNT=0
-ENABLED_LIST=""
-DISABLED_LIST=""
+# --- Helper Function ---
+list_skills() {
+    local dir="$1"
+    local label="$2"
+    local type="$3" # "role" (subdirs) or "file" (.md files)
 
-for skill_dir in "$SKILLS_DIR"/*/; do
-    [ ! -d "$skill_dir" ] && continue
+    echo "$label"
+    echo "-----------------------------------"
     
-    role=$(basename "$skill_dir")
-    
-    if [ -f "$skill_dir/SKILL.md" ]; then
-        ENABLED_LIST="$ENABLED_LIST$role\n"
-        ((ENABLED_COUNT++))
-    elif [ -f "$skill_dir/SKILL.md.off" ]; then
-        DISABLED_LIST="$DISABLED_LIST$role\n"
-        ((DISABLED_COUNT++))
+    if [ ! -d "$dir" ]; then
+        echo "   ⚠️  Directory not found: $dir"
+        return
     fi
-done
 
-# Print enabled skills (sorted)
-echo -e "$ENABLED_LIST" | sort | while read -r role; do
-    [ -n "$role" ] && echo "✅ $role [ON]"
-done
+    if [ "$type" == "role" ]; then
+        # List subdirectories (Legacy Mega-Roles)
+        found=0
+        for skill_dir in "$dir"/*/; do
+            [ ! -d "$skill_dir" ] && continue
+            role=$(basename "$skill_dir")
+            echo "   🌎 $role [GLOBAL ROLE]"
+            found=1
+        done
+        [ $found -eq 0 ] && echo "   (No roles found)"
+    else
+        # List .md files (Technology Plugins)
+        found=0
+        # Check if dir is empty
+        if [ -z "$(ls -A "$dir" 2>/dev/null)" ]; then
+             echo "   (No skills found)"
+             return
+        fi
 
-# Print disabled skills (sorted)
-echo -e "$DISABLED_LIST" | sort | while read -r role; do
-    [ -n "$role" ] && echo "🚫 $role [OFF]"
-done
+        files=$(find "$dir" -maxdepth 1 -type f \( -name "*.md" -o -name "*.md.off" \) | sort)
+        
+        while read -r file; do
+            [ -z "$file" ] && continue
+            
+            name=$(basename "$file")
+            clean_name=${name%.md}
+            clean_name=${clean_name%.off}
+            
+            status="✅ ON "
+            icon="🔌"
+            
+            if [[ "$name" == *.off ]]; then
+                status="🚫 OFF"
+                icon="💤"
+            fi
 
-echo ""
-echo "─────────────────"
-echo "Total: $((ENABLED_COUNT + DISABLED_COUNT)) skills"
-echo "  ✅ Enabled:  $ENABLED_COUNT"
-echo "  🚫 Disabled: $DISABLED_COUNT"
+            # Check for overrides
+            if [ "$label" == "🏠 Workspace Skills (Local)" ] && [ -f "$GLOBAL_SKILLS_DIR/$name" ]; then
+                 note="(Overrides Global)"
+            else
+                 note=""
+            fi
+
+            printf "   %s %-25s [%s] %s\n" "$icon" "$clean_name" "$status" "$note"
+            found=1
+        done <<< "$files"
+        [ $found -eq 0 ] && echo "   (No active skills found)"
+    fi
+    echo ""
+}
+
+# 1. GLOBAL ROLES
+list_skills "$GLOBAL_SKILLS_DIR" "🌍 Global Roles (Core)" "role"
+
+# 2. WORKSPACE SKILLS
+list_skills "$WORKSPACE_SKILLS_DIR" "🏠 Workspace Skills (Local)" "file"
+
+
+echo "=================================================="
+echo "Use /skill_off <name> or /skill_on <name> to toggle local skills."
 ```
