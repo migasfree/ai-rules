@@ -16,7 +16,7 @@ In a distributed community like ours, consistency is key. By using this reposito
 
 Ensure you have the Antigravity AI agent installed and configured.
 
-## 2. Install the Standards
+### 2. Install the Standards
 
 We follow a **Hybrid Installation Strategy**: Core roles are global (always on), while technology skills are installed per-project to keep the context clean.
 

@@ -59,7 +59,7 @@ Every project is different. **Do not install all skills globally.** Instead, sel
     ```
 
 > Note: The skills are organized in subfolders (`languages`, `frameworks`, `disciplines`). Browse them to find exactly what you need.
-
+>
 > 💡 **Tip**: Use `/skill_list` to verify which skills are active in your current session.
 
 ---
