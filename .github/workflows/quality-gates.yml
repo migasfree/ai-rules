@@ -8,26 +8,19 @@ on:
 
 jobs:
   lint:
-    name: Lint Markdown & Python
+    name: Lint Markdown
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          python-version: '3.12'
+          node-version: '20'
 
-      - name: Install Linting Tools
-        run: |
-          pip install ruff
-          npm install -g markdownlint-cli
-
-      - name: Run Ruff (Python Linting)
-        run: |
-          # Ruff will run on any .py files found, or we can check snippets if we add them later
-          ruff check . || echo "No Python files to lint yet."
+      - name: Install Markdownlint
+        run: npm install -g markdownlint-cli
 
       - name: Run Markdownlint
         run: |
