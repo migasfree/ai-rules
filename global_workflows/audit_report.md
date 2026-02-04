@@ -19,17 +19,17 @@ This workflow is designed to be executed directly by you (the AI agent). It gene
 ### 2. Strategic Assessment (The "Hook")
 
 * **Executive Dashboard**: Instead of just text, create a high-level summary using:
-  * **Status Badges**: (e.g., 🟢 Stable, 🟡 Modernize, 🔴 Critical).
+  * **Visual Status Badges**: Use Shields.io badges (e.g., `![Status](https://img.shields.io/badge/Status-Stable-brightgreen?style=for-the-badge)`) instead of simple text/emojis.
   * **Scorecard Table**: Rate key areas (Architecture, Security, Code Quality) out of 10.
   * **Mermaid Graph**: A high-level architecture diagram of what you found.
 
 ### 3. Multi-Layer Audit (The "Content")
 
 * **Process Core & Skills**: For each discovered Role/Skill:
-  * **Adopt the Persona**: Write *as* that expert. Use their terminology.
+  * **Adopt the Persona**: Write *as* that expert. Use their terminology. Add a **Role Badge** at the start of the section (e.g., `![Architect](https://img.shields.io/badge/Role-Architect-blueviolet?style=for-the-badge)`).
   * **Structured Analysis**:
-    * **✅ Strengths**: Bullet points of what is good.
-    * **⚠️ Concerns**: specific findings with Severity (High/Medium/Low).
+    * **![Strength](shield_url) Strengths**: Use visual badges for "Strengths" and "Concerns" headers.
+    * **![Concern](shield_url) Concerns**: specific findings with Severity (High/Medium/Low) using dynamic colors (red/orange/yellow).
     * **📄 Code Examples**: Real snippets from the codebase. **Crucial**: Show "Before" vs "After" or "Current" vs "Recommended" snippets where possible, using syntax highlighting.
   * **REQUIRED VISUALIZATION**: For **every** role/section, you **MUST** include a specific Mermaid diagram. Examples:
     * *Business Analyst*: Flowchart of value delivery or process gaps.

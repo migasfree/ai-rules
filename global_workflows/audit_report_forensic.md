@@ -11,6 +11,9 @@ This workflow generates a **Forensic Audit Report**. Unlike the high-level asses
 ### 1. Initialization & Discovery
 
 * **Setup**: Create `role_audit_report.md`. Add header with "Deep Inspection" tag.
+* **Forensic Dashboard**: Create a high-level summary using:
+  * **Visual Investigation Badges**: Use Shields.io badges (e.g., `![Integrity](https://img.shields.io/badge/Integrity-Verified-brightgreen?style=for-the-badge)`) for Integrity, Risk, and Traceability.
+  * **Forensic Scorecard**: Confidence ratings for key layers.
 * **Load Experts**: Read all `.md` files in `.agent/skills/` to load the "Hard Stops" and "Cognitive Processes".
 * **Map Trace**: Use `list_dir` on `migasfree/` to identify all Django Apps.
 
@@ -51,10 +54,9 @@ For each **Expert Skill** available, perform a targeted search:
 
 ### 3. Detailed Reporting
 
-Structure the report by **Technology Domain** (matching the Experts). For each domain:
-
-* **🔍 Forensic Evidence**: specific files/lines found.
-* **📉 Metrics**: (e.g., "Found 12 Async Tasks", "Found 5 Security Hotspots").
+* **Role Integration**: For each Technology Domain, add a **Forensic Role Badge** (e.g., `![Staff Engineer](https://img.shields.io/badge/Role-Staff_Engineer-black?style=for-the-badge)`).
+* **🔍 Forensic Evidence**: Use visual badges for "Evidence" and "Concerns" headers.
+* **📉 Metrics**: (e.g., "Found 12 Async Tasks", "Found 5 Security Hotspots") using metric badges.
 * **💡 Senior Analysis**: Apply the "Cognitive Process" from the Skill to explain *why* findings are critical.
 * **🚑 Remediation Plan**: Code snippets for the most critical fixes.
 
