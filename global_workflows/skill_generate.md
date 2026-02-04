@@ -1,49 +1,45 @@
 ---
 description: Analyze the codebase technology stack and generate specialized technology skills dynamic and specific to the workspace content.
-version: 1.1.0
+version: 1.2.0
 last_modified: 2026-02-04
 ---
 
 # Generate Dynamic Technology Skills
 
-This workflow is designed to be executed by the agent to analyze the current workspace and generate specialized Knowledge Skills (`.md` files) for the technologies, frameworks, and languages detected. These skills complement the **Core Mega-Roles**.
+This workflow is designed to be executed by the agent to analyze the current workspace and provide the best set of specialized Knowledge Skills (`.md` files). It prioritizes reusing high-quality existing skills from the global repository over generating new ones.
+
+## 🗃️ Catalog of Existing Skills
+
+*Prioritize copying these from [ai-rules](https://github.com/migasfree/ai-rules) if detected:*
+
+| Category | Skills available in repository |
+| :--- | :--- |
+| **Languages** | `bash-expert`, `go-expert`, `python-expert` |
+| **Frameworks** | `celery-expert`, `django-expert`, `electron-expert`, `graphql-expert`, `postgresql-expert`, `quasar-vue-expert`, `terraform-expert` |
+| **Disciplines** | `ai-prompt-expert`, `cicd-expert`, `docs-expert`, `qa-expert`, `security-expert` |
 
 ## Instructions
 
 1. **Analyze the Workspace**:
-    * Use `list_dir` to explore the root directory and key subdirectories.
-    * Read configuration files (`package.json`, `requirements.txt`, etc.) to identify specific versions and key libraries.
+    * Use `list_dir` and configuration files (`package.json`, `requirements.txt`, `go.mod`, etc.) to identify the tech stack and versions.
 
-2. **Identify Skills Needed**:
-    * Determine 2-4 key technical skills (e.g., "FastAPI Expert", "PostgreSQL Architect").
-    * **Constraint**: Do not recreate Global Core roles. Focus ONLY on the technology-specific knowledge.
+2. **Compare with Global Catalog**:
+    * Compare detected technologies with the **Catalog of Existing Skills** above.
+    * **Recommendation**: Identify which technologies already have an "Expert" in the `ai-rules` repo.
+    * **Generation**: Identify which technologies are MISSING from the repo and require a new 6-Pillar Protocol skill.
 
-3. **Generate Skills (The 6-Pillar Protocol)**:
-    * Create each skill in `.agent/skills/`. All skills MUST follow this mandatory structure:
-    * **YAML Frontmatter**:
-
-        ```yaml
-        ---
-        name: [Tech Name] Expert (Skill)
-        version: 1.0.0
-        description: Specialized module for [Technology].
-        last_modified: [YYYY-MM-DD]
-        triggers: [list, of, triggers]
-        ---
-        ```
-
-    * **Pillar 1: Persona & Role Overview**: Define the Senior level persona and mission.
-    * **Pillar 2: Project Context & Resources**: Specify the tech stack versions and standards.
-    * **Pillar 3: Main Task & Objectives**: Clear list of deliverables and engineering goals.
-    * **Pillar 4: Critical Constraints & Hard Stops**: 🛑 Negative constraints and security rules.
-    * **Pillar 5: Cognitive Process & Decision Logs (Mandatory)**: The step-by-step reasoning chain (CoT) to execute before any action.
-    * **Pillar 6: Output Style & Format Guide**: Mandatory response structure (Analysis -> Code -> Verification).
+3. **Generate New Skills (Only if missing from Catalog)**:
+    * For technologies NOT in the catalog, create a new skill in `.agent/skills/` following the **6-Pillar Protocol**:
+    * **YAML Frontmatter**: Includes `name`, `version: 1.0.0`, `description`, `last_modified`, and `triggers`.
+    * **The 6 Pillars**: Persona, Context, Task, Constraints, Cognitive Process, and Output Format.
 
 4. **Self-Audit**:
-    * After generating a skill, use the **AI Prompt Engineer** role to verify that all 6 pillars are robust and unambiguous.
+    * Use the **AI Prompt Engineer** role (mandatory) to verify that any newly generated skill is robust and follows the standard.
 
-5. **Report**:
-    * Summarize the skills generated and explain how they interact with the Global Core Mega-Roles.
+5. **Final Report**:
+    * **REUSE**: List the skills the user should copy from `https://github.com/migasfree/ai-rules` (specifying paths: `skills/languages/`, `skills/frameworks/`, or `skills/disciplines/`).
+    * **NEW**: Summarize the newly generated skills created in `.agent/skills/`.
+    * **INSTRUCTIONS**: Provide the exact `cp` commands for the user to import existing skills if they are not already present.
 
 ---
 *Maintained by the Migasfree Community.*
