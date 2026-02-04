@@ -1,28 +1,29 @@
 Act as a Senior ${role_label}.
 
-GUIDELINES
----
+## GUIDELINES
 
 ${guidelines}
+
 ---
 
-CODEBASE CONTEXT
----
+## CODEBASE CONTEXT
 
 ${CONTEXT_STRUCTURE}
+
 ---
 
-TASK:
+## TASK
+
 Generate the audit section for your role.
 
-FOCAL POINT (CONTEXTUAL):
+## FOCAL POINT (CONTEXTUAL)
 
 - If ROLE_TYPE is "Core": Focus on systemic health, architectural patterns, multi-module coordination, and high-level security-by-design. Evaluate if the project follows the defined Mega-Role principles.
 - If ROLE_TYPE is "Skill": Focus on implementation details, idiomatic use of the specific technology/language, dependency security, and version-specific pitfalls.
 
-REQUIRED STRUCTURE:
+## REQUIRED STRUCTURE
 
-## ${ROLE_INDEX}. [${ROLE_TYPE}] ${role_label} Audit
+### ## ${ROLE_INDEX}. [${ROLE_TYPE}] ${role_label} Audit
 
 ### ${ROLE_INDEX}.1 Key Implementation Review
 
