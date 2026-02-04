@@ -1,5 +1,7 @@
 ---
 description: List all skills showing their enabled/disabled status, merging Global and Workspace scopes.
+version: 1.0.0
+last_modified: 2026-02-04
 ---
 
 # List Skills Status (Unified View)

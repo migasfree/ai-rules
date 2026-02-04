@@ -1,5 +1,7 @@
 ---
 description: Disable one or more skills by renaming .md to .md.off
+version: 1.0.0
+last_modified: 2026-02-04
 ---
 
 # Disable Skills

@@ -1,5 +1,7 @@
 ---
 description: Execute a Deep-Dive Technical Audit of the codebase, enforcing Senior Expert rules and forensic code analysis.
+version: 1.0.0
+last_modified: 2026-02-04
 ---
 
 # Agentic Audit Workflow: Deep Code Inspection

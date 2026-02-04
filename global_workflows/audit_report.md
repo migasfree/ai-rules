@@ -1,5 +1,7 @@
 ---
 description: Create a Premium Role-Based Audit Report with high-end visuals and "packaging".
+version: 1.0.0
+last_modified: 2026-02-04
 ---
 
 # Agentic Audit Workflow: Premium Role-Based Report

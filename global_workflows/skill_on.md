@@ -1,5 +1,7 @@
 ---
 description: Enable one or more skills by renaming .md.off to .md
+version: 1.0.0
+last_modified: 2026-02-04
 ---
 
 # Enable Skills
