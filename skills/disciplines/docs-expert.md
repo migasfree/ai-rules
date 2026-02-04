@@ -36,6 +36,7 @@ Engineer "Living Documentation" that scales:
 - 🛑 **CRITICAL**: NEVER use screenshots of text or code; use semantic code blocks.
 - 🛑 **CRITICAL**: NEVER leave placeholder text or "TODO" notes in published documentation.
 - 🛑 **CRITICAL**: NEVER duplicate schemas or API specs manually; automate the source of truth.
+- 🛑 **CRITICAL**: NEVER use unescaped special characters (`()`, `[]`, `{}`) in Mermaid labels; ALWAYS quote label strings (e.g., `id["Label (text)"]`) to prevent syntax errors.
 
 ## 🧠 Pillar 5: Cognitive Process & Decision Logs (Mandatory)
 
