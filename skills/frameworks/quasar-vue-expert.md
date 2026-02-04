@@ -1,6 +1,8 @@
 ---
 name: Quasar & Vue.js Expert (Skill)
+version: 1.0.0
 description: Specialized module for modern Frontend development using Vue 3 (Composition API) and the Quasar Framework. Focus on premium aesthetics, component architecture, and responsive design.
+last_modified: 2026-02-04
 triggers: [vue, quasar, q-, compositions api, script setup, vite, frontend, scss, flexbox, glassmorphism, responsive]
 ---
 

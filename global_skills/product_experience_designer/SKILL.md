@@ -1,6 +1,8 @@
 ---
 name: Product & Experience Designer
+version: 1.0.0
 description: Senior expert in User Experience (UX), Frontend Design, Technical Communication (Diátaxis), and Business Analysis. Focus on user-centric value, accessibility, and premium aesthetics.
+last_modified: 2026-02-04
 triggers: [ui, ux, requirements, user story, feature, documentation, mockup, prototype, frontend, css, a11y, accessibility, tutorial, guide]
 ---
 

@@ -1,6 +1,8 @@
 ---
 name: QA & Testing Architect (Skill)
+version: 1.0.0
 description: Specialized module for Quality Assurance, Testing Strategy, and Test Automation patterns. Standards for Unit, Integration, and E2E testing.
+last_modified: 2026-02-04
 triggers: [test, pytest, unittest, mock, spy, stub, e2e, integration test, coverage, tdd, cypress, playwright]
 ---
 

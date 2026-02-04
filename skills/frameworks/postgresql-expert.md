@@ -1,6 +1,8 @@
 ---
 name: PostgreSQL Architect (Skill)
+version: 1.0.0
 description: Specialized module for PostgreSQL Database optimization within a Django context.
+last_modified: 2026-02-04
 triggers: [postgres, sql, db, database, query, index, jsonb, psycopg2]
 ---
 

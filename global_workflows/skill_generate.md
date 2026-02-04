@@ -25,7 +25,9 @@ This workflow is designed to be executed by the agent to analyze the current wor
             ```yaml
             ---
             name: [Tech Name] Expert (Skill)
+            version: 1.0.0
             description: Specialized module for [Technology]. Focus on [Key Areas].
+            last_modified: [Current Date in YYYY-MM-DD]
             triggers: [list, of, trigger, keywords]
             ---
             ```

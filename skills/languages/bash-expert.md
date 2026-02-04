@@ -1,6 +1,8 @@
 ---
 name: Bash & Shell Scripting Expert (Skill)
+version: 1.0.0
 description: Specialized module for robust, idempotent, and secure Shell scripting. Acts as a technology skill for the Solutions & Operations Lead.
+last_modified: 2026-02-04
 triggers: [bash, shell, .sh, scripting, idempotent, pipeline, linux, automation]
 ---
 
