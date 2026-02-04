@@ -18,7 +18,10 @@ If you detect that your project uses a technology not currently covered by our g
 
 1. **Install the Prompt Supervisor**: Before generating skills, ensure `ai-prompt-expert.md` is installed in your workspace `.agent/skills/`. This role ensures the new skill follows the **6-Pillar Protocol**.
 2. **Launch the Generator**: Run the `/skill_generate` workflow.
-3. **Review & Refine**: The agent will analyze your codebase and propose a new skill definition (e.g., `fastapi-expert.md`).
+3. **Reuse vs. Generate**:
+    * The generator will compare your stack against the **Global Catalog** at [https://github.com/migasfree/ai-rules](https://github.com/migasfree/ai-rules).
+    * **Reuse**: For existing experts (e.g., `python-expert`), it will provide the specific `cp` command.
+    * **Generate**: For new or missing technologies, it will create a specialized skill in `.agent/skills/` following the **6-Pillar Protocol**.
 4. **Contribution**: Once a skill is stabilized in your project, consider submitting a PR to the `ai-rules` global repository to share it with the community.
 
 ## 🛠️ Getting Started
@@ -36,6 +39,19 @@ graph LR
 ### 1. Prerequisite: Antigravity
 
 Ensure you have the Antigravity AI agent installed and configured.
+
+We follow a **Hybrid Installation Strategy**: Core roles are global (always on), while technology skills are installed per-project to keep the context clean.
+
+### 1. Prerequisite: AI Prompt Engineer
+
+The `ai-prompt-expert.md` skill is **mandatory** for generating new skills. It ensures compliance with the **6-Pillar Protocol**.
+
+```bash
+# Recommendation: Install the prompt expert first in your workspace
+cp path/to/ai-rules/skills/disciplines/ai-prompt-expert.md .agent/skills/
+```
+
+### 2. Install the Standards
 
 We follow a **Hybrid Installation Strategy**: Core roles are global (always on), while technology skills are installed per-project to keep the context clean.
 
