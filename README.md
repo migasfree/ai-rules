@@ -30,14 +30,8 @@ To adopt the Migasfree standards, install the resources into your local Antigrav
 Install the standard workflows, templates, and core roles that apply to **every** Migasfree project. This ensures the "Rules of the House" are always active.
 
 ```bash
-# 1. Install Workflows & Templates
-mkdir -p ~/.gemini/antigravity/global_workflows/ ~/.gemini/antigravity/templates/
-cp ./global_workflows/*.md ~/.gemini/antigravity/global_workflows/
-cp -r ./templates/* ~/.gemini/antigravity/templates/
-
-# 2. Install Core Roles (Architect, Ops, Designer)
-mkdir -p ~/.gemini/antigravity/global_skills/
-cp -r ./global_skills/* ~/.gemini/antigravity/global_skills/
+# Run the automated setup script
+./setup.sh
 ```
 
 ### 📂 Workspace-Specific Skills (Tech Stack)
