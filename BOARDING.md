@@ -17,8 +17,8 @@ In a distributed community like ours, consistency is key. By using this reposito
 ```mermaid
 graph LR
     A[Clone ai-rules] --> B[Run ./setup.sh]
-    B --> C[Choose project skills]
-    C --> D[Run /skill_list]
+    B --> C[Verify with --verify]
+    C --> D[Choose project skills]
     D --> E{Ready!}
 ```
 
@@ -32,8 +32,10 @@ We follow a **Hybrid Installation Strategy**: Core roles are global (always on),
 
 ```bash
 # 1. GLOBAL: System-wide Workflows & Core Roles
-# This script handles templates, global workflows, and mega-roles.
 ./setup.sh
+
+# 1.1 VERIFY: Check installation and versions
+./setup.sh --verify
 
 # 2. LOCAL: Project-Specific Skills
 # Navigate to your specific project folder and run:

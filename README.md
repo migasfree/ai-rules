@@ -32,6 +32,9 @@ Install the standard workflows, templates, and core roles that apply to **every*
 ```bash
 # Run the automated setup script
 ./setup.sh
+
+# Verify the installation and versions
+./setup.sh --verify
 ```
 
 ### 📂 Workspace-Specific Skills (Tech Stack)
@@ -125,6 +128,12 @@ graph TD
     E --> J[Automated Audits]
     E --> K[Standardized Commits]
 ```
+
+---
+
+## 📓 Decision Logs (ADR)
+
+To understand the architectural evolution of these standards, see our [Architecture Decision Records](docs/adr/).
 
 ---
 *Maintained by the Migasfree Community.*
