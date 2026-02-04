@@ -1,6 +1,6 @@
 ---
 description: Analyze the codebase technology stack and generate specialized technology skills dynamic and specific to the workspace content.
-version: 1.0.0
+version: 1.1.0
 last_modified: 2026-02-04
 ---
 
@@ -11,40 +11,39 @@ This workflow is designed to be executed by the agent to analyze the current wor
 ## Instructions
 
 1. **Analyze the Workspace**:
-    * Use `list_dir` to explore the root directory and key subdirectories (e.g., `src`, `lib`, `app`, `core`, `.agent`).
-    * Read configuration files to understand the stack (e.g., `package.json`, `requirements.txt`, `go.mod`, `pom.xml`, `docker-compose.yml`, `README.md`).
-    * Identify specific versions and key libraries used.
+    * Use `list_dir` to explore the root directory and key subdirectories.
+    * Read configuration files (`package.json`, `requirements.txt`, etc.) to identify specific versions and key libraries.
 
 2. **Identify Skills Needed**:
-    * Determine 2-4 key technical skills (e.g., "FastAPI Expert", "SvelteKit & Tailwind Expert", "PostgreSQL Architect").
-    * **Constraint**: Do not recreate Core roles (Architect, Operations, Designer). Focus ONLY on the technology-specific knowledge.
+    * Determine 2-4 key technical skills (e.g., "FastAPI Expert", "PostgreSQL Architect").
+    * **Constraint**: Do not recreate Global Core roles. Focus ONLY on the technology-specific knowledge.
 
-3. **Generate Skills**:
-    * Create each skill as a single Markdown file in `.agent/skills/<tech_name_snake_case>.md`.
-    * **Structure of the Skill File**:
-        * **YAML Frontmatter**:
+3. **Generate Skills (The 6-Pillar Protocol)**:
+    * Create each skill in `.agent/skills/`. All skills MUST follow this mandatory structure:
+    * **YAML Frontmatter**:
 
-            ```yaml
-            ---
-            name: [Tech Name] Expert (Skill)
-            version: 1.0.0
-            description: Specialized module for [Technology]. Focus on [Key Areas].
-            last_modified: [Current Date in YYYY-MM-DD]
-            triggers: [list, of, trigger, keywords]
-            ---
-            ```
+        ```yaml
+        ---
+        name: [Tech Name] Expert (Skill)
+        version: 1.0.0
+        description: Specialized module for [Technology].
+        last_modified: [YYYY-MM-DD]
+        triggers: [list, of, triggers]
+        ---
+        ```
 
-        * **Role Overview**: Define the Persona (e.g., "You are the Senior Architect").
-        * **🧠 Cognitive Process (Mandatory)**: A step-by-step reasoning chain the agent MUST perform *before* generating code (e.g., "Check for N+1", "Verify Idempotency").
-        * **🤝 Collaboration**: Explicit instructions to cross-reference other experts (e.g., "Consult the PostgreSQL Expert for schema changes").
-        * **Technical Deep-Dive**: Best practices, specific version idiomatic code.
-        * **🛑 Critical Hard Stops**: Negative constraints (e.g., "NEVER use shell=True", "NEVER commit secrets").
-        * **🗣️ Output Style Guide**: Enforce a structured response format (Why -> Code -> Improve).
-        * **Project-Specific standards**: Idioms found in the existing codebase.
+    * **Pillar 1: Persona & Role Overview**: Define the Senior level persona and mission.
+    * **Pillar 2: Project Context & Resources**: Specify the tech stack versions and standards.
+    * **Pillar 3: Main Task & Objectives**: Clear list of deliverables and engineering goals.
+    * **Pillar 4: Critical Constraints & Hard Stops**: 🛑 Negative constraints and security rules.
+    * **Pillar 5: Cognitive Process & Decision Logs (Mandatory)**: The step-by-step reasoning chain (CoT) to execute before any action.
+    * **Pillar 6: Output Style & Format Guide**: Mandatory response structure (Analysis -> Code -> Verification).
 
-4. **Important**:
-    * If a skill already exists in `.agent/skills/`, update it only if you can add significant value or if the versions/stack have changed.
-    * Do not overwrite global skills; always prioritize local `.agent/skills/` for workspace-specific customizations.
+4. **Self-Audit**:
+    * After generating a skill, use the **AI Prompt Engineer** role to verify that all 6 pillars are robust and unambiguous.
 
 5. **Report**:
-    * Summarize the skills generated and explain how they interact with the Core Mega-Roles to the user.
+    * Summarize the skills generated and explain how they interact with the Global Core Mega-Roles.
+
+---
+*Maintained by the Migasfree Community.*
