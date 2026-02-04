@@ -1,3 +1,7 @@
+---
+version: 1.0.0
+last_modified: 2026-02-04
+---
 Act as a Senior Lead Auditor.
 Based on this codebase structure:
 ${CONTEXT_STRUCTURE}
