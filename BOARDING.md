@@ -12,6 +12,16 @@ In a distributed community like ours, consistency is key. By using this reposito
 
 ## 🛠️ Getting Started
 
+### ⚡ Quick Start Visual
+
+```mermaid
+graph LR
+    A[Clone ai-rules] --> B[Run ./setup.sh]
+    B --> C[Choose project skills]
+    C --> D[Run /skill_list]
+    D --> E{Ready!}
+```
+
 ### 1. Prerequisite: Antigravity
 
 Ensure you have the Antigravity AI agent installed and configured.
@@ -21,23 +31,15 @@ Ensure you have the Antigravity AI agent installed and configured.
 We follow a **Hybrid Installation Strategy**: Core roles are global (always on), while technology skills are installed per-project to keep the context clean.
 
 ```bash
-# A. GLOBAL: System-wide Workflows & Core Roles
-# ---------------------------------------------
-# 1. Templates & Workflows
-mkdir -p ~/.gemini/antigravity/templates/ ~/.gemini/antigravity/global_workflows/
-cp -r ./templates/* ~/.gemini/antigravity/templates/
-cp ./global_workflows/*.md ~/.gemini/antigravity/global_workflows/
+# 1. GLOBAL: System-wide Workflows & Core Roles
+# This script handles templates, global workflows, and mega-roles.
+./setup.sh
 
-# 2. Core Roles (Architect, Ops, Designer)
-mkdir -p ~/.gemini/antigravity/global_skills/
-cp -r ./global_skills/* ~/.gemini/antigravity/global_skills/
-
-# B. LOCAL: Project-Specific Skills
-# ---------------------------------
+# 2. LOCAL: Project-Specific Skills
 # Navigate to your specific project folder and run:
 mkdir -p .agent/skills
-# Then copy ONLY the skills you need from this repo:
-# cp /path/to/ai-rules/skills/languages/python-expert.md .agent/skills/
+# Then copy ONLY the skills you need from the skills/ folder:
+# cp path/to/ai-rules/skills/languages/python-expert.md .agent/skills/
 ```
 
 ### 3. Verification
