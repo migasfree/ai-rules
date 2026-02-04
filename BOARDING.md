@@ -10,6 +10,17 @@ In a distributed community like ours, consistency is key. By using this reposito
 2. **Workflows are Automated**: We share the same scripts for auditing, committing, and generating code.
 3. **Quality is Enforced**: specialized roles (like Security Engineer) automatically check your work against our specific best practices.
 
+## 🧠 Creating New Skills
+
+If you detect that your project uses a technology not currently covered by our global standards, you should generate a new specialized skill.
+
+### 📋 Protocol for New Skills
+
+1. **Install the Prompt Supervisor**: Before generating skills, ensure `ai-prompt-expert.md` is installed in your workspace `.agent/skills/`. This role ensures the new skill follows the **6-Pillar Protocol**.
+2. **Launch the Generator**: Run the `/skill_generate` workflow.
+3. **Review & Refine**: The agent will analyze your codebase and propose a new skill definition (e.g., `fastapi-expert.md`).
+4. **Contribution**: Once a skill is stabilized in your project, consider submitting a PR to the `ai-rules` global repository to share it with the community.
+
 ## 🛠️ Getting Started
 
 ### ⚡ Quick Start Visual
@@ -25,8 +36,6 @@ graph LR
 ### 1. Prerequisite: Antigravity
 
 Ensure you have the Antigravity AI agent installed and configured.
-
-### 2. Install the Standards
 
 We follow a **Hybrid Installation Strategy**: Core roles are global (always on), while technology skills are installed per-project to keep the context clean.
 

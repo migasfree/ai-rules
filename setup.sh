@@ -109,6 +109,15 @@ process_dir "$SOURCE_DIR/templates" "$ANTIGRAVITY_DIR/templates" "Templates"
 # 3. Global Skills (Core Roles)
 process_dir "$SOURCE_DIR/global_skills" "$ANTIGRAVITY_DIR/global_skills" "Global Skills"
 
+# 4. Local Workspace Extras (Optional but recommended)
+if [ "$VERIFY_MODE" = false ]; then
+    if [ -d ".agent/skills" ]; then
+        echo -e "${YELLOW}🛠️  Applying Workspace Enhancements...${NC}"
+        cp "$SOURCE_DIR/skills/disciplines/ai-prompt-expert.md" ".agent/skills/"
+        echo -e "${GREEN}✓ AI Prompt Engineer installed locally.${NC}"
+    fi
+fi
+
 if [ "$VERIFY_MODE" = false ]; then
     echo -e "\n${GREEN}✨ Installation Complete!${NC}"
     echo -e "Verify your installation anytime with: ${BLUE}./setup.sh --verify${NC}"
