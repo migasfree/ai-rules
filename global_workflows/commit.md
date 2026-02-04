@@ -9,6 +9,7 @@ This workflow analyzes "Staged Changes," performs a security scan, identifies re
 1.- Generate Commit Message
 
 - **Action**: Security audit and issue-linked drafting.
+- **CRITICAL**: ONLY operate on **Staged Changes** (`git diff --cached`). DO NOT run `git add` automatically. If there are unstaged changes, they MUST be ignored.
 - **Command**:
 
 ```bash
@@ -60,8 +61,11 @@ TASKS:
 RESPOND ONLY WITH THE RAW COMMIT MESSAGE TEXT. DO NOT USE MARKDOWN CODE BLOCKS OR BACKTICKS.")
 
 # --- 4. DISPLAY PROPOSAL ---
+STAGED_FILES=$(git diff --cached --name-only)
 echo "✅ Security Analysis: SECURE"
-echo -e "\n📝 **Proposed Commit Message:**\n"
+echo -e "\n� **Files to be committed:**"
+echo "$STAGED_FILES"
+echo -e "\n�📝 **Proposed Commit Message:**\n"
 echo "------------------------------------------------"
 echo "$COMMIT_MSG"
 echo "------------------------------------------------"
@@ -69,7 +73,7 @@ echo "------------------------------------------------"
 # --- 5. INTERACTIVE APPROVAL ---
 # This block forces the user to choose before any action is taken
 echo -e "\n"
-read -p "🚀 Do you want to execute this commit? (y/N): " CONFIRM
+read -p "🚀 Do you want to execute this commit with only these files? (y/N): " CONFIRM
 
 if [[ "$CONFIRM" =~ ^[Yy]$ ]]; then
   # Use temporary file to handle multiline messages correctly
