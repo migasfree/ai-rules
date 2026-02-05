@@ -21,6 +21,34 @@ To empower developers, system administrators, and technical writers with a stand
 
 ---
 
+## ⚡ Quick Start
+
+```mermaid
+graph LR
+    A[1. Clone ai-rules] --> B[2. Run ./setup.sh]
+    B --> C[3. Verify with --verify]
+    C --> D[4. Copy skills to project]
+    D --> E[✅ Ready!]
+    
+    style A fill:#e1f5fe
+    style E fill:#c8e6c9
+```
+
+```bash
+# 1. Clone and setup
+git clone https://github.com/migasfree/ai-rules.git
+cd ai-rules && ./setup.sh
+
+# 2. In your project, add needed skills
+mkdir -p .agent/skills
+cp /path/to/ai-rules/skills/languages/python-expert.md .agent/skills/
+
+# 3. Verify
+./setup.sh --verify
+```
+
+---
+
 ## 🚀 Installation & Setup
 
 To adopt the Migasfree standards, install the resources into your local Antigravity configuration.
