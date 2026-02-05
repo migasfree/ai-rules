@@ -24,8 +24,16 @@ if [ -z "$STAGED_DIFF" ]; then
   exit 1
 fi
 
-# Fetch open Issues (Simulated CLI tool)
-OPEN_ISSUES=$(ag issues list --status open --limit 5)
+# Fetch open Issues (requires GitHub CLI 'gh' or custom 'ag' tool)
+# Fallback: If neither tool is available, continue without issue linking
+if command -v gh &> /dev/null; then
+  OPEN_ISSUES=$(gh issue list --limit 5 2>/dev/null || echo "")
+elif command -v ag &> /dev/null; then
+  OPEN_ISSUES=$(ag issues list --status open --limit 5 2>/dev/null || echo "")
+else
+  OPEN_ISSUES=""
+  echo "ℹ️  No issue CLI found (gh/ag). Skipping issue linking."
+fi
 
 # --- 2. SECURITY AUDIT (Security Engineer) ---
 SECURITY_CHECK=$(ag run --mode Codebase --model "Gemini 3 Flash" "Act as a Senior Security Engineer.
