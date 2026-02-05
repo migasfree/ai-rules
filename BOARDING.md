@@ -80,7 +80,7 @@ You should see a list of Migasfree Core roles (e.g., `technical_lead_architect`)
 Depending on your contribution, you should activate different "Skills" for your session.
 
 | Activity | Role/Skill | Focus |
-|----------|------------|-------|
+| -------------- | -------------------------------------------- | ----------------------------------------- |
 | **Architecting** | `Technical Lead & Architect` (Global) | Patterns, security-by-design, ADRs |
 | **Operations** | `Solutions & Operations Lead` (Global) | CI/CD, packaging, reliability |
 | **Designing** | `Product & Experience Designer` (Global) | UX/UI, accessibility, user flow |
