@@ -15,7 +15,7 @@ This workflow is designed to be executed by the agent to analyze the current wor
 | Category | Skills available in repository |
 | :--- | :--- |
 | **Languages** | `bash-expert`, `go-expert`, `python-expert` |
-| **Frameworks** | `celery-expert`, `django-expert`, `electron-expert`, `graphql-expert`, `postgresql-expert`, `quasar-vue-expert`, `terraform-expert` |
+| **Frameworks** | `celery-expert`, `django-expert`, `docker-expert`, `electron-expert`, `graphql-expert`, `postgresql-expert`, `quasar-vue-expert`, `terraform-expert` |
 | **Disciplines** | `ai-prompt-expert`, `cicd-expert`, `docs-expert`, `qa-expert`, `security-expert` |
 
 ## Instructions
