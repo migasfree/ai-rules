@@ -1,9 +1,10 @@
 ---
 name: GraphQL & Graphene Expert (Skill)
-version: 1.1.0
+version: 1.2.0
 description: Specialized module for GraphQL API development using Graphene-Django. Focus on N+1 prevention, Schema design, and DataLoader usage.
-last_modified: 2026-02-04
+last_modified: 2026-02-05
 triggers: [graphql, graphene, schema, mutation, query, resolver, dataloader]
+dependencies: [django-expert]
 ---
 
 # Skill: GraphQL & Graphene Expert

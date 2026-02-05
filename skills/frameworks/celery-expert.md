@@ -1,9 +1,10 @@
 ---
 name: Celery & Async Expert (Skill)
-version: 1.1.0
+version: 1.2.0
 description: Specialized module for Asynchronous Task Queues with Celery and Redis.
-last_modified: 2026-02-04
+last_modified: 2026-02-05
 triggers: [celery, async, worker, task, redis, queue, schedule]
+dependencies: [django-expert, python-expert]
 ---
 
 # Skill: Celery & Async Expert

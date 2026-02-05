@@ -1,9 +1,10 @@
 ---
 name: Django & DRF Expert (Skill)
-version: 1.1.0
+version: 1.2.0
 description: Specialized module for Django 5.x and Django REST Framework. Focus on ORM efficiency, API design, and Scalability.
-last_modified: 2026-02-04
+last_modified: 2026-02-05
 triggers: [django, drf, models, views, serializers, api, orm, querysets]
+dependencies: [python-expert, postgresql-expert]
 ---
 
 # Skill: Django & DRF Expert

@@ -1,9 +1,10 @@
 ---
 name: Docker & Containerization Architect (Skill)
-version: 1.0.0
+version: 1.1.0
 description: Specialized module for Dockerfile optimization, multi-stage builds, and container security. Focus on image efficiency and runtime hardening.
 last_modified: 2026-02-05
 triggers: [dockerfile, docker-compose, multi-stage, container image, distroless, alpine, registry]
+dependencies: [cicd-expert, bash-expert]
 ---
 
 # Skill: Docker & Containerization Architect
