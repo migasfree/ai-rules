@@ -40,10 +40,6 @@ graph LR
 
 Ensure you have the Antigravity AI agent installed and configured.
 
-We follow a **Hybrid Installation Strategy**: Core roles are global (always on), while technology skills are installed per-project to keep the context clean.
-
-### 1. Prerequisite: AI Prompt Engineer
-
 The `ai-prompt-expert.md` skill is **mandatory** for generating new skills. It ensures compliance with the **6-Pillar Protocol**.
 
 ```bash
@@ -83,19 +79,22 @@ You should see a list of Migasfree Core roles (e.g., `technical_lead_architect`)
 
 Depending on your contribution, you should activate different "Skills" for your session.
 
-| **Architecting** | `Technical Lead & Architect` (Global Role) | Patterns, security-by-design, ADRs |
-| **Operations** | `Solutions & Operations Lead` (Global Role) | CI/CD, packaging, reliability |
-| **Designing** | `Product & Experience Designer` (Global Role) | UX/UI, accessibility, user flow |
-| **Developing** | `Python Expert` (Skill) | Idiomatic Python, mTLS, performance |
-| **Dev Desktop** | `Electron Expert` (Skill) | Secure IPC, native integration |
+| Activity | Role/Skill | Focus |
+|----------|------------|-------|
+| **Architecting** | `Technical Lead & Architect` (Global) | Patterns, security-by-design, ADRs |
+| **Operations** | `Solutions & Operations Lead` (Global) | CI/CD, packaging, reliability |
+| **Designing** | `Product & Experience Designer` (Global) | UX/UI, accessibility, user flow |
+| **Developing** | `python-expert` (Skill) | Idiomatic Python, mTLS, performance |
+| **Dev Desktop** | `electron-expert` (Skill) | Secure IPC, native integration |
+| **Containers** | `docker-expert` (Skill) | Multi-stage builds, image security |
 
 ### How to Switch Roles
 
 You can enable/disable skills dynamically:
 
-```prompt
-/skill_on technical_writer
-/skill_off python_developer
+```bash
+/skill_on docs-expert
+/skill_off python-expert
 ```
 
 ## 🤝 Contribution Guidelines

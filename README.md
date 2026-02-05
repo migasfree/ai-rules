@@ -70,9 +70,8 @@ These commands automate routine tasks using our community standards.
 *Analyzes your project structure and generates specialized technology skills.*
 
 * **Use when**: Starting a new repository or onboarding a new project to provide specific technical context.
-* **Model**: Claude Opus 4.5
 
-### � `/audit_report`
+### 📋 `/audit_report`
 
 *Performs a comprehensive quality audit covering both Core Architecture and Skill technology compliance.*
 
