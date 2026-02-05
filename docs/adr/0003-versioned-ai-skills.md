@@ -31,7 +31,7 @@ triggers: [architecture, design pattern]
 ---
 ```
 
-## Consequenses
+## Consequences
 
 * **Traceability**: Projects can now specify exactly which version of a skill they depend on.
 * **Update Verification**: Future tooling (like `setup.sh --check`) can compare local versions against the global repository.

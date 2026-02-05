@@ -16,7 +16,7 @@ We have implemented three core architectural pillars:
 3. **Strict Visual Quality**: Enforcement of **ATX-style headings** and **Shields.io badges** to ensure a premium, consistent documentation brand.
 4. **Automatic Quality Gates**: Use of GitHub Actions with `markdownlint` to prevent stylistic drift.
 
-## Consequenses
+## Consequences
 
 * **Zero-Debt Onboarding**: New users can install the standards in seconds using the setup script.
 * **Visual Hardening**: All generated reports and templates follow a unified aesthetic.

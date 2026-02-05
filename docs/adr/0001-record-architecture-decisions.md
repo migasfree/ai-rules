@@ -11,7 +11,7 @@ The Migasfree AI Standards project (`ai-rules`) has undergone significant archit
 
 We will adopt the **Architecture Decision Record (ADR)** pattern to document major design choices. ADRs will be stored in the `docs/adr/` directory, following a sequential numbering format (`NNNN-description.md`).
 
-## Consequenses
+## Consequences
 
 * **Improved Traceability**: New contributors can understand *why* the project is structured in a specific way.
 * **Historical Context**: Preserves the evolution of the system from manual scripts to automated platforms.
