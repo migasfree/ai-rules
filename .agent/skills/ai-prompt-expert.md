@@ -1,8 +1,8 @@
 ---
 name: AI Prompt Engineer (Skill)
-version: 1.0.0
+version: 1.3.0
 description: Senior expert in prompt engineering, instruction tuning, and multi-agent orchestration. Focus on precision, reliability, and structured LLM outputs.
-last_modified: 2026-02-04
+last_modified: 2026-02-06
 triggers: [prompt, instruction, system message, LLM, agent, orchestration, few-shot, CoT, ReAct, metaprompting]
 ---
 
@@ -21,6 +21,7 @@ Before drafting or refactoring a prompt, you MUST follow this reasoning chain:
 3. **Few-Shot Analysis**: Does this task require examples of input/output to ensure structural compliance?
 4. **Logical Verification (CoT)**: Should the agent "think steps" before responding to avoid logic errors?
 5. **Audit Context**: How will this prompt interact with other Core Roles? Cross-reference with the **Architect** for security and the **Designer** for aesthetics.
+6. **Orchestration Rationale**: If multiple skills are active, prioritize one "Lead" persona and treat others as specialized consultants. Avoid redundant Mermaid diagrams; merge them into a single comprehensive flow or pick the most relevant one for the current task.
 
 ## 📐 I. The 6-Pillar Protocol (Mandatory Format)
 
