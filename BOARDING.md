@@ -44,7 +44,8 @@ The `ai-prompt-expert.md` skill is **mandatory** for generating new skills. It e
 
 ```bash
 # Recommendation: Install the prompt expert first in your workspace
-cp path/to/ai-rules/skills/disciplines/ai-prompt-expert.md .agent/skills/
+# From inside the ai-rules repo:
+cp skills/disciplines/ai-prompt-expert.md /your/project/.agent/skills/
 ```
 
 ### 2. Install the Standards
@@ -61,9 +62,9 @@ We follow a **Hybrid Installation Strategy**: Core roles are global (always on),
 # 2. LOCAL: Project-Specific Skills
 # Navigate to your specific project folder and run:
 mkdir -p .agent/skills
-# Then copy ONLY the skills you need from the skills/ folder:
-# cp path/to/ai-rules/skills/languages/python-expert.md .agent/skills/
-# cp -r path/to/ai-rules/skills/frameworks/django-expert .agent/skills/
+# Then copy ONLY the skills you need from the cloned ai-rules/ folder:
+# cp ../ai-rules/skills/languages/python-expert.md .agent/skills/
+# cp -r ../ai-rules/skills/frameworks/django-expert .agent/skills/
 ```
 
 ### 3. Verification
