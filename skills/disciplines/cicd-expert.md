@@ -39,6 +39,39 @@ Engineer the automated delivery life cycle:
 - 🛑 **CRITICAL**: NEVER allow "Allow Failure" on critical security or quality gates.
 - 🛑 **CRITICAL**: NEVER perform manual deployments; all production releases MUST originate from the CI runner.
 - 🛑 **CRITICAL**: NEVER use `latest` tags for dependencies or actions in production pipelines.
+- 🛑 **CRITICAL**: NEVER skip automated secret scanning on projects with external integrations (APIs, cloud services, databases).
+
+### Secret Scanning Best Practice
+
+**When to Implement**: Projects with API keys, database credentials, cloud tokens, or SSH keys.
+
+**Recommended Tools**:
+
+- **gitleaks**: Lightweight, low false-positive rate, GitHub Actions native
+- **TruffleHog**: More comprehensive, higher accuracy for complex patterns
+
+**Example Implementation (GitHub Actions)**:
+
+```yaml
+name: Security Scan
+
+on: [push, pull_request]
+
+jobs:
+  secret-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for gitleaks
+
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+**Not Required For**: Pure documentation repos, configuration-only projects, or repositories with no external service integrations.
 
 ## 🧠 Pillar 5: Cognitive Process & Decision Logs (Mandatory)
 
