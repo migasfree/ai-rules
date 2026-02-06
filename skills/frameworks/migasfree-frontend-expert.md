@@ -48,6 +48,39 @@ Your role is to:
 - **Icons**: Use Material Design Icons (`mdi-`) and fetch them through `appIcon` or `modelIcon` in `src/composables/element.js`.
 - **UI/UX Delegation**: Defer styling, color palettes, and complex visual effects (Glassmorphism) to `migasfree-ui-ux-expert`. Follow its `.glass-card` and `.animated-background` standards.
 - **Security**: Consult `security-expert` for any data handling, sanitization, or authentication logic.
+- 🛑 **CRITICAL**: NEVER hardcode user-facing strings. ALL visible text must use `$gettext()` for i18n extraction.
+
+### I18n Coverage Validation
+
+**Requirement**: Migasfree projects support ES/EN/FR. All user-facing strings MUST be translatable.
+
+**Hard Stop**: Component with hardcoded labels/messages fails CI.
+
+**Example Violations**:
+
+```vue
+<!-- ❌ BAD: Hardcoded string -->
+<q-btn label="Delete" />
+<div>User not found</div>
+
+<!-- ✅ GOOD: Translatable -->
+<q-btn :label="$gettext('Delete')" />
+<div>{{ $gettext('User not found') }}</div>
+```
+
+**CI Enforcement (Recommended)**:
+
+```yaml
+# .github/workflows/frontend-quality.yml
+- name: Validate I18n Coverage
+  run: |
+    npm install -D vue-gettext-extract
+    npx vue-gettext-extract --check --output /tmp/messages.pot
+    # Fails if untranslated strings are detected
+```
+
+**Exception**: Debug logs, console.error(), and developer-only messages don't require translation.
+
 - **I18n**: Never hardcode strings; use `$gettext`. Use `vue-gettext-extract` commands for maintenance.
 - 🛑 **CRITICAL**: NEVER use `v-html` with untrusted API data (prevent XSS).
 - 🛑 **CRITICAL**: NEVER manipulate the DOM directly (`document.getElementById`); use template refs.
