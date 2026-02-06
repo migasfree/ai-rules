@@ -80,7 +80,7 @@ Every project is different. **Do not install all skills globally.** Instead, sel
     ```bash
     # Example: For a Python/Django project
     cp /path/to/ai-rules/skills/languages/python-expert.md .agent/skills/
-    cp /path/to/ai-rules/skills/frameworks/django-expert.md .agent/skills/
+    cp -r /path/to/ai-rules/skills/frameworks/django-expert .agent/skills/
     ```
 
 > Note: The skills are organized in subfolders (`languages`, `frameworks`, `disciplines`). Browse them to find exactly what you need.
@@ -157,6 +157,14 @@ graph TD
 ```
 
 ---
+
+## 📋 Version Control
+
+The skill ecosystem follows [Semantic Versioning](https://semver.org/).
+
+* **Current Version**: `v1.3.0`
+* **Changelog**: See [skills/CHANGELOG.md](skills/CHANGELOG.md) for detailed version history
+* **Dependency Graph**: See [docs/skill_dependency_graph.md](docs/skill_dependency_graph.md)
 
 ## 📓 Decision Logs (ADR)
 

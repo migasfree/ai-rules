@@ -63,6 +63,7 @@ We follow a **Hybrid Installation Strategy**: Core roles are global (always on),
 mkdir -p .agent/skills
 # Then copy ONLY the skills you need from the skills/ folder:
 # cp path/to/ai-rules/skills/languages/python-expert.md .agent/skills/
+# cp -r path/to/ai-rules/skills/frameworks/django-expert .agent/skills/
 ```
 
 ### 3. Verification
@@ -102,6 +103,27 @@ You can enable/disable skills dynamically:
 1. **Always use the `/commit` workflow**: This ensures your commit messages follow our Conventional Commits standard.
 2. **Run an Audit before PR**: Use `/audit_report` to self-check your work against our quality gates.
 3. **Improve the Standards**: If you find a prompt that can be improved, submit a PR to *this* repository!
+4. **Follow the 6-Pillar Protocol**: All skills must include:
+    * Pillar 1: Persona & Role Overview
+    * Pillar 2: Project Context & Resources
+    * Pillar 3: Main Task & Objectives
+    * Pillar 4: Critical Constraints & Hard Stops
+    * Pillar 5: Cognitive Process & Decision Logs
+    * Pillar 6: Output Style & Format Guide
+
+## 📋 Skill Dependencies
+
+Skills declare dependencies in YAML frontmatter:
+
+```yaml
+---
+name: Django & DRF Expert
+version: 1.3.0
+dependencies: [python-expert, postgresql-expert]
+---
+```
+
+When installing a skill, also install its dependencies for optimal context. See [skills/CHANGELOG.md](skills/CHANGELOG.md) for version history.
 
 Happy Hacking!
 The Migasfree Team
