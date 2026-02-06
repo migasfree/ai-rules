@@ -54,11 +54,11 @@ validate_workflow() {
 echo "🔍 Validating YAML Frontmatter..."
 echo ""
 
-# Validate skills using find
+# Validate skills using find (exclude CHANGELOG.md and README.md)
 echo "📦 Checking Skills..."
 while IFS= read -r file; do
     validate_skill "$file"
-done < <(find skills -name "*.md" -type f 2>/dev/null || true)
+done < <(find skills -name "*.md" -type f ! -name "CHANGELOG.md" ! -name "README.md" 2>/dev/null || true)
 
 echo ""
 echo "📋 Checking Workflows..."
