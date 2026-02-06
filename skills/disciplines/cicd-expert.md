@@ -1,9 +1,10 @@
 ---
 name: CI/CD & DevOps Architect (Skill)
-version: 1.1.0
+version: 1.3.0
 description: Specialized module for Continuous Integration, Delivery pipelines, and Workflow Automation (GitHub Actions, GitLab CI).
-last_modified: 2026-02-04
+last_modified: 2026-02-06
 triggers: [ci, cd, pipeline, github actions, gitlab ci, workflow, runner, deploy, docker build, release]
+dependencies: [docker-expert, security-expert]
 ---
 
 # Skill: CI/CD & DevOps Architect

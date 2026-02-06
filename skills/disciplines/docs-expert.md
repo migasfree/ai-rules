@@ -1,8 +1,8 @@
 ---
 name: Technical Writer & Docs Architect (Skill)
-version: 1.1.0
+version: 1.3.0
 description: Specialized module for Living Documentation, Architecture Decision Records (ADR), and Diátaxis-based technical writing.
-last_modified: 2026-02-04
+last_modified: 2026-02-06
 triggers: [docs, documentation, adr, readme, mermaid, markdown, swagger, openapi, docstring, mkdocs, user guide, tutorial, how-to, diataxis]
 ---
 

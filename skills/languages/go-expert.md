@@ -1,8 +1,8 @@
 ---
 name: Go Language Expert (Skill)
-version: 1.1.0
+version: 1.3.0
 description: Specialized module for Go (Golang) implementation, idiomatic patterns, and performance. Acts as a technology skill for the Technical Lead Architect.
-last_modified: 2026-02-04
+last_modified: 2026-02-06
 triggers: [golang, .go, go mod, go build, go test, gomock, goroutine, channel]
 ---
 
@@ -45,6 +45,7 @@ Before writing any Go code, you MUST execute this reasoning chain:
 2. **Pointer Analysis**: "Should this be a value or a pointer? (Pointer for mutation/large struct, Value for thread-safety)."
 3. **Race Audit**: "If this data is shared between goroutines, is it protected by a Mutex or Channel?"
 4. **Error Strategy**: "Is the error wrapped with enough context to trace the root cause? (`%w`)?"
+5. **Polyglot Check**: "Is this task better suited for Python? (Data processing libraries, complex scripts, high-level business logic)."
 
 ## 🗣️ Pillar 6: Output Style & Format Guide
 

@@ -1,8 +1,8 @@
 ---
 name: Security Architect & CISO (Skill)
-version: 1.1.0
+version: 1.3.0
 description: Specialized module for Application Security (AppSec), OWASP compliance, and Secrets Management.
-last_modified: 2026-02-04
+last_modified: 2026-02-06
 triggers: [security, owasp, auth, authentication, authorization, cve, vulnerability, secrets, encryption, xss, sqli, csrf, audit, pentest]
 ---
 
