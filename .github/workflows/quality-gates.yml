@@ -30,3 +30,20 @@ jobs:
         run: |
           chmod +x scripts/validate_frontmatter.sh
           ./scripts/validate_frontmatter.sh
+
+      - name: Validate Skills Catalog Sync
+        run: |
+          chmod +x scripts/sync_skills_catalog.sh
+          echo "🔍 Checking if skills catalog is synchronized..."
+          ./scripts/sync_skills_catalog.sh
+          if git diff --exit-code global_workflows/skill_generate.md; then
+            echo "✅ Skills catalog is up to date!"
+          else
+            echo "❌ ERROR: Skills catalog is out of sync!"
+            echo ""
+            echo "The catalog in global_workflows/skill_generate.md does not match the actual skills directory."
+            echo "Please run: ./scripts/sync_skills_catalog.sh"
+            echo ""
+            git diff global_workflows/skill_generate.md
+            exit 1
+          fi
