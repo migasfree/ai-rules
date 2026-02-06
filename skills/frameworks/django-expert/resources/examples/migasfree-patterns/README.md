@@ -1,3 +1,10 @@
+---
+name: "Documentation: Migasfree Django Patterns"
+version: 1.2.1
+type: documentation
+triggers: [migasfree-pattern, django-pattern]
+---
+
 # Migasfree-Specific Django Patterns
 
 This folder contains code examples specific to the migasfree project, demonstrating advanced Django/DRF patterns in the context of a software deployment management system.

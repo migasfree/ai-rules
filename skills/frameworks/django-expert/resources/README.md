@@ -1,3 +1,10 @@
+---
+name: "Documentation: Django Expert Resources"
+version: 1.2.1
+type: documentation
+triggers: [django-resource, drf-resource, django-templates]
+---
+
 # Django Expert Resources
 
 This directory contains reusable resources for the Django Expert skill, including templates, examples, and validation tools.
