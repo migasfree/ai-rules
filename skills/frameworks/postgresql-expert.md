@@ -4,6 +4,7 @@ version: 1.3.0
 description: Specialized module for PostgreSQL Database optimization within a Django context.
 last_modified: 2026-02-06
 triggers: [postgres, sql, db, database, query, index, jsonb, psycopg2]
+dependencies: [django-expert]
 ---
 
 # Skill: PostgreSQL Architect
