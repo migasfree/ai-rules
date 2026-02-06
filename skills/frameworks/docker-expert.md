@@ -40,6 +40,66 @@ Engineer efficient, secure container images:
 - 🛑 **CRITICAL**: NEVER store credentials or API keys in the `Dockerfile` or committed `docker-compose.yml`.
 - 🛑 **CRITICAL**: NEVER use `ADD` when `COPY` is sufficient (to avoid unexpected remote downloads or extraction).
 - 🛑 **CRITICAL**: NEVER leave build artifacts (dependencies, caches, source code) in the final production layer.
+- 🛑 **CRITICAL**: NEVER deploy images to production without vulnerability scanning on release candidates.
+
+### Container Vulnerability Scanning (Release Gates)
+
+**When to Scan**: Before deploying tagged releases to production environments.
+
+**Recommended Tool**: **Trivy** (open source, fast, low false-positive rate)
+
+**Strategy**: Automated scan on git tags only (not on every commit/PR to avoid CI slowdown).
+
+**GitHub Actions Implementation**:
+
+```yaml
+name: Release Security Scan
+
+on:
+  push:
+    tags:
+      - 'v*'  # Triggers on version tags: v1.2.3, v2.0.0-beta, etc.
+
+jobs:
+  vulnerability-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Build Release Image
+        run: docker build -t ${{ github.repository }}:${{ github.ref_name }} .
+
+      - name: Run Trivy Security Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ github.repository }}:${{ github.ref_name }}
+          severity: 'CRITICAL,HIGH'
+          exit-code: 1  # Fail pipeline if vulnerabilities found
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
+      - name: Upload Results to GitHub Security
+        uses: github/codeql-action/upload-sarif@v2
+        if: always()
+        with:
+          sarif_file: 'trivy-results.sarif'
+```
+
+**Manual Scan (for local validation)**:
+
+```bash
+docker build -t myapp:latest .
+docker run --rm aquasec/trivy image myapp:latest --severity CRITICAL,HIGH
+```
+
+**What Gets Scanned**:
+
+- Base OS packages (Alpine, Ubuntu, etc.)
+- Language dependencies (Python packages, npm modules, Go binaries)
+- Known CVEs in installed libraries
+
+**Not Required For**: Development/feature branches, ephemeral test builds.
 
 ## 🧠 Pillar 5: Cognitive Process & Decision Logs (Mandatory)
 
