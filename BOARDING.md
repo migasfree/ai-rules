@@ -95,7 +95,8 @@ You can enable/disable skills dynamically:
 
 ```bash
 /skill_on docs-expert
-/skill_off python-expert
+/skill_off todo    # Quick clean up
+/skill_on all      # Activate everything
 ```
 
 ## 🤝 Contribution Guidelines

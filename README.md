@@ -122,9 +122,9 @@ These commands automate routine tasks using our community standards.
 
 ### 📋 Role Management
 
-* `/skill_list`: View active Core roles and Skills.
-* `/skill_on [skill]`: Activate a technology skill (e.g., `python-expert`).
-* `/skill_off [skill]`: Deactivate a skill.
+* `/skill_list`: View active Core roles and Skills (includes automatic **update detection**).
+* `/skill_on [skill | todo]`: Activate a tech skill or **everything** at once.
+* `/skill_off [skill | todo]`: Deactivate a specific skill or **everything**.
 
 ---
 
@@ -162,7 +162,7 @@ graph TD
 
 The skill ecosystem follows [Semantic Versioning](https://semver.org/).
 
-* **Current Version**: `v1.3.0`
+* **Current Version**: `v1.4.0`
 * **Changelog**: See [skills/CHANGELOG.md](skills/CHANGELOG.md) for detailed version history
 * **Dependency Graph**: See [docs/skill_dependency_graph.md](docs/skill_dependency_graph.md)
 
