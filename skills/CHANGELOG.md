@@ -1,4 +1,5 @@
 # Expert Skills Changelog
+<!-- markdownlint-disable MD024 -->
 
 All notable changes to the Expert Skills ecosystem will be documented in this file.
 
