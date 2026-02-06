@@ -70,11 +70,11 @@ echo -e "${GREEN}✓${NC} Disciplines: ${DISCIPLINES:-none}"
 echo ""
 
 # Generate the new catalog table
-NEW_CATALOG="| Category | Skills available in repository |
-| :--- | :--- |
-| **Languages** | ${LANGUAGES:-none} |
-| **Frameworks** | ${FRAMEWORKS:-none} |
-| **Disciplines** | ${DISCIPLINES:-none} |"
+NEW_CATALOG="| Category | Skills available in repository | Path in GitHub |
+| :--- | :--- | :--- |
+| **Languages** | ${LANGUAGES:-none} | \`languages/\` |
+| **Frameworks** | ${FRAMEWORKS:-none} | \`frameworks/\` |
+| **Disciplines** | ${DISCIPLINES:-none} | \`disciplines/\` |"
 
 # Check if workflow file exists
 if [[ ! -f "$WORKFLOW_FILE" ]]; then
