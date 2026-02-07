@@ -1,7 +1,7 @@
 ---
 description: List all skills showing their enabled/disabled status, merging Global and Workspace scopes, and checking for updates.
-version: 1.2.0
-last_modified: 2026-02-06
+version: 1.4.0
+last_modified: 2026-02-07
 ---
 
 # 📋 Unified AI Skill Report (v1.2.0)

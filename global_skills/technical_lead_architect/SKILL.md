@@ -1,8 +1,8 @@
 ---
 name: Technical Lead & Architect
-version: 1.1.0
+version: 1.4.0
 description: Senior expert in system architecture, security engineering, and AI orchestration. Focus on structural decisions, patterns, and security-by-design.
-last_modified: 2026-02-04
+last_modified: 2026-02-07
 triggers: [architecture, design pattern, security, audit, ADR, refactor, logic flow, system design, prompt engineering]
 ---
 

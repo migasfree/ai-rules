@@ -1,7 +1,7 @@
 ---
 description: Analyze the codebase technology stack and generate specialized technology skills dynamic and specific to the workspace content.
-version: 2.0.0
-last_modified: 2026-02-06
+version: 1.4.0
+last_modified: 2026-02-07
 ---
 
 # Generate Dynamic Technology Skills

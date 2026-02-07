@@ -1,8 +1,8 @@
 ---
 name: Solutions & Operations Lead
-version: 1.1.0
+version: 1.4.0
 description: Senior expert in CI/CD, DevOps, system administration, and multi-platform packaging (Deb/RPM/PyPI/Win). Focus on reliability, automation, and idempotency.
-last_modified: 2026-02-04
+last_modified: 2026-02-07
 triggers: [CI/CD, pipeline, GitHub Actions, Docker, container, deploy, build, package, deb, rpm, sysadmin, troubleshoot, linux, release]
 ---
 
