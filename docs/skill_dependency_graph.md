@@ -1,7 +1,7 @@
 # Skill Dependency Graph
 
 > **Purpose**: Visual reference for understanding relationships between technology skills.  
-> **Last Updated**: 2026-02-06 | **Ecosystem Version**: v1.3.0
+> **Last Updated**: 2026-02-07 | **Ecosystem Version**: v1.4.0
 
 ## Overview
 
