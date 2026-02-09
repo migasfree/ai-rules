@@ -52,6 +52,10 @@ To prevent "Line 2" and "got STR" parsing errors, all diagrams MUST follow this 
 
 #### ✅ REQUIRED TEMPLATE
 
+Refer to [mermaid_atomic.md](file:///media/alberto/HD/git/ai-rules/skills/disciplines/output-standard-expert/resources/templates/mermaid_atomic.md) for the required structure.
+
+#### ✅ REQUIRED TEMPLATE EXAMPLE
+
 ```mermaid
 graph TD
 
