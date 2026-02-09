@@ -49,8 +49,10 @@ To prevent rendering or execution errors, these strict protocols MUST be followe
 
 - **Golden Rule**: Use **Alphanumeric IDs** for nodes and define text separately in **Double Quotes**.
   - ✅ **Correct Format**: `NODE_ID["Node Label (with special chars)"]`
-  - ❌ **Avoid**: Using complex strings directly as IDs (e.g., `"Manual/E2E"`).
-- **Forbidden Characters (Unquoted)**: `( ) [ ] { } / \ > < - _ . , : ; ! ? * + =`.
+  - ❌ **Avoid**: Starting a line with a string (e.g., `"Internet" --> ...`).
+- **Syntax Requirements**:
+  - **Header**: Always put a newline after `graph TD` or `graph LR`.
+  - **IDs**: Use short, clear, uppercase IDs (e.g., `APP`, `DB`, `PROXY`).
 - **Special Shapes**: For databases or cylindrical shapes, use `DB_ID[( "Database Name" )]`.
 
 ### 2. Technical Blocks (JSON/YAML/Bash)
