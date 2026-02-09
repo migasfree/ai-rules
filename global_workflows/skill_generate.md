@@ -16,7 +16,7 @@ This workflow is designed to be executed by the agent to analyze the current wor
 | :--- | :--- | :--- |
 | **Languages** | `bash-expert`, `go-expert`, `python-expert` | `languages/` |
 | **Frameworks** | `celery-expert`, `django-expert`, `docker-expert`, `electron-expert`, `graphql-expert`, `migasfree-frontend-expert`, `postgresql-expert`, `terraform-expert` | `frameworks/` |
-| **Disciplines** | `ai-prompt-expert`, `cicd-expert`, `docs-expert`, `migasfree-ui-ux-expert`, `qa-expert`, `security-expert` | `disciplines/` |
+| **Disciplines** | `ai-prompt-expert`, `cicd-expert`, `docs-expert`, `migasfree-ui-ux-expert`, `output-standard-expert`, `qa-expert`, `security-expert` | `disciplines/` |
 
 ## 📊 Skill Dependencies Matrix
 
@@ -41,17 +41,26 @@ Skills often work together. When recommending a skill, **automatically include i
 
 ### 1. **Automatic Prerequisite Installation**
 
-* Check if `.agent/skills/disciplines/ai-prompt-expert/SKILL.md` exists in the local workspace.
-* 🛠️ **ACTION**: If missing, **DO NOT STOP**. Instead:
-    1. Create `.agent/skills/disciplines/ai-prompt-expert/` if it doesn't exist.
-    2. Use `run_command` with `curl` to download it:
+* Check if the following mandatory skills exist in the local workspace:
+  * `.agent/skills/disciplines/ai-prompt-expert/SKILL.md`
+  * `.agent/skills/disciplines/output-standard-expert/SKILL.md`
+* 🛠️ **ACTION**: If any are missing, **DO NOT STOP**. Instead, download them:
+
+    1. **AI Prompt Engineer**:
 
        ```bash
        mkdir -p .agent/skills/disciplines/ai-prompt-expert
        curl -s -L -o .agent/skills/disciplines/ai-prompt-expert/SKILL.md https://raw.githubusercontent.com/migasfree/ai-rules/main/skills/disciplines/ai-prompt-expert/SKILL.md
        ```
 
-    3. Inform the user: "Prerequisite `ai-prompt-expert` was missing. I've automatically downloaded it from GitHub to proceed with the analysis."
+    2. **Output Standard Expert**:
+
+       ```bash
+       mkdir -p .agent/skills/disciplines/output-standard-expert
+       curl -s -L -o .agent/skills/disciplines/output-standard-expert/SKILL.md https://raw.githubusercontent.com/migasfree/ai-rules/main/skills/disciplines/output-standard-expert/SKILL.md
+       ```
+
+    3. Inform the user: "Missing prerequisites (`ai-prompt-expert`, `output-standard-expert`) have been automatically downloaded from GitHub."
 
 ### 2. **Analyze the Workspace**
 

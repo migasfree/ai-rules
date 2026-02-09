@@ -46,6 +46,8 @@ Unless the user requests a simple, conversational answer (e.g., "Yes/No", "Expla
 When generating diagrams (Flowcharts, Sequence, Class):
 
 1. **Labels**: ALWAYS quote node labels to prevent syntax errors with special characters: `id["Label (Info)"]`.
+    - ❌ **BAD**: `Node[Label (Info)]` (Causes parse error due to unquoted parentheses)
+    - ✅ **GOOD**: `Node["Label (Info)"]` (Correctly quoted)
 2. **Direction**: Use `TD` (Top-Down) for hierarchies and `LR` (Left-Right) for processes.
 
 ---
