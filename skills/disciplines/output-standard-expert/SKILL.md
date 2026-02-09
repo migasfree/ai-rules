@@ -43,35 +43,44 @@ Unless the user requests a simple, conversational answer (e.g., "Yes/No", "Expla
 
 ## 🛡️ III. Defensive Syntax Guard (Anti-Failure Protocols)
 
-To prevent rendering or execution errors, these strict protocols MUST be followed:
+### 1. Mermaid: Atomic Declaration Pattern (MANDATORY)
 
-### 1. Mermaid: Zero-Tolerance for Unquoted Labels
+To prevent "Line 2" and "got STR" parsing errors, all diagrams MUST follow this 2-step decoupled structure:
 
-- **Golden Rule**: Use **Alphanumeric IDs** for nodes and define text separately in **Double Quotes**.
-  - ✅ **Correct Format**: `NODE_ID["Node Label (with special chars)"]`
-  - ❌ **Avoid**: Starting a line with a string (e.g., `"Internet" --> ...`).
-- **Syntax Requirements**:
-  - **Header**: MUST have a newline immediately after `graph TD`. NEVER put nodes on the same line as the header.
-  - **Indentation**: Indent all nodes inside the graph for readability.
-  - **IDs**: Use short, clear, uppercase IDs (e.g., `APP`, `DB`, `PROXY`).
-- **Special Shapes**: For databases or cylindrical shapes, use `DB_ID[( "Database Name" )]`.
+- **Phase A (Declaration)**: Define all Nodes first using clean alphanumeric IDs.
+- **Phase B (Logic)**: Define all connections using ONLY those IDs.
 
-### 2. Technical Blocks (JSON/YAML/Bash)
+#### ✅ REQUIRED TEMPLATE
 
-- **Complex Strings**: In YAML or JSON, always use quotes if a value contains colons `:`, slashes `/`, or `@` symbols.
-- **Command Escaping**: In Bash, if a command uses pipes `|` or redirections `>` within explanations, always wrap it in backticks.
+```mermaid
+graph TD
 
-### 3. File Paths and URLs
+    %% 1. Node Declarations (ID["Label"])
+    ID1["Visual Label 1"]
+    ID2["Visual Label 2"]
 
-- **Spaces and Symbols**: If a file path contains spaces or special characters, use the format `[name](file:///path/with%20spaces)`.
+    %% 2. Connection Logic
+    ID1 --> ID2
+```
 
-## 🧪 IV. Pre-Output Validation Protocol
+#### ❌ PROHIBITED PRACTICES
 
-Before sending the response, the model MUST perform an "Integrity Check":
+- **NO Strings as IDs**: Never start a line with quotes: `"Node" --> ...` ❌
+- **NO Mixed Lines**: Never put nodes on the same line as `graph TD` ❌
+- **NO Implicit Nodes**: Never create nodes directly in a connection: `ID1 --> ID2["Label"]` ❌ (Define ID2 first).
 
-1. Do all Mermaid nodes have double quotes?
-2. Are there any orphan parentheses in code blocks?
-3. Are all Markdown blocks properly closed?
+### 2. Technical Integrity (JSON/YAML/Bash)
+
+- **Strings**: Always quote values containing symbols: `:`, `/`, `@`, `[`, `]`.
+- **Bash**: Escape pipes `|` or redirects `>` if they are part of a text explanation.
+
+## 🧪 IV. Pre-Output Integrity Gate (HARD STOP)
+
+Before providing any technical artifact, the model MUST perform this internal checklist:
+
+1. **Mermaid**: Did I use the **Atomic Pattern** (Declare first, connect later)?
+2. **Mermaid**: Is there a double-newline after `graph TD`?
+3. **Markdown**: Are all triple backticks closed with a matching pair?
 
 ---
 *End of Output Standard Expert Skill Definition.*
