@@ -1,6 +1,6 @@
 ---
 description: Execute a Deep-Dive Technical Audit of the codebase, enforcing Senior Expert rules and forensic code analysis.
-version: 1.4.0
+version: 1.5.0
 last_modified: 2026-02-07
 ---
 

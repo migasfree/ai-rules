@@ -1,6 +1,6 @@
 ---
 description: Generate a secure, professional, and linked commit message.
-version: 1.4.0
+version: 1.5.0
 last_modified: 2026-02-07
 ---
 

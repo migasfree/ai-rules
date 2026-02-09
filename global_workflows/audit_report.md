@@ -1,6 +1,6 @@
 ---
 description: Create a Premium Role-Based Audit Report with high-end visuals and "packaging".
-version: 1.4.0
+version: 1.5.0
 last_modified: 2026-02-07
 ---
 

@@ -1,6 +1,6 @@
 ---
 description: Analyze the codebase technology stack and generate specialized technology skills dynamic and specific to the workspace content.
-version: 1.4.0
+version: 1.5.0
 last_modified: 2026-02-07
 ---
 
