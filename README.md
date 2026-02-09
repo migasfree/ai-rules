@@ -162,7 +162,7 @@ graph TD
 
 The skill ecosystem follows [Semantic Versioning](https://semver.org/).
 
-* **Current Version**: `v1.4.0`
+* **Current Version**: `v1.5.0`
 * **Changelog**: See [skills/CHANGELOG.md](skills/CHANGELOG.md) for detailed version history
 * **Dependency Graph**: See [docs/skill_dependency_graph.md](docs/skill_dependency_graph.md)
 

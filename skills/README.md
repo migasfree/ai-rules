@@ -11,6 +11,7 @@ skills/
 │   ├── cicd-expert.md
 │   ├── docs-expert.md
 │   ├── migasfree-ui-ux-expert.md
+│   ├── ui-designer-expert.md
 │   ├── qa-expert.md
 │   └── security-expert.md
 ├── frameworks/        # Framework-specific expertise (9 skills)
@@ -82,7 +83,7 @@ When you install a skill, **also install its dependencies** for optimal context.
 
 All skills follow [Semantic Versioning](https://semver.org/).
 
-- **Current Version**: `1.4.0` (2026-02-07)
+- **Current Version**: `1.5.0` (2026-02-09)
 - **Changelog**: See [CHANGELOG.md](CHANGELOG.md) for version history
 
 To verify skill versions:
