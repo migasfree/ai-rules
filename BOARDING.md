@@ -45,7 +45,8 @@ The `ai-prompt-expert.md` skill is **mandatory** for generating new skills. It e
 ```bash
 # Recommendation: Install the prompt expert first in your workspace
 # From inside the ai-rules repo:
-cp skills/disciplines/ai-prompt-expert.md /your/project/.agent/skills/
+mkdir -p .agent/skills/disciplines/ai-prompt-expert
+cp -r skills/disciplines/ai-prompt-expert/. .agent/skills/disciplines/ai-prompt-expert/
 ```
 
 ### 2. Install the Standards

@@ -40,8 +40,9 @@ git clone https://github.com/migasfree/ai-rules.git
 cd ai-rules && ./setup.sh
 
 # 2. In your project, add needed skills
-mkdir -p .agent/skills
-cp /path/to/ai-rules/skills/languages/python-expert.md .agent/skills/
+# 2. In your project, add needed skills
+mkdir -p .agent/skills/languages/python-expert
+cp -r /path/to/ai-rules/skills/languages/python-expert/. .agent/skills/languages/python-expert/
 
 # 3. Verify
 ./setup.sh --verify
@@ -79,8 +80,11 @@ Every project is different. **Do not install all skills globally.** Instead, sel
 
     ```bash
     # Example: For a Python/Django project
-    cp /path/to/ai-rules/skills/languages/python-expert.md .agent/skills/
-    cp -r /path/to/ai-rules/skills/frameworks/django-expert .agent/skills/
+    mkdir -p .agent/skills/languages/python-expert
+    cp -r /path/to/ai-rules/skills/languages/python-expert/. .agent/skills/languages/python-expert/
+    
+    mkdir -p .agent/skills/frameworks/django-expert
+    cp -r /path/to/ai-rules/skills/frameworks/django-expert/. .agent/skills/frameworks/django-expert/
     ```
 
 > Note: The skills are organized in subfolders (`languages`, `frameworks`, `disciplines`). Browse them to find exactly what you need.

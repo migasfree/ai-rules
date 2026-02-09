@@ -103,44 +103,44 @@ graph TB
 
 ```bash
 # Minimal
-cp skills/languages/python-expert.md .agent/skills/
-cp -r skills/frameworks/django-expert .agent/skills/
+cp -r skills/languages/python-expert/. .agent/skills/languages/python-expert/
+cp -r skills/frameworks/django-expert/. .agent/skills/frameworks/django-expert/
 
 # Full Stack
-cp skills/frameworks/postgresql-expert.md .agent/skills/
-cp skills/frameworks/celery-expert.md .agent/skills/
-cp skills/disciplines/security-expert.md .agent/skills/
+cp -r skills/frameworks/postgresql-expert/. .agent/skills/frameworks/postgresql-expert/
+cp -r skills/frameworks/celery-expert/. .agent/skills/frameworks/celery-expert/
+cp -r skills/disciplines/security-expert/. .agent/skills/disciplines/security-expert/
 ```
 
 ### Frontend Projects (Migasfree)
 
 ```bash
-cp skills/disciplines/migasfree-ui-ux-expert.md .agent/skills/
-cp skills/frameworks/migasfree-frontend-expert.md .agent/skills/
+cp -r skills/disciplines/migasfree-ui-ux-expert/. .agent/skills/disciplines/migasfree-ui-ux-expert/
+cp -r skills/frameworks/migasfree-frontend-expert/. .agent/skills/frameworks/migasfree-frontend-expert/
 ```
 
 ### Desktop Applications
 
 ```bash
-cp skills/disciplines/migasfree-ui-ux-expert.md .agent/skills/
-cp skills/frameworks/migasfree-frontend-expert.md .agent/skills/
-cp skills/frameworks/electron-expert.md .agent/skills/
+cp -r skills/disciplines/migasfree-ui-ux-expert/. .agent/skills/disciplines/migasfree-ui-ux-expert/
+cp -r skills/frameworks/migasfree-frontend-expert/. .agent/skills/frameworks/migasfree-frontend-expert/
+cp -r skills/frameworks/electron-expert/. .agent/skills/frameworks/electron-expert/
 ```
 
 ### Infrastructure & DevOps
 
 ```bash
-cp skills/languages/bash-expert.md .agent/skills/
-cp skills/disciplines/cicd-expert.md .agent/skills/
-cp skills/frameworks/docker-expert.md .agent/skills/
+cp -r skills/languages/bash-expert/. .agent/skills/languages/bash-expert/
+cp -r skills/disciplines/cicd-expert/. .agent/skills/disciplines/cicd-expert/
+cp -r skills/frameworks/docker-expert/. .agent/skills/frameworks/docker-expert/
 ```
 
 ### Polyglot Projects (Python + Go)
 
 ```bash
-cp skills/languages/python-expert.md .agent/skills/
-cp skills/languages/go-expert.md .agent/skills/
-cp skills/disciplines/security-expert.md .agent/skills/
+cp -r skills/languages/python-expert/. .agent/skills/languages/python-expert/
+cp -r skills/languages/go-expert/. .agent/skills/languages/go-expert/
+cp -r skills/disciplines/security-expert/. .agent/skills/disciplines/security-expert/
 ```
 
 ## Version Notes (v1.3.0)
