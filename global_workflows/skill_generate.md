@@ -15,8 +15,8 @@ This workflow is designed to be executed by the agent to analyze the current wor
 | Category | Skills available in repository | Path in GitHub |
 | :--- | :--- | :--- |
 | **Languages** | `bash-expert`, `go-expert`, `python-expert` | `languages/` |
-| **Frameworks** | `celery-expert`, `django-expert`, `docker-expert`, `electron-expert`, `graphql-expert`, `migasfree-frontend-expert`, `postgresql-expert`, `terraform-expert` | `frameworks/` |
-| **Disciplines** | `ai-prompt-expert`, `cicd-expert`, `docs-expert`, `migasfree-ui-ux-expert`, `output-standard-expert`, `qa-expert`, `security-expert` | `disciplines/` |
+| **Frameworks** | `celery-expert`, `django-expert`, `docker-expert`, `electron-expert`, `fastapi-expert`, `graphql-expert`, `mcp-expert`, `migasfree-frontend-expert`, `postgresql-expert`, `redis-expert`, `terraform-expert` | `frameworks/` |
+| **Disciplines** | `ai-prompt-expert`, `cicd-expert`, `docs-expert`, `migasfree-ui-ux-expert`, `output-standard-expert`, `qa-expert`, `security-expert`, `ui-designer-expert` | `disciplines/` |
 
 ## 📊 Skill Dependencies Matrix
 
