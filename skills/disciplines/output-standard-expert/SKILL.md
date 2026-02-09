@@ -47,9 +47,11 @@ To prevent rendering or execution errors, these strict protocols MUST be followe
 
 ### 1. Mermaid: Zero-Tolerance for Unquoted Labels
 
-- **Golden Rule**: ALL text inside a Mermaid node (except simple alphanumeric IDs) MUST be enclosed in double quotes `""`.
+- **Golden Rule**: Use **Alphanumeric IDs** for nodes and define text separately in **Double Quotes**.
+  - ✅ **Correct Format**: `NODE_ID["Node Label (with special chars)"]`
+  - ❌ **Avoid**: Using complex strings directly as IDs (e.g., `"Manual/E2E"`).
 - **Forbidden Characters (Unquoted)**: `( ) [ ] { } / \ > < - _ . , : ; ! ? * + =`.
-- **Special Shapes**: For databases or cylindrical shapes, use `ID[( "Text" )]`.
+- **Special Shapes**: For databases or cylindrical shapes, use `DB_ID[( "Database Name" )]`.
 
 ### 2. Technical Blocks (JSON/YAML/Bash)
 
