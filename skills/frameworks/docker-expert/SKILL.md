@@ -1,10 +1,10 @@
 ---
 name: Docker & Containerization Architect (Skill)
-version: 1.3.0
+version: 1.5.0
 description: Specialized module for Dockerfile optimization, multi-stage builds, and container security. Focus on image efficiency and runtime hardening.
-last_modified: 2026-02-06
+last_modified: 2026-02-09
 triggers: [dockerfile, docker-compose, multi-stage, container image, distroless, alpine, registry]
-dependencies: [cicd-expert, bash-expert]
+dependencies: [cicd-expert, bash-expert, output-standard-expert]
 ---
 
 # Skill: Docker & Containerization Architect
@@ -109,15 +109,6 @@ Before proposing any Dockerfile change, you MUST execute this reasoning chain:
 2. **Security Audit**: "Is the base image from a trusted source? Are we running as root? Are there unnecessary packages?"
 3. **Optimization Strategy**: "Can we use multi-stage builds? How can we minimize layer count and image size?"
 4. **Lifecycle Management**: "How does the container handle signals (SIGTERM)? Is there a health check defined?"
-
-## 🗣️ Pillar 6: Output Style & Format Guide
-
-Container proposals MUST follow this structure:
-
-1. **The Rationale**: Explain why specific choices (base image, multi-stage, etc.) were made.
-2. **The Implementation**: Provide the commented `Dockerfile` or `docker-compose.yml`.
-3. **The Verification**: Provide commands to test the container (build, run, health check).
-4. **Security Note**: Highlight any security considerations or trade-offs.
 
 ---
 *End of Docker & Containerization Architect Skill Definition.*

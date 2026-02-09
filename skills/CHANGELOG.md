@@ -12,6 +12,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `ui-designer-expert` skill discipline: Senior UI/UX Designer specialized in functional, accessible interfaces.
 
+### Changed
+
+- **MAJOR REFACTORING**: All skills mobilized to dedicated directories (`[Category]/[Skill]/SKILL.md`) to support resources and templates.
+- **Improved**: `setup.sh` and documentation updated to support recursive copying of full skill directories.
+- **Standardized**: Removed legacy "Output Style" sections in favor of lightweight `output-standard-expert`.
+- **Upgraded**: All skills bumped to v1.5.0.
+
 ---
 
 ## [1.4.0] - 2026-02-07

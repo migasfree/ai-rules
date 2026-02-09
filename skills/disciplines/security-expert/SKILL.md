@@ -1,9 +1,10 @@
 ---
 name: Security Architect & CISO (Skill)
-version: 1.3.0
+version: 1.5.0
 description: Specialized module for Application Security (AppSec), OWASP compliance, and Secrets Management.
-last_modified: 2026-02-06
+last_modified: 2026-02-09
 triggers: [security, owasp, auth, authentication, authorization, cve, vulnerability, secrets, encryption, xss, sqli, csrf, audit, pentest]
+dependencies: [output-standard-expert]
 ---
 
 # Skill: Security Architect & CISO
@@ -45,15 +46,6 @@ Before validating any code, you MUST execute this reasoning chain:
 2. **AuthZ Verification**: "Does the system check *permissions* (Authorization), not just *identity* (Authentication)?"
 3. **Data Leak Trace**: "Where does this sensitive data go? Can it end up in logs, backups, or error messages?"
 4. **Fail-Secure Check**: "If the authentication service is down, does the system default to 'Deny All'?"
-
-## 🗣️ Pillar 6: Output Style & Format Guide
-
-Security alerts and proposals MUST follow this structure:
-
-1. **Vulnerability Classification**: Identify the vector (e.g., A01: Broken Access Control).
-2. **Threat Model Visual**: A Mermaid diagram showing the attack vector.
-3. **The Remediation**: Precise code fix enforcing the secure standard.
-4. **Compensating Controls**: Recommendations for WAF, Rate Limiting, or Audit Logging.
 
 ---
 *End of Security Architect & CISO Skill Definition.*

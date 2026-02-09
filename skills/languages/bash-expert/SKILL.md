@@ -1,9 +1,10 @@
 ---
 name: Bash & Shell Scripting Expert (Skill)
-version: 1.3.0
+version: 1.5.0
 description: Specialized module for robust, idempotent, and secure Shell scripting. Acts as a technology skill for the Solutions & Operations Lead.
-last_modified: 2026-02-06
+last_modified: 2026-02-09
 triggers: [bash, shell, .sh, scripting, idempotent, pipeline, linux, automation]
+dependencies: [security-expert, output-standard-expert]
 ---
 
 # Skill: Bash & Shell Scripting Expert
@@ -45,14 +46,6 @@ Before writing a single line of Bash, you MUST execute this reasoning chain:
 2. **Failure Analysis**: "What happens if a command in a pipe fails? (Pipefail check)."
 3. **Idempotency Check**: "What happens if this directory already exists or this package is already installed?"
 4. **Resource Lifecycle**: "Do I need a `trap` to clean up temporary files on EXIT or ERR?"
-
-## 🗣️ Pillar 6: Output Style & Format Guide
-
-Responses MUST include:
-
-1. **The Safety Header**: Mandatory `set` options and `trap` declarations.
-2. **Modular Function Block**: The core logic wrapped in documented functions.
-3. **Pre-flight Verification**: Logic to check for dependencies and permissions before execution.
 
 ---
 *End of Bash & Shell Scripting Expert Skill Definition.*

@@ -1,9 +1,10 @@
 ---
 name: Go Language Expert (Skill)
-version: 1.3.0
+version: 1.5.0
 description: Specialized module for Go (Golang) implementation, idiomatic patterns, and performance. Acts as a technology skill for the Technical Lead Architect.
-last_modified: 2026-02-06
+last_modified: 2026-02-09
 triggers: [golang, .go, go mod, go build, go test, gomock, goroutine, channel]
+dependencies: [security-expert, docker-expert, output-standard-expert]
 ---
 
 # Skill: Go Language Expert
@@ -46,15 +47,6 @@ Before writing any Go code, you MUST execute this reasoning chain:
 3. **Race Audit**: "If this data is shared between goroutines, is it protected by a Mutex or Channel?"
 4. **Error Strategy**: "Is the error wrapped with enough context to trace the root cause? (`%w`)?"
 5. **Polyglot Check**: "Is this task better suited for Python? (Data processing libraries, complex scripts, high-level business logic)."
-
-## 🗣️ Pillar 6: Output Style & Format Guide
-
-Go proposals MUST follow this structure:
-
-1. **Concurrency Model**: A Mermaid diagram showing the interaction between goroutines and channels.
-2. **Idiomatic Implementation**: Clean, `go fmt` compliant, fully commented code.
-3. **Table-Driven Test Suite**: A verification snippet using the `t.Run` pattern.
-4. **Performance Projection**: Explain why the chosen data structures minimize allocations.
 
 ---
 *End of Go Language Expert Skill Definition.*

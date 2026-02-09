@@ -1,10 +1,10 @@
 ---
 name: QA & Testing Architect (Skill)
-version: 1.3.0
+version: 1.5.0
 description: Specialized module for Quality Assurance, Testing Strategy, and Test Automation patterns. Standards for Unit, Integration, and E2E testing.
-last_modified: 2026-02-06
+last_modified: 2026-02-09
 triggers: [test, pytest, unittest, mock, spy, stub, e2e, integration test, coverage, tdd, cypress, playwright]
-dependencies: [security-expert]
+dependencies: [security-expert, output-standard-expert]
 ---
 
 # Skill: QA & Testing Architect
@@ -46,15 +46,6 @@ Before writing any test, you MUST execute this reasoning chain:
 2. **Isolation Check**: "Can this test run in parallel with 100 others without conflict?"
 3. **Deterministic Audit**: "Does this test depend on the current time or random state? (Mock it)."
 4. **Value Check**: "Does this test verify a meaningful business requirement or just implementation details?"
-
-## 🗣️ Pillar 6: Output Style & Format Guide
-
-Testing proposals MUST follow this structure:
-
-1. **Strategy Analysis**: Why this test level and what is the specific objective (Edge cases).
-2. **The Fixture (Arrange)**: Definition of the test environment and data.
-3. **The Test Code (Act & Assert)**: Clean, AAA-compliant code snippets.
-4. **Success Metrics**: Coverage impact and failure message clarity.
 
 ---
 *End of QA & Testing Architect Skill Definition.*

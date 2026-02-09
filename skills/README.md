@@ -4,32 +4,31 @@ This directory contains **specialized AI personas** organized by domain to provi
 
 ## 📂 Directory Structure
 
-```text
 skills/
-├── disciplines/       # Cross-cutting concerns (6 skills)
-│   ├── ai-prompt-expert.md
-│   ├── cicd-expert.md
-│   ├── docs-expert.md
-│   ├── migasfree-ui-ux-expert.md
-│   ├── ui-designer-expert.md
-│   ├── qa-expert.md
-│   └── security-expert.md
-├── frameworks/        # Framework-specific expertise (9 skills)
-│   ├── celery-expert.md
-│   ├── django-expert/
-│   │   └── SKILL.md
-│   ├── docker-expert.md
-│   ├── electron-expert.md
-│   ├── graphql-expert.md
-│   ├── migasfree-frontend-expert.md
-│   ├── postgresql-expert.md
-│   └── terraform-expert.md
-├── languages/         # Language-specific expertise (3 skills)
-│   ├── bash-expert.md
-│   ├── go-expert.md
-│   └── python-expert.md
+├── disciplines/       # Cross-cutting concerns
+│   ├── ai-prompt-expert/SKILL.md
+│   ├── cicd-expert/SKILL.md
+│   ├── docs-expert/SKILL.md
+│   ├── migasfree-ui-ux-expert/SKILL.md
+│   ├── ui-designer-expert/SKILL.md
+│   ├── qa-expert/SKILL.md
+│   └── security-expert/SKILL.md
+├── frameworks/        # Framework-specific expertise
+│   ├── celery-expert/SKILL.md
+│   ├── django-expert/SKILL.md
+│   ├── docker-expert/SKILL.md
+│   ├── electron-expert/SKILL.md
+│   ├── graphql-expert/SKILL.md
+│   ├── migasfree-frontend-expert/SKILL.md
+│   ├── postgresql-expert/SKILL.md
+│   └── terraform-expert/SKILL.md
+├── languages/         # Language-specific expertise
+│   ├── bash-expert/SKILL.md
+│   ├── go-expert/SKILL.md
+│   └── python-expert/SKILL.md
 └── CHANGELOG.md       # Version history
-```
+
+```text
 
 ## 🎯 How to Choose Skills
 
@@ -38,32 +37,50 @@ skills/
 ### Backend Development
 
 ```bash
-cp skills/languages/python-expert.md .agent/skills/
-cp -r skills/frameworks/django-expert .agent/skills/
-cp skills/frameworks/postgresql-expert.md .agent/skills/
+mkdir -p .agent/skills/languages/python-expert
+cp -r skills/languages/python-expert/. .agent/skills/languages/python-expert/
+
+mkdir -p .agent/skills/frameworks/django-expert
+cp -r skills/frameworks/django-expert/. .agent/skills/frameworks/django-expert/
+
+mkdir -p .agent/skills/frameworks/postgresql-expert
+cp -r skills/frameworks/postgresql-expert/. .agent/skills/frameworks/postgresql-expert/
 ```
 
 ### Frontend Development (Migasfree Projects)
 
 ```bash
-cp skills/disciplines/migasfree-ui-ux-expert.md .agent/skills/
-cp skills/frameworks/migasfree-frontend-expert.md .agent/skills/
+mkdir -p .agent/skills/disciplines/migasfree-ui-ux-expert
+cp -r skills/disciplines/migasfree-ui-ux-expert/. .agent/skills/disciplines/migasfree-ui-ux-expert/
+
+mkdir -p .agent/skills/frameworks/migasfree-frontend-expert
+cp -r skills/frameworks/migasfree-frontend-expert/. .agent/skills/frameworks/migasfree-frontend-expert/
 ```
 
 ### Desktop Applications
 
 ```bash
-cp skills/frameworks/electron-expert.md .agent/skills/
-cp skills/frameworks/migasfree-frontend-expert.md .agent/skills/
+mkdir -p .agent/skills/frameworks/electron-expert
+cp -r skills/frameworks/electron-expert/. .agent/skills/frameworks/electron-expert/
+
+mkdir -p .agent/skills/frameworks/migasfree-frontend-expert
+cp -r skills/frameworks/migasfree-frontend-expert/. .agent/skills/frameworks/migasfree-frontend-expert/
 ```
 
 ### Infrastructure & DevOps
 
 ```bash
-cp skills/languages/bash-expert.md .agent/skills/
-cp skills/disciplines/cicd-expert.md .agent/skills/
-cp skills/frameworks/docker-expert.md .agent/skills/
-cp skills/frameworks/terraform-expert.md .agent/skills/
+mkdir -p .agent/skills/languages/bash-expert
+cp -r skills/languages/bash-expert/. .agent/skills/languages/bash-expert/
+
+mkdir -p .agent/skills/disciplines/cicd-expert
+cp -r skills/disciplines/cicd-expert/. .agent/skills/disciplines/cicd-expert/
+
+mkdir -p .agent/skills/frameworks/docker-expert
+cp -r skills/frameworks/docker-expert/. .agent/skills/frameworks/docker-expert/
+
+mkdir -p .agent/skills/frameworks/terraform-expert
+cp -r skills/frameworks/terraform-expert/. .agent/skills/frameworks/terraform-expert/
 ```
 
 ## 🔗 Understanding Dependencies
@@ -89,7 +106,7 @@ All skills follow [Semantic Versioning](https://semver.org/).
 To verify skill versions:
 
 ```bash
-grep "^version:" skills/**/*.md
+grep "^version:" skills/*/*/SKILL.md
 ```
 
 ## 🏗️ Skill Architecture

@@ -1,9 +1,10 @@
 ---
 name: Technical Writer & Docs Architect (Skill)
-version: 1.3.0
+version: 1.5.0
 description: Specialized module for Living Documentation, Architecture Decision Records (ADR), and Diátaxis-based technical writing.
-last_modified: 2026-02-06
+last_modified: 2026-02-09
 triggers: [docs, documentation, adr, readme, mermaid, markdown, swagger, openapi, docstring, mkdocs, user guide, tutorial, how-to, diataxis]
+dependencies: [output-standard-expert]
 ---
 
 # Skill: Technical Writer & Docs Architect
@@ -46,15 +47,6 @@ Before generating any content, you MUST execute this reasoning chain:
 2. **Maintenance Check**: "How likely is this content to rot? Can I automate it instead?"
 3. **Visual Translation**: "Is this flow too complex for text? (3+ steps -> Mermaid diagram)."
 4. **Audience Filter**: "Is the jargon level appropriate for the target reader?"
-
-## 🗣️ Pillar 6: Output Style & Format Guide
-
-All documentation proposals MUST follow this structure:
-
-1. **Diátaxis Quadrant Label**: Explicitly state the category (e.g., *How-To Guide*).
-2. **Persona & Audience Context**: Define who this is for.
-3. **Visual Core**: A Mermaid diagram or structural overview.
-4. **Technical Artifact**: The complete, clean Markdown content.
 
 ---
 *End of Technical Writer & Docs Architect Skill Definition.*

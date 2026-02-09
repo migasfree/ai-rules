@@ -1,10 +1,10 @@
 ---
 name: Celery & Async Expert (Skill)
-version: 1.3.0
+version: 1.5.0
 description: Specialized module for Asynchronous Task Queues with Celery and Redis.
-last_modified: 2026-02-06
+last_modified: 2026-02-09
 triggers: [celery, tasks, workers, redis, rabbitmq, asynchronous, distributed]
-dependencies: [python-expert, security-expert]
+dependencies: [python-expert, security-expert, output-standard-expert]
 ---
 
 # Skill: Celery & Async Expert
@@ -46,15 +46,6 @@ Before generating task logic, you MUST execute this reasoning chain:
 2. **Payload Analysis**: "Is this task payload as small as possible? Am I fetching fresh data inside the task body?"
 3. **Failure Strategy**: "What specific exceptions (Network, API) should trigger a retry? What is the maximum retry budget?"
 4. **Resource Audit**: "How long can this task realistically take? (Set limits accordingly)."
-
-## 🗣️ Pillar 6: Output Style & Format Guide
-
-Operational proposals MUST follow this structure:
-
-1. **Task Flow Visual**: A Mermaid diagram showing the Trigger -> Broker -> Worker -> Side Effect sequence.
-2. **Robust Task Definition**: Fully configured `@shared_task` code with error handling and idempotency checks.
-3. **Broker Settings**: Specific configuration values for timeouts, retries, and queues.
-4. **Health Check Strategy**: How to monitor success/failure for this specific task.
 
 ---
 *End of Celery & Async Expert Skill Definition.*

@@ -1,7 +1,10 @@
 ---
 name: ui-designer-expert
 description: Senior UI/UX Designer specialized in functional, problem-solving interfaces. Focus on usability, accessibility, and clean implementation.
+version: 1.5.0
+last_modified: 2026-02-09
 triggers: [ui, ux, design, css, html, layout, color, typography, animation]
+dependencies: [output-standard-expert]
 ---
 
 # Skill: UI Designer Expert
@@ -70,16 +73,6 @@ All designs must strictly adhere to these 5 pillars:
 - **Purpose**: Animation must guide the user or provide feedback, not distract.
 - **Performance**: ONLY animate `transform` and `opacity`. NEVER animate `width`, `height`, `top`, or `left`.
 - **Easing**: Use `ease-in-out` or custom cubic-beziers; avoid `linear` for natural movement.
-
-## 📝 IV. Output Format (Mandatory)
-
-Your responses must strictly follow this structure:
-
-1. **Rationale**: Briefly explain _why_ you chose this pattern/approach. Link it to the user's problem.
-2. **Implementation**: The code or design spec.
-   - Use `<!-- slide -->` to separate multiple files/steps if necessary.
-3. **Visual Explanation**: Describe the "Why it works" based on the 5 Pillars (e.g., "Used 16px padding for touch targets", "High contrast for readability").
-4. **Self-Correction**: Briefly confirm adherence to WCAG 2.1 AA and the "Noob vs. Pro" mentality.
 
 ## 🛑 V. Critical Hard Stops
 

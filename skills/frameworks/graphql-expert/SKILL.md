@@ -1,10 +1,10 @@
 ---
 name: GraphQL & Graphene Expert (Skill)
-version: 1.3.0
+version: 1.5.0
 description: Specialized module for GraphQL API development using Graphene-Django. Focus on N+1 prevention, Schema design, and DataLoader usage.
-last_modified: 2026-02-06
+last_modified: 2026-02-09
 triggers: [graphql, graphene, schema, mutation, query, resolver, dataloader]
-dependencies: [django-expert]
+dependencies: [django-expert, output-standard-expert]
 ---
 
 # Skill: GraphQL & Graphene Expert
@@ -46,15 +46,6 @@ Before writing any resolver or schema, you MUST execute this reasoning chain:
 2. **Field Exposure Analysis**: "Is this field safe to expose? Who can see it?"
 3. **Type Precision**: "Am I using specific Input types and non-nullable fields where appropriate?"
 4. **Complexity Check**: "Should this logic be in the resolver or pushed down to the Model/Service layer?"
-
-## 🗣️ Pillar 6: Output Style & Format Guide
-
-Graph proposals MUST follow this structure:
-
-1. **Graph Analysis**: Explain the resolve path mapping and estimated DB cost.
-2. **The Schema (Python)**: Precise `graphene` definitions for Types, Queries, and Mutations.
-3. **Sample Query/Mutation**: A GraphQL example to verify the interface.
-4. **Optimization Trace**: Explanation of how N+1 was prevented for this specific case.
 
 ---
 *End of GraphQL & Graphene Expert Skill Definition.*

@@ -1,10 +1,10 @@
 ---
 name: Terraform & IaC Expert (Skill)
-version: 1.3.0
+version: 1.5.0
 description: Specialized module for Infrastructure as Code (IaC) using Terraform and OpenTofu. Focus on provider development, HCL best practices, and state management.
-last_modified: 2026-02-06
+last_modified: 2026-02-09
 triggers: [terraform, opentofu, .tf, hcl, provider, resource, state, backend, plan, apply, module]
-dependencies: [docker-expert, cicd-expert]
+dependencies: [docker-expert, cicd-expert, output-standard-expert]
 ---
 
 # Skill: Terraform & IaC Expert
@@ -46,15 +46,6 @@ Before writing any HCL block, you MUST execute this reasoning chain:
 2. **Idempotency Check**: "If this configuration is applied twice, will it cause drift or unnecessary change sets?"
 3. **Variable Validation**: "Does this input variable have a type definition and a validation block for cost/security control?"
 4. **Interface Check**: "Are the outputs from this module sufficient for downstream dependencies without exposing secrets?"
-
-## 🗣️ Pillar 6: Output Style & Format Guide
-
-Infrastructure proposals MUST follow this structure:
-
-1. **Resource Graph Visual**: A Mermaid diagram showing the dependency graph between resources.
-2. **Modular HCL Implementation**: Clean, commented HCL code organized into `versions`, `variables`, and `main` components.
-3. **Plan Analysis**: Prediction of what will be Added, Changed, or Destroyed.
-4. **Hardening Summary**: Explanation of `lifecycle` rules and security group constraints applied.
 
 ---
 *End of Terraform & IaC Expert Skill Definition.*

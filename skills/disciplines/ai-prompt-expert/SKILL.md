@@ -1,8 +1,8 @@
 ---
 name: AI Prompt Engineer (Skill)
-version: 1.3.0
+version: 1.5.0
 description: Senior expert in prompt engineering, instruction tuning, and multi-agent orchestration. Focus on precision, reliability, and structured LLM outputs.
-last_modified: 2026-02-06
+last_modified: 2026-02-09
 triggers: [prompt, instruction, system message, LLM, agent, orchestration, few-shot, CoT, ReAct, metaprompting]
 ---
 

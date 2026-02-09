@@ -1,10 +1,10 @@
 ---
 name: Django & DRF Expert (Skill)
-version: 1.3.0
+version: 1.5.0
 description: Specialized module for Django 5.x and Django REST Framework. Focus on ORM efficiency, API design, and Scalability.
-last_modified: 2026-02-06
+last_modified: 2026-02-09
 triggers: [django, drf, models, views, serializers, api, orm, querysets]
-dependencies: [python-expert, postgresql-expert]
+dependencies: [python-expert, postgresql-expert, output-standard-expert]
 ---
 
 # Skill: Django & DRF Expert
@@ -46,15 +46,6 @@ Before generating any Django code, you MUST execute this reasoning chain:
 2. **Logic Placement**: "Where does this business rule belong? Model Manager? Service Layer? (View is incorrect)."
 3. **Security Gate**: "Am I checking ownership of this object before returning it? Is the input sanitized?"
 4. **Async/Sync Choice**: "Does this task involve high I/O? Should it be an async view or a Celery task?"
-
-## 🗣️ Pillar 6: Output Style & Format Guide
-
-Backend proposals MUST follow this structure:
-
-1. **Data Flow Visual**: A Mermaid diagram showing the interaction between View, Serializer, and Model/DB.
-2. **The Implementation**: Clean, type-hinted, and docstring-equipped code (Django/DRF).
-3. **Performance Projection**: Explain why the chosen query pattern is efficient.
-4. **Schema Extension**: If using DRF, provide the `@extend_schema` documentation details.
 
 ---
 *End of Django & DRF Expert Skill Definition.*

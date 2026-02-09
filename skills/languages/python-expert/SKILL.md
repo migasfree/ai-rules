@@ -1,10 +1,10 @@
 ---
 name: Python Language Expert (Skill)
-version: 1.3.0
+version: 1.5.0
 description: Specialized module for Pythonic implementation, testing, and quality standards. Acts as a technology skill for the Technical Lead Architect.
-last_modified: 2026-02-06
+last_modified: 2026-02-09
 triggers: [python, pytest, ruff, mypy, .py, pip, poetry, venv, type hints]
-dependencies: [security-expert]
+dependencies: [security-expert, output-standard-expert]
 ---
 
 # Skill: Python Language Expert
@@ -48,14 +48,6 @@ Before writing any Python code, you MUST execute this reasoning chain:
 3. **Security Scan**: "Is any variable reaching a system command or SQL raw string?"
 4. **Pythonic Idiom Check**: "Am I using modern idioms (pathlib, match/case) instead of legacy patterns?"
 5. **Polyglot Check**: "Is this task better suited for Go? (High-concurrency, binary processing, low-level sys-ops)."
-
-## 🗣️ Pillar 6: Output Style & Format Guide
-
-Responses MUST include:
-
-1. **Type Theory Analysis**: Explanation of the chosen typed structures.
-2. **The Implementation**: Fully typed, docstring-equipped Python code.
-3. **The Verification Suite**: A `pytest` snippet demonstrating usage and edge cases.
 
 ---
 *End of Python Language Expert Skill Definition.*

@@ -1,10 +1,10 @@
 ---
 name: Electron JS Expert (Skill)
-version: 1.3.0
+version: 1.5.0
 description: Specialized module for cross-platform desktop application development using Electron. Focus on security, IPC architecture, and native integration.
-last_modified: 2026-02-06
+last_modified: 2026-02-09
 triggers: [electron, main process, renderer process, IPC, preload script, context isolation, electron-builder, desktop app]
-dependencies: [migasfree-frontend-expert, security-expert]
+dependencies: [migasfree-frontend-expert, security-expert, output-standard-expert]
 ---
 
 # Skill: Electron JS Expert
@@ -46,15 +46,6 @@ Before bridging Node.js and the UI, you MUST execute this reasoning chain:
 2. **IPC Sanitization**: "Can a compromised renderer inject arbitrary parameters into this IPC call? (Sanitize it)."
 3. **Traversal Audit**: "Is this file path operation vulnerable to directory traversal? (Use `path.basename`)."
 4. **Isolation Check**: "Is `contextIsolation` enabled? How am I protecting the global namespace?"
-
-## 🗣️ Pillar 6: Output Style & Format Guide
-
-Operational proposals MUST follow this structure:
-
-1. **IPC Bridge Visual**: A Mermaid diagram showing the data flow between processes.
-2. **The Preload Bridge**: The secure `contextBridge` definition.
-3. **The Main Handler**: The secure asynchronous listener in the Main process.
-4. **Audit Check**: Specific security notes regarding CSP or input validation.
 
 ---
 *End of Electron JS Expert Skill Definition.*
