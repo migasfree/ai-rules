@@ -41,14 +41,32 @@ Unless the user requests a simple, conversational answer (e.g., "Yes/No", "Expla
     > [!WARNING]
     > Doing X will break Y.
 
-## 🧜 III. Mermaid Diagram Convention
+## 🛡️ III. Defensive Syntax Guard (Anti-Failure Protocols)
 
-When generating diagrams (Flowcharts, Sequence, Class):
+To prevent rendering or execution errors, these strict protocols MUST be followed:
 
-1. **Labels**: ALWAYS quote node labels to prevent syntax errors with special characters: `id["Label (Info)"]`.
-    - ❌ **BAD**: `Node[Label (Info)]` (Causes parse error due to unquoted parentheses)
-    - ✅ **GOOD**: `Node["Label (Info)"]` (Correctly quoted)
-2. **Direction**: Use `TD` (Top-Down) for hierarchies and `LR` (Left-Right) for processes.
+### 1. Mermaid: Zero-Tolerance for Unquoted Labels
+
+- **Golden Rule**: ALL text inside a Mermaid node (except simple alphanumeric IDs) MUST be enclosed in double quotes `""`.
+- **Forbidden Characters (Unquoted)**: `( ) [ ] { } / \ > < - _ . , : ; ! ? * + =`.
+- **Special Shapes**: For databases or cylindrical shapes, use `ID[( "Text" )]`.
+
+### 2. Technical Blocks (JSON/YAML/Bash)
+
+- **Complex Strings**: In YAML or JSON, always use quotes if a value contains colons `:`, slashes `/`, or `@` symbols.
+- **Command Escaping**: In Bash, if a command uses pipes `|` or redirections `>` within explanations, always wrap it in backticks.
+
+### 3. File Paths and URLs
+
+- **Spaces and Symbols**: If a file path contains spaces or special characters, use the format `[name](file:///path/with%20spaces)`.
+
+## 🧪 IV. Pre-Output Validation Protocol
+
+Before sending the response, the model MUST perform an "Integrity Check":
+
+1. Do all Mermaid nodes have double quotes?
+2. Are there any orphan parentheses in code blocks?
+3. Are all Markdown blocks properly closed?
 
 ---
 *End of Output Standard Expert Skill Definition.*
