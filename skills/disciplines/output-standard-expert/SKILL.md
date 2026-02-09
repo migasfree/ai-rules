@@ -51,7 +51,8 @@ To prevent rendering or execution errors, these strict protocols MUST be followe
   - ✅ **Correct Format**: `NODE_ID["Node Label (with special chars)"]`
   - ❌ **Avoid**: Starting a line with a string (e.g., `"Internet" --> ...`).
 - **Syntax Requirements**:
-  - **Header**: Always put a newline after `graph TD` or `graph LR`.
+  - **Header**: MUST have a newline immediately after `graph TD`. NEVER put nodes on the same line as the header.
+  - **Indentation**: Indent all nodes inside the graph for readability.
   - **IDs**: Use short, clear, uppercase IDs (e.g., `APP`, `DB`, `PROXY`).
 - **Special Shapes**: For databases or cylindrical shapes, use `DB_ID[( "Database Name" )]`.
 
