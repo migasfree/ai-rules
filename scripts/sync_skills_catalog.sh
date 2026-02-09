@@ -42,16 +42,14 @@ scan_skills_category() {
         return
     fi
     
-    # Find all .md files and SKILL.md directories
+    # Find all SKILL.md files and extract parent directory name
     while IFS= read -r -d '' file; do
         if [[ -f "$file" ]]; then
-            # Regular .md file
-            basename "${file%.md}"
-        elif [[ -d "$file" && -f "$file/SKILL.md" ]]; then
-            # Directory with SKILL.md
-            basename "$file"
+            # Extract skill name from parent directory
+            skill_name=$(basename "$(dirname "$file")")
+            echo "$skill_name"
         fi
-    done < <(find "$category_path" -maxdepth 1 \( -name "*.md" -o -type d \) -print0 | sort -z) | \
+    done < <(find "$category_path" -maxdepth 2 -name "SKILL.md" -print0 | sort -z) | \
         grep -v "^README$" | \
         paste -sd ',' - | \
         sed 's/, *$//;s/,/, /g;s/[^, ][^,]*/`&`/g'

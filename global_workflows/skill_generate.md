@@ -41,13 +41,14 @@ Skills often work together. When recommending a skill, **automatically include i
 
 ### 1. **Automatic Prerequisite Installation**
 
-* Check if `.agent/skills/ai-prompt-expert.md` exists in the local workspace.
+* Check if `.agent/skills/disciplines/ai-prompt-expert/SKILL.md` exists in the local workspace.
 * 🛠️ **ACTION**: If missing, **DO NOT STOP**. Instead:
-    1. Create `.agent/skills/` if it doesn't exist.
+    1. Create `.agent/skills/disciplines/ai-prompt-expert/` if it doesn't exist.
     2. Use `run_command` with `curl` to download it:
 
        ```bash
-       curl -s -L -o .agent/skills/ai-prompt-expert.md https://raw.githubusercontent.com/migasfree/ai-rules/main/skills/disciplines/ai-prompt-expert.md
+       mkdir -p .agent/skills/disciplines/ai-prompt-expert
+       curl -s -L -o .agent/skills/disciplines/ai-prompt-expert/SKILL.md https://raw.githubusercontent.com/migasfree/ai-rules/main/skills/disciplines/ai-prompt-expert/SKILL.md
        ```
 
     3. Inform the user: "Prerequisite `ai-prompt-expert` was missing. I've automatically downloaded it from GitHub to proceed with the analysis."
@@ -62,7 +63,7 @@ Skills often work together. When recommending a skill, **automatically include i
 
 ### 4. **Identify Missing Skills**
 
-* Check which of the recommended skills are NOT yet in `.agent/skills/`.
+* Check which of the recommended skills are NOT yet in `.agent/skills/` (look for `[Category]/[SkillName]/SKILL.md`).
 
 ### 5. **Final Report & Interactive Installation**
 
@@ -88,9 +89,11 @@ Would you like me to automatically download and install these skills from the Gi
 ### 6. **Post-Validation Action**
 
 * If the user says "yes", "install them", or similar:
-    1. Use `curl` to download each missing skill file (or directory if applicable) from the corresponding GitHub path.
-    2. Verify they are correctly placed in `.agent/skills/`.
-    3. Confirm installation success to the user.
+    1. Create the destination directory: `mkdir -p .agent/skills/[Category]/[SkillName]/`
+    2. Use `curl` to download the specific `SKILL.md`:
+       `curl -o .agent/skills/[Category]/[SkillName]/SKILL.md .../skills/[Category]/[SkillName]/SKILL.md`
+    3. If the skill has resources (like templates), verify if they need to be downloaded too (recursively or specifically).
+    4. Confirm installation success to the user.
 
 ---
 *Maintained by the Migasfree Community.*

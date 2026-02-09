@@ -55,15 +55,9 @@ get_remote_version() {
         return # Not in official catalog
     fi
 
-    # Try as file first (most common)
-    local url="$GITHUB_REPO_URL/skills/$cat/$skill_name.md"
+    # Try as directory/SKILL.md (Standard)
+    local url="$GITHUB_REPO_URL/skills/$cat/$skill_name/SKILL.md"
     local v=$(curl -s -L --max-time 2 "$url" | grep "^version:" | head -n 1 | awk '{print $2}' | tr -d '\r')
-    
-    if [ -z "$v" ]; then
-        # Try as directory/SKILL.md
-        url="$GITHUB_REPO_URL/skills/$cat/$skill_name/SKILL.md"
-        v=$(curl -s -L --max-time 2 "$url" | grep "^version:" | head -n 1 | awk '{print $2}' | tr -d '\r')
-    fi
     echo "$v"
 }
 
@@ -99,7 +93,7 @@ list_skills() {
              return
         fi
 
-        files=$(find "$dir" -maxdepth 2 \( -name "*.md" -o -name "*.md.off" \) | sort)
+        files=$(find "$dir" -maxdepth 4 -name "SKILL.md*" | sort)
         
         while read -r file; do
             [ -z "$file" ] && continue
@@ -109,7 +103,7 @@ list_skills() {
             clean_name=${name%.md}
             clean_name=${clean_name%.off}
             
-            if [[ "$name" == "SKILL.md" ]]; then
+            if [[ "$name" == "SKILL.md" || "$name" == "SKILL.md.off" ]]; then
                 clean_name=$(basename "$(dirname "$file")")
             fi
 

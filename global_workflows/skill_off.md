@@ -11,7 +11,7 @@ This workflow disables **local workspace skills** located in `.agent/skills/` by
 ## Usage Examples
 
 - `/skill_off python-expert`
-- `/skill_off frameworks/electron-expert`
+- `/skill_off electron-expert`
 
 ## 1. Disable Skills
 
@@ -45,9 +45,10 @@ if [[ "$1" == "all" ]]; then
     while read -r file; do
         v=$(get_ver "$file")
         mv "$file" "${file}.off"
-        echo "- 💤 $(basename "$file" .md) [v${v:-?.?.?}]"
+        skill_name=$(basename "$(dirname "$file")")
+        echo "- 💤 $skill_name [v${v:-?.?.?}]"
         found=1
-    done < <(find "$SKILLS_DIR" -type f -name "*.md" ! -name "README.md")
+    done < <(find "$SKILLS_DIR" -type f -name "SKILL.md")
     
     if [ $found -eq 0 ]; then
         echo "⏭️  All skills are already disabled."
@@ -55,28 +56,22 @@ if [[ "$1" == "all" ]]; then
 else
     # Individual handling
     for input in "$@"; do
-        clean_path=$(echo "$input" | sed 's/\.md$//' | sed 's/\.off$//')
-        basename=$(basename "$clean_path")
+        # Input implies skill name (e.g. "python-expert")
+        # We look for .../python-expert/SKILL.md
         
-        found_file=$(find "$SKILLS_DIR" -type f -name "${basename}.md" | grep "/${clean_path}\.md$" | head -n 1)
+        found_file=$(find "$SKILLS_DIR" -type f -name "SKILL.md" | grep "/$input/SKILL.md$" | head -n 1)
         
-        if [ -z "$found_file" ] && [[ "$clean_path" != */* ]]; then
-            found_file=$(find "$SKILLS_DIR" -type f -name "${basename}.md" | head -n 1)
-        fi
-
         if [ -n "$found_file" ]; then
             v=$(get_ver "$found_file")
             mv "$found_file" "${found_file}.off"
-            echo "- 💤 $(basename "$found_file" .md) [v${v:-?.?.?}]"
+            echo "- 💤 $input [v${v:-?.?.?}]"
         else
-            already_off=$(find "$SKILLS_DIR" -type f -name "${basename}.md.off" | grep "/${clean_path}\.md\.off$" | head -n 1)
-            if [ -z "$already_off" ] && [[ "$clean_path" != */* ]]; then
-                already_off=$(find "$SKILLS_DIR" -type f -name "${basename}.md.off" | head -n 1)
-            fi
+            # Check if it's already off
+            already_off=$(find "$SKILLS_DIR" -type f -name "SKILL.md.off" | grep "/$input/SKILL.md.off$" | head -n 1)
             
             if [ -n "$already_off" ]; then
                 v=$(get_ver "$already_off")
-                echo "- 💤 $(basename "$already_off" .md.off) [v${v:-?.?.?}] (Already disabled)"
+                echo "- 💤 $input [v${v:-?.?.?}] (Already disabled)"
             else
                 echo "❌ Skill not found in workspace: $input"
             fi

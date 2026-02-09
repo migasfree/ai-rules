@@ -104,7 +104,9 @@ process_dir() {
 process_dir "$SOURCE_DIR/global_workflows" "$ANTIGRAVITY_DIR/global_workflows" "Global Workflows"
 
 # 2. Templates
-process_dir "$SOURCE_DIR/templates" "$ANTIGRAVITY_DIR/templates" "Templates"
+if [ -d "$SOURCE_DIR/templates" ]; then
+    process_dir "$SOURCE_DIR/templates" "$ANTIGRAVITY_DIR/templates" "Templates"
+fi
 
 # 3. Global Skills (Core Roles)
 process_dir "$SOURCE_DIR/global_skills" "$ANTIGRAVITY_DIR/global_skills" "Global Skills"
@@ -113,8 +115,13 @@ process_dir "$SOURCE_DIR/global_skills" "$ANTIGRAVITY_DIR/global_skills" "Global
 if [ "$VERIFY_MODE" = false ]; then
     if [ -d ".agent/skills" ]; then
         echo -e "${YELLOW}🛠️  Applying Workspace Enhancements...${NC}"
-        cp "$SOURCE_DIR/skills/disciplines/ai-prompt-expert.md" ".agent/skills/"
-        echo -e "${GREEN}✓ AI Prompt Engineer installed locally.${NC}"
+        mkdir -p ".agent/skills/disciplines/ai-prompt-expert"
+        if [ -d "$SOURCE_DIR/skills/disciplines/ai-prompt-expert" ]; then
+            cp -r "$SOURCE_DIR/skills/disciplines/ai-prompt-expert/." ".agent/skills/disciplines/ai-prompt-expert/"
+            echo -e "${GREEN}✓ AI Prompt Engineer installed locally.${NC}"
+        else
+             echo -e "${RED}✗ AI Prompt Engineer source directory not found.${NC}"
+        fi
     fi
 fi
 
