@@ -111,7 +111,12 @@ fi
 # 3. Global Skills (Core Roles)
 process_dir "$SOURCE_DIR/global_skills" "$ANTIGRAVITY_DIR/global_skills" "Global Skills"
 
-# 4. Local Workspace Extras (Optional but recommended)
+# 4. Global Scripts
+if [ -d "$SOURCE_DIR/scripts" ]; then
+    process_dir "$SOURCE_DIR/scripts" "$ANTIGRAVITY_DIR/scripts" "Global Scripts"
+fi
+
+# 5. Local Workspace Extras (Optional but recommended)
 if [ "$VERIFY_MODE" = false ]; then
     if [ -d ".agent/skills" ]; then
         echo -e "${YELLOW}🛠️  Applying Workspace Enhancements...${NC}"
