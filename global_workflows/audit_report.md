@@ -1,59 +1,65 @@
 ---
 description: Create a Premium Role-Based Audit Report with high-end visuals and "packaging".
-version: 1.5.0
-last_modified: 2026-02-07
+version: 1.6.0
+last_modified: 2026-02-10
 ---
 
 # Agentic Audit Workflow: Premium Role-Based Report
 
-This workflow is designed to be executed directly by you (the AI agent). It generates a "Premium" audit report that balances deep technical insight with executive-level presentation ("Packaging").
+This workflow is designed to be executed directly by you (the AI agent). It generates a "Premium" audit report that balances deep technical insight with executive-level presentation ("Packaging"), utilizing standardized templates.
 
 ## Instructions
 
 ### 1. Context Acquisition & Discovery
 
 * **Analyze Structure**: Discover the technical stack (Languages, Frameworks, Infrastructure).
-* **Role Discovery (Dynamic)**: Identify relevant **Mega-Roles** based on project evidence:
-  * `src/*.vue` -> Activate **Frontend Architect**.
-  * `Dockerfile` -> Activate **Platform Engineer**.
-  * `tests/` -> Activate **QA/SDET**.
-  * `models.py` / `Schema` -> Activate **Data Architect**.
+* **Role Discovery (Dynamic)**: Identify relevant **Mega-Roles** and **Skills** based on project evidence.
+* **Template Loading**: Read all templates from `~/.gemini/antigravity/templates/audit_report/`:
+  * `executive_summary.md`
+  * `role_audit.md`
+  * `consolidated.md`
+  * `metrics.md`
 * **Initialize Report**: Create `premium_audit_report.md` with a Premium Header.
 
-### 2. Strategic Assessment (The "Hook")
+### 2. Strategic Assessment (The "Executive View")
 
+Use the `executive_summary.md` template to generate:
+
+* **Executive Summary**: Distinguishing between Core Architectural Health and Skill/Technology Compliance.
+* **Overall Assessment Table**: Scoring key areas (Security, Code Quality, etc.) with 🟢/🟡/🔴 indicators.
 * **Stack-Specific Dashboard**:
-  * **Badges**: Use dynamic badges reflecting the detected stack (e.g., `![Stack](https://img.shields.io/badge/Stack-Django-blue)`).
-  * **Scorecard**: Rate 3-4 key areas found (e.g., Security, Testability, Containerization).
-  * **Mermaid Overview**: A high-level architecture diagram. Choose the type:
-    * Deployment Flow (if DevOps detected).
-    * Component Hierarchy (if Frontend detected).
-    * Data Model (if Backend detected).
+  * **Badges**: Use dynamic badges reflecting the detected stack.
+  * **Mermaid Overview**: A high-level architecture diagram.
 
 ### 3. Multi-Layer Audit (The "Adaptative Packaging")
 
-For each discovered **Role**, generate a premium section:
+For each discovered **Role** (Core or Skill), use the `role_audit.md` template:
 
-* **Role Badge**: Use a Shields.io badge for the role.
-* **Persona Insights**: Write strictly from that role's perspective.
-* **Visual Evidence**:
-  * **Mermaid Diagram**: **Mandatory** per role. (e.g., QA Role -> Testing Pyramid; Platform Role -> CI/CD Graph).
-  * **Code Highlights**: Showcase "Premium" patterns (Clean Code) vs "Draft" patterns.
-* **Domain Strengths & Concerns**: Use visual indicators for severity.
+* **Role-Specific Context**: Apply the correct `ROLE_TYPE` (Core for Mega-Roles, Skill for specific techs).
+* **Key Implementation Review**: Generate tables for Strengths and Concerns (with IDs like SEC-001).
+* **Code Examples**: Showcase specific implementation patterns found in the codebase.
+* **Role Diagram**: **Mandatory** Mermaid diagram summarizing priorities for that role.
 
 ### 4. Synthesis & Recommendations (The "Value")
 
+Use the `consolidated.md` template to generate:
+
 * **Consolidated Recommendations Matrix**:
-  * Group findings into a robust table: `| Priority | Domain | Finding | Actionable Recommendation |`.
-* **Metrics & Appendix**:
-  * Include a "Files Analyzed" list.
-  * Include a Glossary if technical terms were used.
+  * Categorize into "Strategic & Architectural (Core)" and "Tactical & Technical (Skills)".
+  * Rank by priority (P0 to P3) using the template's table structure.
 
-### 5. Final Polish ("Packaging")
+### 5. Metrics & Documentation (The "Evidence")
 
-* **Review**: Read the generated markdown.
+Use the `metrics.md` template to generate:
+
+* **Metrics Summary**: Codebase statistics and Core-Skill alignment scoring.
+* **Skill Ecosystem Status**: A table showing all detected Skills and their compliance levels.
+* **Appendices**: Files Analyzed and Glossary.
+
+### 6. Final Polish ("Packaging")
+
+* **Visual Consistency**: Ensure headers, emojis, and tables follow a premium, professional aesthetic.
 * **Format Check**:
-  * Are headers clear?
-  * Are there enough emojis to guide the eye (without being clownish)?
-  * Are the tables well-spaced?
-* **Delivery**: Save the file and inform the user the Premium Audit is ready.
+  * 🛑 **CRITICAL**: Verify there is at least one blank line before EVERY table to ensure correct rendering.
+  * 🛑 **CRITICAL**: Verify all headings are unique by including the Role Index or descriptive labels (avoid duplicate "Strengths" or "Concerns" headers).
+* **Delivery**: Save the final `premium_audit_report.md` and inform the user.

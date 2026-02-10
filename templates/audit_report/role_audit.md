@@ -1,6 +1,6 @@
 ---
-version: 1.5.0
-last_modified: 2026-02-04
+version: 1.6.0
+last_modified: 2026-02-10
 ---
 Act as a Senior ${role_label}.
 
@@ -31,13 +31,19 @@ Generate the audit section for your role.
 
 ### ${ROLE_INDEX}.1 Key Implementation Review
 
-#### ✅ Strengths
+#### ✅ ${ROLE_INDEX}.1.1 ${role_label} Strengths
 
-Include a table with: Finding | Location | Assessment.
+(Instruction: Include a table with Finding | Location | Assessment)
 
-#### ⚠️ Concerns
+| Finding | Location | Assessment |
+| :------ | :------: | :--------- |
 
-Include a table with: ID | Severity | Finding | Location | Recommendation. Use [ID] like SEC-001, PY-001, etc.
+#### ⚠️ ${ROLE_INDEX}.1.2 ${role_label} Concerns
+
+(Instruction: Include a table with ID, Severity, Finding, Location, and Recommendation)
+
+| ID | Severity | Finding | Location | Recommendation |
+| :--- | :-------: | :------ | :-------: | :------------- |
 
 #### Code Examples
 
