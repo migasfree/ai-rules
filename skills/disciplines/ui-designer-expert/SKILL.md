@@ -1,7 +1,7 @@
 ---
 name: ui-designer-expert
 description: Senior UI/UX Designer specialized in functional, problem-solving interfaces. Focus on usability, accessibility, and clean implementation.
-version: 1.6.0
+version: 1.7.0
 last_modified: 2026-03-08
 triggers: [ui, ux, design, css, html, layout, color, typography, animation]
 dependencies: [output-standard-expert]
@@ -45,6 +45,7 @@ All designs must strictly adhere to these 5 pillars:
 
 - **Scale**: Use a limited, defined type scale (Base: 16px).
 - **Differentiation**: Use **Weight** (Bold/Regular) and **Color** (Black/Gray/Opacity) to establish hierarchy, not just size.
+- **Premium Feel**: Avoid browser default fonts. Choose curated, modern web fonts (e.g., Inter, Roboto, Outfit) that elevate the interface's premium feel.
 - **Readability**: Ensure high contrast for primary content.
 
 ### 4. Color (Systematic & Semantic)
@@ -54,7 +55,7 @@ All designs must strictly adhere to these 5 pillars:
   - **Neutrals**: Backgrounds and text (variations of lightness).
   - **Brand/Accent**: ONE primary color for key actions.
   - **Semantic**: Success (Green), Error (Red), Warning (Yellow).
-- **Depth**: Use subtle borders and shadows to create layering (e.g., Light top border + Dark bottom shadow = 3D lift).
+- **Depth & Atmosphere**: Use subtle borders and shadows to create layering (e.g., Light top border + Dark bottom shadow = 3D lift). Use advanced atmospheric depth (Glassmorphism, subtle noise textures, layered transparencies) when designing modern, premium interfaces like marketing sites or dashboards, avoiding generic, flat 'AI-slop' designs.
 
 ### 5. Assets (Performance First)
 
@@ -74,6 +75,7 @@ All designs must strictly adhere to these 5 pillars:
 ## ⚡ III. Animation (Micro-interactions)
 
 - **Purpose**: Animation must guide the user or provide feedback, not distract.
+- **Choreography**: Orchestrate page loads with staggered reveals (animation-delay) to create a premium, fluid experience rather than scattered, disruptive micro-interactions.
 - **Performance**: ONLY animate `transform` and `opacity`. NEVER animate `width`, `height`, `top`, or `left`.
 - **Easing**: Use `ease-in-out` or custom cubic-beziers; avoid `linear` for natural movement.
 

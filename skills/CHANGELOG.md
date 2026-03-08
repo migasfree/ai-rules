@@ -6,6 +6,14 @@ All notable changes to the Expert Skills ecosystem will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2026-03-08
+
+### Changed
+
+- `ui-designer-expert`: Integrated premium aesthetic guidelines inspired by Anthropic's frontend-design, focusing on modern curated typography, advanced atmospheric depth/glassmorphism, and choreographed staggered micro-interactions.
+
+---
+
 ## [1.6.0] - 2026-03-08
 
 ### Changed
