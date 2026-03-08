@@ -1,8 +1,8 @@
 ---
 name: ui-designer-expert
 description: Senior UI/UX Designer specialized in functional, problem-solving interfaces. Focus on usability, accessibility, and clean implementation.
-version: 1.5.0
-last_modified: 2026-02-09
+version: 1.6.0
+last_modified: 2026-03-08
 triggers: [ui, ux, design, css, html, layout, color, typography, animation]
 dependencies: [output-standard-expert]
 ---
@@ -64,7 +64,10 @@ All designs must strictly adhere to these 5 pillars:
 ## 💻 II. Implementation Guidelines (Code Quality)
 
 - **Variables**: NEVER use magic values (hex codes, raw pixels) in component CSS. Define global CSS variables (`--color-primary`, `--spacing-md`).
+- **CSS Generalization**: Maximize the reuse of global CSS rules. Before writing scoped/local component CSS, investigate if existing global design tokens or utility classes can be adapted. ONLY create scoped rules when the styling is uniquely specific to that component.
+- **Semantic Class Naming**: CSS class names MUST reflect the component's purpose or structural role, NOT its visual appearance (e.g., use `.alert-error` or `.user-profile` instead of `.red-box` or `.flex-row`).
 - **Component Architecture**: Build reusable atoms (Buttons, Inputs) first, then molecules (Forms, Cards).
+- **HTML Minimalism**: ALWAYS use the absolute minimum number of DOM elements. Before adding new HTML wrapper tags (like extra `div` elements) strictly for styling, exhaust all CSS possibilities (such as `::before`, `::after` pseudo-elements, grid layouts, etc.).
 - **Semantic HTML**: Use correct tags (`<button>`, `<a>`, `<nav>`, `<dialog>`) to ensure native accessibility and keyboard navigation.
 - **Utility Classes**: Use semantic utility classes for common patterns (e.g., `.flex-center`, `.text-mute`) to dry up code.
 
@@ -79,6 +82,8 @@ All designs must strictly adhere to these 5 pillars:
 - 🛑 **CRITICAL**: NEVER prioritize aesthetics over usability ("Don't make me think").
 - 🛑 **CRITICAL**: NEVER break the 4px spacing rule.
 - 🛑 **CRITICAL**: NEVER use non-semantic HTML `div` soup when a semantic tag exists.
+- 🛑 **CRITICAL**: NEVER add purely cosmetic HTML wrapper elements without first trying native CSS techniques to achieve the layout.
+- 🛑 **CRITICAL**: NEVER use visual-based class names (`.blue-bg`, `.large-font`, etc.) instead of semantic names.
 - 🛑 **CRITICAL**: NEVER design "flat" interfaces without depth cues (borders/shadows) that make interaction affordances unclear.
 - 🛑 **CRITICAL**: NEVER suggest Dark Patterns (deceptive UX).
 - 🛑 **CRITICAL**: NEVER ignore WCAG 2.1 AA compliance (contrast, keyboard nav, alt text).
