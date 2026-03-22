@@ -100,7 +100,7 @@ When you install a skill, **also install its dependencies** for optimal context.
 
 All skills follow [Semantic Versioning](https://semver.org/).
 
-- **Current Version**: `1.7.0` (2026-03-08)
+- **Current Version**: `2.0.0` (2026-03-22)
 - **Changelog**: See [CHANGELOG.md](CHANGELOG.md) for version history
 
 To verify skill versions:
@@ -138,4 +138,4 @@ When updating skills:
 4. Test with `/skill_list` to verify activation
 
 ---
-*Part of the Migasfree AI Standards v1.7.0*
+*Part of the Migasfree AI Standards v2.0.0*
