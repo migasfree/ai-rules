@@ -6,6 +6,20 @@ All notable changes to the Expert Skills ecosystem will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-03-24
+
+### Added
+
+- **System Rules**: Introduced a global `rules/` directory for immutable system-level instructions at the root of the repository.
+- `anti-sycophancy.md`: New behavioral rule that enforces objective, analytical, and intellectually honest conduct without sycophantic bias. Enforced globally for all AI interactions.
+
+### Changed
+
+- Updated `setup.sh` to automatically synchronize global system rules into the workspace context.
+- Updated `README.md` to document the new `rules/` directory paradigm.
+
+---
+
 ## [2.0.0] - 2026-03-22
 
 ### Changed

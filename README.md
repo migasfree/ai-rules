@@ -56,7 +56,9 @@ To adopt the Migasfree standards, install the resources into your local Antigrav
 
 ### 🌎 Global Installation (Core Foundation)
 
-Install the standard workflows, templates, and core roles that apply to **every** Migasfree project. This ensures the "Rules of the House" are always active.
+Install the standard workflows, templates, system rules, and core roles that apply to **every** Migasfree project. This ensures the "Rules of the House" are always active.
+
+> **System Rules**: Files in the `rules/` directory (like Anti-Sycophancy) represent immutable system instructions. They are synced globally so that AI agents strictly consider them on every interaction.
 
 ```bash
 # Run the automated setup script

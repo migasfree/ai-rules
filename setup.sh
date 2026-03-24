@@ -1,7 +1,7 @@
 #!/bin/bash
 # 🤖 Migasfree AI Standards - Setup Script
 # Description: Idempotent installation and verification of global AI standards.
-# Version: 1.1.0
+# Version: 1.2.0
 
 set -euo pipefail
 
@@ -41,7 +41,8 @@ fi
 check_metadata() {
     local file="$1"
     if [ -f "$file" ]; then
-        local version=$(grep "version:" "$file" | head -n1 | cut -d':' -f2 | tr -d ' "')
+        local version
+        version=$(grep "version:" "$file" | head -n1 | cut -d':' -f2 | tr -d ' "')
         echo "$version"
     else
         echo "MISSING"
@@ -72,8 +73,10 @@ process_dir() {
             local dest_file="$dest/$rel_path"
             
             if [ -f "$dest_file" ]; then
-                local src_ver=$(check_metadata "$src_file")
-                local dest_ver=$(check_metadata "$dest_file")
+                local src_ver
+                src_ver=$(check_metadata "$src_file")
+                local dest_ver
+                dest_ver=$(check_metadata "$dest_file")
                 
                 if [ "$src_ver" != "MISSING" ] && [ "$dest_ver" != "MISSING" ]; then
                     if [ "$src_ver" == "$dest_ver" ]; then
@@ -116,7 +119,12 @@ if [ -d "$SOURCE_DIR/scripts" ]; then
     process_dir "$SOURCE_DIR/scripts" "$ANTIGRAVITY_DIR/scripts" "Global Scripts"
 fi
 
-# 5. Local Workspace Extras (Optional but recommended)
+# 5. Global Rules
+if [ -d "$SOURCE_DIR/rules" ]; then
+    process_dir "$SOURCE_DIR/rules" "$ANTIGRAVITY_DIR/rules" "Global Rules"
+fi
+
+# 6. Local Workspace Extras (Optional but recommended)
 if [ "$VERIFY_MODE" = false ]; then
     if [ -d ".agent/skills" ]; then
         echo -e "${YELLOW}🛠️  Applying Workspace Enhancements...${NC}"
