@@ -1,8 +1,8 @@
 ---
 name: migasfree-frontend-expert
-version: 1.5.0
+version: 2.2.0
 description: Expert in Migasfree Frontend architecture, focusing on Quasar/Vue 3 patterns, smart data requests, and legacy gettext integration. Merged with quality and performance standards from Quasar gen-expert.
-last_modified: 2026-02-09
+last_modified: 2026-03-27
 triggers:
   - "migasfree-frontend"
   - "quasar.config.js"

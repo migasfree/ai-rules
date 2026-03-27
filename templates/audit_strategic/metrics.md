@@ -1,5 +1,5 @@
 ---
-version: 1.6.0
+version: 2.2.0
 last_modified: 2026-02-10
 ---
 Based on the codebase:

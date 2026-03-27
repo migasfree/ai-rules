@@ -1,7 +1,7 @@
 #!/bin/bash
 # 🤖 Migasfree AI Standards - Setup Script
 # Description: Idempotent installation and verification of global AI standards.
-# Version: 1.2.0
+# Version: 2.2.0
 
 set -euo pipefail
 

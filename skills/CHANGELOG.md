@@ -6,6 +6,23 @@ All notable changes to the Expert Skills ecosystem will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.0] - 2026-03-27
+
+### Added
+
+- **Adversarial Governance**: Added `governance_role: adversarial` to all core global skills (CTO, Architect, Ops Lead, Designer).
+- **Strategic Audit Templates**: New templates for `audit_strategic` workflow:
+  - `executive_summary.md`, `metrics.md`, `role_audit.md`, `consolidated.md`.
+- **Global Skills**: New `cto_strategic_oversight` role for high-level risk management and long-term technical vision.
+
+### Changed
+
+- **Synchronized Ecosystem**: All skills, workflows, and templates bumped to v2.2.0 for full consistency.
+- **Audit Workflow**: Replaced `audit_report` with the more comprehensive `audit_strategic` workflow.
+- **Standardized Versioning**: Enforced ecosystem-wide versioning (v2.2.0) across all active components.
+
+---
+
 ## [2.1.0] - 2026-03-24
 
 ### Added

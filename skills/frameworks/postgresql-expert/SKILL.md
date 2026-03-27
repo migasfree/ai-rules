@@ -1,8 +1,8 @@
 ---
 name: PostgreSQL Architect (Skill)
-version: 1.5.0
+version: 2.2.0
 description: Specialized module for PostgreSQL Database optimization using native SQL and Psycopg2.
-last_modified: 2026-02-09
+last_modified: 2026-03-27
 triggers: [postgres, sql, db, database, query, index, jsonb, psycopg2, cursor, execute]
 dependencies: [python-expert, security-expert, output-standard-expert]
 ---

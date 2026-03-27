@@ -1,5 +1,5 @@
 ---
-version: 1.6.0
+version: 2.2.0
 last_modified: 2026-02-10
 ---
 Act as a Senior ${role_label}.
@@ -22,7 +22,7 @@ Generate the audit section for your role.
 
 ## FOCAL POINT (CONTEXTUAL)
 
-- If ROLE_TYPE is "Core": Focus on systemic health, architectural patterns, multi-module coordination, and high-level security-by-design. Evaluate if the project follows the defined Mega-Role principles.
+- If ROLE_TYPE is "Core": Focus on systemic health, architectural patterns, multi-module coordination, and high-level security-by-design. Evaluate if the project follows the defined Mega-Role principles. **You MUST consult `/docs/governance/critiques/` to identify known architectural risks and include the verified defense/counter-argument.**
 - If ROLE_TYPE is "Skill": Focus on implementation details, idiomatic use of the specific technology/language, dependency security, and version-specific pitfalls.
 
 ## REQUIRED STRUCTURE
@@ -42,7 +42,7 @@ Generate the audit section for your role.
 
 (Instruction: Include a table with ID, Severity, Finding, Location, and Recommendation)
 
-| ID | Severity | Finding | Location | Recommendation |
+| ID | Severidad | Hallazgo (Crítica) | Contraargumentación (Defensa) | Recomendación Final |
 | :--- | :-------: | :------ | :-------: | :------------- |
 
 #### Code Examples

@@ -1,8 +1,8 @@
 ---
 name: Go Language Expert (Skill)
-version: 1.5.0
+version: 2.2.0
 description: Specialized module for Go (Golang) implementation, idiomatic patterns, and performance. Acts as a technology skill for the Technical Lead Architect.
-last_modified: 2026-02-09
+last_modified: 2026-03-27
 triggers: [golang, .go, go mod, go build, go test, gomock, goroutine, channel]
 dependencies: [security-expert, docker-expert, output-standard-expert]
 ---

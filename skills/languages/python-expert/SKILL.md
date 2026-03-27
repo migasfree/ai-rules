@@ -1,8 +1,8 @@
 ---
 name: Python Language Expert (Skill)
-version: 1.5.0
+version: 2.2.0
 description: Specialized module for Pythonic implementation, testing, and quality standards. Acts as a technology skill for the Technical Lead Architect.
-last_modified: 2026-02-09
+last_modified: 2026-03-27
 triggers: [python, pytest, ruff, mypy, .py, pip, poetry, venv, type hints]
 dependencies: [security-expert, output-standard-expert]
 ---

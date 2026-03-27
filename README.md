@@ -107,10 +107,18 @@ These commands automate routine tasks using our community standards.
 
 ### 📋 `/audit_report`
 
-*Performs a comprehensive quality audit covering both Core Architecture and Skill technology compliance.*
+*Performs a standard quality audit covering both Core Architecture and Skill technology compliance.*
 
-* **Use when**: Before submitting a Pull Request.
-* **Output**: A detailed `role_audit_report.md` covering security, code quality, and multi-layer architecture.
+* **Use when**: Routine checks during development.
+* **Output**: A detailed `role_audit_report.md`.
+
+### 🛡️ `/audit_strategic`
+
+*Generates a **Premium Strategic Audit Report** utilizing the full Adversarial Governance model.*
+
+* **Use when**: Before major releases, architecture reviews, or critical stakeholder alignment.
+* **Features**: Dynamic Discovery of adversarial agents, integration of real formal critiques from `docs/governance/critiques/`.
+* **Output**: A professional-grade `strategic_audit_report.md` with role-based assessments and counter-argument (defense) tables.
 
 ### 🕵️ `/audit_report_forensic`
 
@@ -131,6 +139,21 @@ These commands automate routine tasks using our community standards.
 * `/skill_list`: View active Core roles and Skills (includes automatic **update detection**).
 * `/skill_on [skill | todo]`: Activate a tech skill or **everything** at once.
 * `/skill_off [skill | todo]`: Deactivate a specific skill or **everything**.
+
+---
+
+## 🛡️ III. Adversarial Governance
+
+We follow a **Governance Consultant** model where our Core Global Roles act as **Adversaries** to ensure maximum quality and risk mitigation.
+
+All projects should integrate the [**Governance Portal**](docs/governance/README.md), which centralizes high-level oversight via:
+
+1. **Dynamic Discovery**: Automatic detection of adversarial agents (CTO, Architect, UX, Ops).
+2. **Formal Critiques**: Specialized risk assessment documents in `docs/governance/critiques/`.
+3. **Strategic Audits**: synthesis of real-world tensions and protocol defenses.
+
+> [!TIP]
+> Use the `/audit_strategic` workflow to generate a premium strategic report that incorporates these adversarial perspectives and formal mitigations.
 
 ---
 
@@ -157,8 +180,16 @@ graph TD
     D --> G[Global: Architect]
     D --> H[Global: Ops Lead]
     D --> I[Skill: Python Expert]
+
+    subgraph GovernanceLayer ["🛡️ Adversarial Governance Layer"]
+        G -.-> G_Critique["Critique: docs/governance/critiques/"]
+        H -.-> H_Critique["Critique: docs/governance/critiques/"]
+        G_Critique --> Audit["Audit: docs/governance/audits/"]
+        H_Critique --> Audit
+    end
     
-    E --> J[Automated Audits]
+    E --> J[Standard Audits]
+    E --> Audit
     E --> K[Standardized Commits]
 ```
 

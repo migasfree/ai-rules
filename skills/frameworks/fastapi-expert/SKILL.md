@@ -1,8 +1,8 @@
 ---
 name: FastAPI Expert (Skill)
-version: 1.5.0
+version: 2.2.0
 description: Specialized role for building high-concurrency, self-documenting APIs with FastAPI, Pydantic v2, and modern Python async patterns.
-last_modified: 2026-02-09
+last_modified: 2026-03-27
 triggers: [fastapi, pydantic, starlette, uvicorn, async, dependency injection, APIRouter]
 dependencies: [python-expert, security-expert, output-standard-expert]
 ---

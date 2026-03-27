@@ -1,8 +1,8 @@
 ---
 name: ui-designer-expert
 description: Senior UI/UX Designer specialized in functional interfaces, problem solving, and product design. Combines usability, accessibility, typographic math, and optimistic UI.
-version: 2.0.0
-last_modified: 2026-03-22
+version: 2.2.0
+last_modified: 2026-03-27
 triggers: [ui, ux, design, css, html, layout, color, typography, animation, product-design]
 dependencies: [output-standard-expert]
 ---

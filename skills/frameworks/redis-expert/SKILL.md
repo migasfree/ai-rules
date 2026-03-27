@@ -1,8 +1,8 @@
 ---
 name: Redis Expert (Skill)
-version: 1.5.0
+version: 2.2.0
 description: Specialized role for designing high-performance caching, session management, and real-time data structures using Redis.
-last_modified: 2026-02-09
+last_modified: 2026-03-27
 triggers: [redis, cache, session, queue, celery, broker, key-value, pubsub]
 dependencies: [python-expert, docker-expert, output-standard-expert]
 ---

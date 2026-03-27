@@ -1,8 +1,8 @@
 ---
 name: Terraform & IaC Expert (Skill)
-version: 1.5.0
+version: 2.2.0
 description: Specialized module for Infrastructure as Code (IaC) using Terraform and OpenTofu. Focus on provider development, HCL best practices, and state management.
-last_modified: 2026-02-09
+last_modified: 2026-03-27
 triggers: [terraform, opentofu, .tf, hcl, provider, resource, state, backend, plan, apply, module]
 dependencies: [docker-expert, cicd-expert, output-standard-expert]
 ---

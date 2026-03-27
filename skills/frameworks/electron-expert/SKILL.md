@@ -1,8 +1,8 @@
 ---
 name: Electron JS Expert (Skill)
-version: 1.5.0
+version: 2.2.0
 description: Specialized module for cross-platform desktop application development using Electron. Focus on security, IPC architecture, and native integration.
-last_modified: 2026-02-09
+last_modified: 2026-03-27
 triggers: [electron, main process, renderer process, IPC, preload script, context isolation, electron-builder, desktop app]
 dependencies: [migasfree-frontend-expert, security-expert, output-standard-expert]
 ---

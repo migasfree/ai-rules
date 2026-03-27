@@ -1,8 +1,8 @@
 ---
 name: MCP Expert (Skill)
-version: 1.5.0
+version: 2.2.0
 description: Specialized role for building Model Context Protocol (MCP) servers, defining typesafe tools, resources, and prompts using the official Python SDK.
-last_modified: 2026-02-09
+last_modified: 2026-03-27
 triggers: [mcp, model context protocol, tool, resource, prompt, json-rpc, @server.tool, @server.resource]
 dependencies: [python-expert, fastapi-expert, output-standard-expert]
 dependencies: [python-expert, fastapi-expert]

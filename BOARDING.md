@@ -82,14 +82,15 @@ You should see a list of Migasfree Core roles (e.g., `technical_lead_architect`)
 
 Depending on your contribution, you should activate different "Skills" for your session.
 
-| Activity | Role/Skill | Focus |
-| -------------- | -------------------------------------------- | ----------------------------------------- |
-| **Architecting** | `Technical Lead & Architect` (Global) | Patterns, security-by-design, ADRs |
-| **Operations** | `Solutions & Operations Lead` (Global) | CI/CD, packaging, reliability |
-| **Designing** | `Product & Experience Designer` (Global) | UX/UI, accessibility, user flow |
-| **Developing** | `python-expert` (Skill) | Idiomatic Python, mTLS, performance |
-| **Dev Desktop** | `electron-expert` (Skill) | Secure IPC, native integration |
-| **Containers** | `docker-expert` (Skill) | Multi-stage builds, image security |
+| Activity | Role/Skill | Character | Focus |
+| -------------- | -------------------------------------------- | ----------- | ----------------------------------------- |
+| **Architecting** | `Technical Lead & Architect` (Global) | Adversarial | Patterns, security-by-design, STRIDE |
+| **Operations** | `Solutions & Operations Lead` (Global) | Adversarial | CI/CD, packaging, reliability |
+| **Designing** | `Product & Experience Designer` (Global) | Adversarial | UX/UI, accessibility, user flow |
+| **Strategy** | `CTO - Strategic Oversight` (Global) | Adversarial | Long-term risk, business alignment |
+| **Developing** | `python-expert` (Skill) | Specialist | Idiomatic Python, mTLS, performance |
+| **Dev Desktop** | `electron-expert` (Skill) | Specialist | Secure IPC, native integration |
+| **Containers** | `docker-expert` (Skill) | Specialist | Multi-stage builds, image security |
 
 ### How to Switch Roles
 
@@ -106,13 +107,8 @@ You can enable/disable skills dynamically:
 1. **Always use the `/commit` workflow**: This ensures your commit messages follow our Conventional Commits standard.
 2. **Run an Audit before PR**: Use `/audit_report` to self-check your work against our quality gates.
 3. **Improve the Standards**: If you find a prompt that can be improved, submit a PR to *this* repository!
-4. **Follow the 6-Pillar Protocol**: All skills must include:
-    * Pillar 1: Persona & Role Overview
-    * Pillar 2: Project Context & Resources
-    * Pillar 3: Main Task & Objectives
-    * Pillar 4: Critical Constraints & Hard Stops
-    * Pillar 5: Cognitive Process & Decision Logs
-    * Pillar 6: Output Style & Format Guide
+4. **Follow the 6-Pillar Protocol**: All skills must include Persona, Context, Objectives, Constraints, Cognitive Process, and Output Style.
+5. **Define Governance Roles**: For high-level roles affecting project integrity, specify `governance_role: adversarial` in the YAML frontmatter. This triggers the critique/defense cycle in automated audits.
 
 ## 📋 Skill Dependencies
 

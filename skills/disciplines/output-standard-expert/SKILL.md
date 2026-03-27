@@ -1,8 +1,8 @@
 ---
 name: Output Standard Expert (Skill)
-version: 1.5.0
+version: 2.2.0
 description: Defines the mandatory output structure for all AI responses. Lightweight standard for clarity and consistency.
-last_modified: 2026-02-09
+last_modified: 2026-03-27
 triggers: [output format, response style, markdown standard, mermaid convention]
 ---
 
@@ -52,7 +52,7 @@ To prevent "Line 2" and "got STR" parsing errors, all diagrams MUST follow this 
 
 #### ✅ REQUIRED TEMPLATE
 
-Refer to [mermaid_atomic.md](file:///media/alberto/HD/git/ai-rules/skills/disciplines/output-standard-expert/resources/templates/mermaid_atomic.md) for the required structure.
+Refer to [mermaid_atomic.md](resources/templates/mermaid_atomic.md) for the required structure.
 
 #### ✅ REQUIRED TEMPLATE EXAMPLE
 
