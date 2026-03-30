@@ -36,7 +36,7 @@ Unless the user requests a simple, conversational answer (e.g., "Yes/No", "Expla
 ## 📝 II. Markdown Standards
 
 1. **Code Blocks**: Always specify the language (e.g., \`\`\`python).
-2. **File Paths**: Use standard markdown links for files: `[filename](file:///absolute/path)`.
+2. **File Paths**: Use standard markdown links for files: `[filename](path/to/file.md)`.
 3. **Alerts**: Use GitHub-style alerts for critical warnings:
     > [!WARNING]
     > Doing X will break Y.
