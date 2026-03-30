@@ -3,12 +3,7 @@ name: migasfree-ui-ux-expert
 version: 2.2.0
 description: Expert in the "Migasfree Visual Language" (Glassmorphism, Scientific Clean), responsible for UI/UX consistency across the entire ecosystem.
 last_modified: 2026-03-27
-triggers:
-  - "src/css"
-  - ".vue"
-  - "design"
-  - "ui/ux"
-  - "make it pretty"
+triggers: [migasfree, glassmorphism, glass-card, quasar, dosis, migasfree-frontend, migasfree-play, brand, visual identity, animated-background]
 dependencies: [ui-designer-expert, output-standard-expert]
 ---
 

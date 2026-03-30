@@ -3,14 +3,7 @@ name: migasfree-frontend-expert
 version: 2.2.0
 description: Expert in Migasfree Frontend architecture, focusing on Quasar/Vue 3 patterns, smart data requests, and legacy gettext integration. Merged with quality and performance standards from Quasar gen-expert.
 last_modified: 2026-03-27
-triggers:
-  - "migasfree-frontend"
-  - "quasar.config.js"
-  - "src/composables/smartRequest.js"
-  - "vue"
-  - "quasar"
-  - "composition api"
-  - "script setup"
+triggers: [migasfree-frontend, smartRequest, useElement, appIcon, pinia, vue-gettext, gettext, QVirtualScroll, quasar.config, composition api, script setup]
 dependencies: [migasfree-ui-ux-expert, security-expert, output-standard-expert]
 ---
 
