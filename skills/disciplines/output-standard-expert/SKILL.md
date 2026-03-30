@@ -72,6 +72,7 @@ graph TD
 - **NO Strings as IDs**: Never start a line with quotes: `"Node" --> ...` ❌
 - **NO Mixed Lines**: Never put nodes on the same line as `graph TD` ❌
 - **NO Implicit Nodes**: Never create nodes directly in a connection: `ID1 --> ID2["Label"]` ❌ (Define ID2 first).
+- **NO Unquoted Special Characters**: NEVER use `()`, `[]`, `{}`, `/`, or `&` inside node labels without quoting the entire label string. ❌ `A[Stack (Core)]` → ✅ `A["Stack (Core)"]`.
 
 ### 2. Technical Integrity (JSON/YAML/Bash)
 
@@ -84,7 +85,8 @@ Before providing any technical artifact, the model MUST perform this internal ch
 
 1. **Mermaid**: Did I use the **Atomic Pattern** (Declare first, connect later)?
 2. **Mermaid**: Is there a double-newline after `graph TD`?
-3. **Markdown**: Are all triple backticks closed with a matching pair?
+3. **Mermaid**: Are ALL node labels containing special characters (`()`, `/`, `&`) quoted with `""` (e.g., `id["Label (info)"]`)?
+4. **Markdown**: Are all triple backticks closed with a matching pair?
 
 ---
 *End of Output Standard Expert Skill Definition.*

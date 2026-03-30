@@ -53,4 +53,6 @@ Show relevant code snippets with brief explanation.
 
 Include a Mermaid diagram (graph LR or graph TD) summarizing priorities.
 
+⚠️ **Mermaid Safety**: ALL node labels containing special characters (`()`, `/`, `&`) MUST be quoted: `id["Label (info)"]`. Declare all nodes before connections.
+
 Respond ONLY in Markdown.
