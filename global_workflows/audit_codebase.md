@@ -34,21 +34,23 @@ Before generating any audit content, execute this prerequisite gate:
        > * ✅ `Software Architect` — `.agent/skills/disciplines/software-architect/SKILL.md`
        > * ✅ `Technical Analyst` — `.agent/skills/disciplines/technical-analyst/SKILL.md`
        >
-       > However, **the directory `docs/governance/critiques/` does not exist** with formal critique and defense documents.
+       > However, **the directory `docs/governance/critiques/` does not exist** with Unified Critique & Defense documents.
        >
        > Would you like me to generate adversarial governance files before the codebase audit?
-       > For each detected agent, I will create a critique file in `docs/governance/critiques/`, plus:
-       > * `docs/governance/critiques/mitigation-plan.md` — Consolidated mitigation plan
-       > * `docs/governance/critiques/protocol-defense.md` — Formal protocol defense
+       > For each detected agent, I will create a **Unified Loop** file in `docs/governance/critiques/` containing:
+       > * **Critique**: The adversarial findings.
+       > * **Defense**: The justification.
+       > * **Recommendation**: Actionable steps for improvement.
        >
-       > **[Yes]** → I will generate the critique files by invoking each agent, then proceed with the codebase audit using real data.
-       > **[No]** → I will proceed with the codebase audit in **Virtual Adversary** mode (synthetic critiques generated during the audit).
+       > I will also generate:
+       > * `docs/governance/critiques/mitigation-plan.md` — High-level strategic roadmap.
+       >
+       > **[Yes]** → I will generate the unified loop files by invoking each agent, then proceed with the codebase audit using real data.
+       > **[No]** → I will proceed with the codebase audit in **Virtual Adversary** mode.
 
-     * **If user answers YES**: For each detected adversarial agent, read its `SKILL.md` and execute its adversarial perspective against the codebase. Generate one critique file per agent in `docs/governance/critiques/` (e.g., `cto-risk-assessment.md`). Then:
-       * Generate `mitigation-plan.md` consolidating counterarguments (defenses) for each critique.
-       * Generate `protocol-defense.md` as a formal justification of the protocol's architectural choices.
-       * Update the project `README.md` to link to the Governance Portal (section 3).
-       * After generation, continue to Step 1.
+     * **If user answers YES**: For each detected adversarial agent, read its `SKILL.md` and execute its adversarial perspective against the codebase. Generate one **Unified Loop** file per agent (e.g., `cto-strategic-oversight.md`) containing Critique, Defense, and Recommendation for each finding. Then:
+        * Generate `mitigation-plan.md` as a consolidated strategic roadmap.
+        * After generation, continue to Step 1.
 
      * **If user answers NO**: Continue to Step 1 with `[Virtual Adversary]` mode active.
 
