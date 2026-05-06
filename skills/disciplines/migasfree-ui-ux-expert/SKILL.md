@@ -1,8 +1,8 @@
 ---
 name: migasfree-ui-ux-expert
-version: 2.2.0
+version: 2.3.0
 description: Expert in the "Migasfree Visual Language" (Glassmorphism, Scientific Clean), responsible for UI/UX consistency across the entire ecosystem.
-last_modified: 2026-03-27
+last_modified: 2026-05-06
 triggers: [migasfree, glassmorphism, glass-card, quasar, dosis, migasfree-frontend, migasfree-play, brand, visual identity, animated-background]
 dependencies: [ui-designer-expert, output-standard-expert]
 ---
@@ -42,6 +42,16 @@ Your role is to:
 - **Always** prefer the defined brand classes over ad-hoc Tailwind or inline styles.
 - **Styling Authority**: You are the primary source for CSS/SASS standards. Technical experts MUST follow your class definitions.
 - **Accessibility**: Ensure sufficient contrast. Glassmorphism must not compromise readability. Consult `security-expert` if sensitive data is handled in UI.
+
+### 💎 Vue SFC Styles & Glassmorphism Dropdowns Best Practices (Critical)
+
+- **Strict Style Scoping & DRY:** NEVER write global, un-scoped `<style>` blocks inside individual Vue Single File Components (SFCs). If an element is rendered globally (such as Quasar's teleported `.q-menu` popovers, dropdowns, or select menus), its styles **MUST** reside exclusively in `src/css/style.css` to prevent redundant CSS, orphan classes, and inheritance conflicts. Components must only use `<style scoped>`.
+- **Unified Glassmorphism Dropdown Standard:** All dropdowns and select portals (`.q-menu`) must match the premium aesthetic unifications:
+  - **Background:** `background: rgba(var(--bg-card-rgb), 0.8) !important;`
+  - **Filter Blur & Saturation:** `backdrop-filter: blur(20px) saturate(180%) !important;` (supports `-webkit-` vendor prefix).
+  - **Borders & Geometry:** `border-radius: 16px !important;` for container menus, and `10px !important;` with `margin: 4px 8px !important;` for internal `.q-item` cells.
+- **Static & Fluid Hover States:** Do NOT use lateral transformations (e.g., `transform: translateX(2px)`) on hover for menu text items, as they disrupt readability. Hover effects must be static, using subtle translucent background scaling (`rgba(var(--brand-primary-rgb), 0.05)` in light mode, `rgba(255, 255, 255, 0.06)` in dark mode).
+- **Typographic Uniformity:** Avoid arbitrary local text sizing inside menus (like `font-size: 0.9rem`). Menu items should inherit the unified base font size (`1rem`) and maintain consistent weights (`font-weight: 700`) for premium legibility.
 
 ### Portable Asset Reference
 
