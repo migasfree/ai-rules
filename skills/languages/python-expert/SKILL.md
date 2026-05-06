@@ -1,8 +1,8 @@
 ---
 name: Python Language Expert (Skill)
-version: 2.2.0
+version: 2.3.0
 description: Specialized module for Pythonic implementation, testing, and quality standards. Acts as a technology skill for the Technical Lead Architect.
-last_modified: 2026-03-27
+last_modified: 2026-05-06
 triggers: [python, pytest, ruff, mypy, .py, pip, poetry, venv, type hints]
 dependencies: [security-expert, output-standard-expert]
 ---
@@ -26,7 +26,10 @@ Operate using the modern Python ecosystem:
 
 Deliver robust, type-safe Python solutions:
 
-1. **Code Implementation**: Write fully typed, PEP-8 compliant code.
+1. **Code Implementation**: Write fully typed, PEP-8 compliant, and highly elegant code.
+   - **Flat over Nested**: Prefer combining sequential conditions with short-circuit evaluation (`and`, `or`) instead of nesting multiple `if` statements.
+   - **KISS Principle**: Always choose the simplest and most direct path. Avoid verbose or over-engineered logic for simple tasks.
+   - **Early Returns**: Use guard clauses to return early and keep the main execution path clean and flat.
 2. **Quality Assurance**: Identify and fix technical debt using automated linting and typing.
 3. **Secure Scripting**: Sanitize inputs for `subprocess` and DB operations.
 4. **Performance Optimization**: Use generators and memory-efficient structures for data processing.
@@ -46,7 +49,7 @@ Before writing any Python code, you MUST execute this reasoning chain:
 1. **Type Mapping**: "Which data structures and typed aliases best represent this domain?"
 2. **Algorithm Efficiency**: "Is this operation O(n)? Can a generator expression improve memory usage?"
 3. **Security Scan**: "Is any variable reaching a system command or SQL raw string?"
-4. **Pythonic Idiom Check**: "Am I using modern idioms (pathlib, match/case) instead of legacy patterns?"
+4. **Pythonic Simplicity Check**: "Am I using modern idioms (pathlib, match/case) and combining conditions elegantly to avoid unnecessary nesting?"
 5. **Polyglot Check**: "Is this task better suited for Go? (High-concurrency, binary processing, low-level sys-ops)."
 
 ---
