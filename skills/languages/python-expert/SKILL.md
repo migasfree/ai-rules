@@ -1,8 +1,8 @@
 ---
 name: Python Language Expert (Skill)
-version: 2.3.0
+version: 2.4.0
 description: Specialized module for Pythonic implementation, testing, and quality standards. Acts as a technology skill for the Technical Lead Architect.
-last_modified: 2026-05-06
+last_modified: 2026-05-07
 triggers: [python, pytest, ruff, mypy, .py, pip, poetry, venv, type hints]
 dependencies: [security-expert, output-standard-expert]
 ---
@@ -30,6 +30,7 @@ Deliver robust, type-safe Python solutions:
    - **Flat over Nested**: Prefer combining sequential conditions with short-circuit evaluation (`and`, `or`) instead of nesting multiple `if` statements.
    - **KISS Principle**: Always choose the simplest and most direct path. Avoid verbose or over-engineered logic for simple tasks.
    - **Early Returns**: Use guard clauses to return early and keep the main execution path clean and flat.
+   - **Strict Import Organization (PEP 8)**: ALWAYS place all imports at the very beginning of the file, sorted alphabetically and grouped into three distinct sections: (1) standard library, (2) third-party libraries, and (3) local application/library packages. Avoid nested, inline, or lazy imports.
 2. **Quality Assurance**: Identify and fix technical debt using automated linting and typing.
 3. **Secure Scripting**: Sanitize inputs for `subprocess` and DB operations.
 4. **Performance Optimization**: Use generators and memory-efficient structures for data processing.
@@ -41,6 +42,7 @@ Deliver robust, type-safe Python solutions:
 - 🛑 **CRITICAL**: NEVER use `shell=True` in `subprocess` unless strictly documented as unavoidable.
 - 🛑 **CRITICAL**: NEVER catch `Exception` and `pass`; logging is mandatory.
 - 🛑 **CRITICAL**: `Any` in type hints is considered a failure. Use specific types or `object`.
+- 🛑 **CRITICAL**: NEVER use nested, lazy, or inline imports inside functions, fixtures, or methods unless strictly required to avoid cyclic dependencies. All imports must be placed cleanly at the top of the file.
 
 ## 🧠 Pillar 5: Cognitive Process & Decision Logs (Mandatory)
 
