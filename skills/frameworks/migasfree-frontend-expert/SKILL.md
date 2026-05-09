@@ -1,8 +1,8 @@
 ---
 name: migasfree-frontend-expert
-version: 2.2.0
+version: 2.3.0
 description: Expert in Migasfree Frontend architecture, focusing on Quasar/Vue 3 patterns, smart data requests, and legacy gettext integration. Merged with quality and performance standards from Quasar gen-expert.
-last_modified: 2026-03-27
+last_modified: 2026-05-09
 triggers: [migasfree-frontend, smartRequest, useElement, appIcon, pinia, vue-gettext, gettext, QVirtualScroll, quasar.config, composition api, script setup]
 dependencies: [migasfree-ui-ux-expert, security-expert, output-standard-expert]
 ---
@@ -22,74 +22,54 @@ This workspace is the frontend for Migasfree, a systems management system. It us
 - **Pinia** for state management.
 - **vue3-gettext** for I18n (PO/MO workflow).
 - **Smart Request Pattern**: Automatic switching between GET/POST based on URL length to accommodate complex DRF filters.
-- **Centralized Utilities**: `useElement` and `appIcon` for consistent UI/UX.
+- **Centralized Utilities**: `useElement`, `appIcon`, and `modelIcon` for consistent UI/UX.
 
 ## ⚔️ Pillar 3: Main Task & Objectives
 
-Your role is to:
+Engineer modern, beautiful, and highly performant user interfaces:
 
-- Implement new pages and components following the Quasar/Migasfree standard.
-- Maintain and extend the **Smart Request** logic for API interactions.
-- Ensure all UI elements use the centralized `useElement` composable for icons and status translations.
-- Manage I18n correctly using `$gettext` and ensuring strings are extractable.
-- Refactor legacy patterns into the modern Composition API style used in the project.
-- **Quality Control**: Enforce reactivity best practices and accessibility standards (WCAG).
+### 1. Centralized Icon & Mapping Infrastructure (`useElement`)
+
+- **Zero Hardcoded Icons**: Never use literal string classes for icons directly in pages (e.g., `<q-icon name="mdi-pencil" />`). Always resolve them dynamically using centralized registry lookups from `src/composables/element.js`:
+  - Use `appIcon(key)` for standard actions (add, edit, delete, copy, save, download, logout).
+  - Use `modelIcon(path)` for database targets (computers, deployments, schedules, package-sets).
+  - Use `techIcon(concept)` for technical terms (ram, network, linux, database).
+  - Use `productIcon(type)` for devices (desktop, laptop, virtual, docker).
+
+### 2. Standardized Status Translation & Formatting
+
+- **Status Dictionary Translation**: Use the `computerStatus()` method from `useElement()` to translate machine-level statuses (e.g., `intended` -> `Intended`, `in repair` -> `In repair`) via build-extractable `$gettext()` tags, ensuring consistency across screens.
+- **Data Formatting Helpers**: Use formatting helpers like `humanMacAddress(value)` to automatically turn raw 12-char MAC strings into readable colon-separated addresses (`00:11:22:33:44:55`).
+
+### 3. Smart Request Filtering & Bypass
+
+- **Smart Request Enforcement**: Always wrap data queries in `smartRequest(endpoint, params)` or `smartExportRequest(endpoint, params)` from `useSmartRequest` (defined in `src/composables/smartRequest.js`). This automatically measures the estimated URL parameter length and routes long filters seamlessly to the POST `/filter/` endpoint when they exceed safe load-balancer limits (preventing HTTP 414 URI Too Long).
+
+### 4. Dynamic Polymorphic Attribute Resolution
+
+- **Unified Attribute Parsing**: When rendering polymorphic device attributes, leverage `attributeValue(att)`, `equivalentModel(att)`, and `equivalentKey(att)` to map attribute prefixes (`SET`, `CID`, `DMN`) to active systems (attribute sets, computers, domains), enabling dynamic routing and unified lists.
+
+### 5. Infinite Lists Virtualization
+
+- **High-Density Virtualization**: Always use `QVirtualScroll` for tables, grids, and lists containing more than 100 entries (e.g., packages, execution logs, or search results) to avoid heavy DOM node allocation and keep the UI responsive.
 
 ## 🛑 Pillar 4: Critical Constraints & Hard Stops
 
-- **API Communication**: ALWAYS use the `smartRequest` or `smartExportRequest` from `useSmartRequest` for data-heavy operations to avoid 414 URI Too Long errors.
-- **Icons**: Use Material Design Icons (`mdi-`) and fetch them through `appIcon` or `modelIcon` in `src/composables/element.js`.
-- **UI/UX Delegation**: Defer styling, color palettes, and complex visual effects (Glassmorphism) to `migasfree-ui-ux-expert`. Follow its `.glass-card` and `.animated-background` standards.
-- **Security**: Consult `security-expert` for any data handling, sanitization, or authentication logic.
-- 🛑 **CRITICAL**: NEVER hardcode user-facing strings. ALL visible text must use `$gettext()` for i18n extraction.
-
-### I18n Coverage Validation
-
-**Requirement**: Migasfree projects support ES/EN/FR. All user-facing strings MUST be translatable.
-
-**Hard Stop**: Component with hardcoded labels/messages fails CI.
-
-**Example Violations**:
-
-```vue
-<!-- ❌ BAD: Hardcoded string -->
-<q-btn label="Delete" />
-<div>User not found</div>
-
-<!-- ✅ GOOD: Translatable -->
-<q-btn :label="$gettext('Delete')" />
-<div>{{ $gettext('User not found') }}</div>
-```
-
-**CI Enforcement (Recommended)**:
-
-```yaml
-# .github/workflows/frontend-quality.yml
-- name: Validate I18n Coverage
-  run: |
-    npm install -D vue-gettext-extract
-    npx vue-gettext-extract --check --output /tmp/messages.pot
-    # Fails if untranslated strings are detected
-```
-
-**Exception**: Debug logs, console.error(), and developer-only messages don't require translation.
-
-- **I18n**: Never hardcode strings; use `$gettext`. Use `vue-gettext-extract` commands for maintenance.
-- 🛑 **CRITICAL**: NEVER use `v-html` with untrusted API data (prevent XSS).
-- 🛑 **CRITICAL**: NEVER manipulate the DOM directly (`document.getElementById`); use template refs.
-- 🛑 **CRITICAL**: NEVER use `v-if` on the same element as `v-for`; use computed filtered wrappers.
-- 🛑 **CRITICAL**: NEVER mutate Pinia state directly; always use actions for state transitions.
+- 🛑 **CRITICAL**: NEVER use hardcoded user-facing strings; all UI labels must be wrapped in `$gettext()` or `gettext()` for PO/MO extraction.
+- 🛑 **CRITICAL**: NEVER use `v-html` with untrusted API data; always sanitize or use standard string interpolation to prevent XSS.
+- 🛑 **CRITICAL**: NEVER manipulate the DOM directly (`document.getElementById`); always use template refs (`ref`).
+- 🛑 **CRITICAL**: NEVER use `v-if` on the same element as `v-for`; separate them using computed filter wrappers or template tags.
+- 🛑 **CRITICAL**: NEVER mutate Pinia state directly; always dispatch actions for predictable state transitions.
 
 ## 🧠 Pillar 5: Cognitive Process & Decision Logs (Mandatory)
 
-Before implementing, you MUST execute this reasoning chain:
+Before writing any Vue/Quasar code, you MUST execute this reasoning chain:
 
-1. **Analyze Requirements**: Determine if the task involves a new data view, a modification, or infrastructure.
-2. **Reactivity Audit**: "Is this state primitive (ref) or complex (reactive)? Did I handle `.value` correctly in logic?"
-3. **Virtualization Check**: "Does this list contain >100 items? If so, mandate `QVirtualScroll`."
-4. **Data Flow**: Check if a Pinia store is needed or if a local Composable is sufficient.
-5. **API Design**: Identify the DRF endpoint and check if it supports the `/filter/` POST pattern.
-6. **Responsiveness & Accessibility**: "How does this layout shift from mobile to desktop? Does this component have aria-labels?"
+1. **Icon lookup**: "What is the logical key for this action or model? Have I called `appIcon` or `modelIcon`?"
+2. **URL Length Check**: "Can this query filter grow very large? Have I used `smartRequest` to automatically fall back to POST `/filter/`?"
+3. **Status Keying**: "Is this a computer status? Am I translating it using `computerStatus()` from `useElement`?"
+4. **List Density**: "Does this data list exceed 100 items? If so, have I implemented `QVirtualScroll`?"
+5. **Polymorphic Resolving**: "Am I rendering computer attributes? Did I use `attributeValue` and `equivalentModel` to parse their prefix types?"
 
 ---
-*Generated by the Migasfree /skill_generate Workflow. Enhanced with Quasar-Vue Gen Standards.*
+*End of Migasfree Frontend Expert Skill Definition.*
